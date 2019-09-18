@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Activities</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static 'kc/css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link href="{% static 'kc/css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="{% static 'kc/css/cygen.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="{% static 'navbarcss/foodsearch.css'%}" rel="stylesheet">
+
+    <style>
+        #logo-container {
+             height: 100%;
+            width: 17%;
+            padding: 4px;
+        }
+        #watermark
+        {
+        padding-right: 10px;
+        position: fixed;
+        bottom:5px;
+        right:5px;
+        opacity:0.6;
+        z-index:99;
+        color:#293d3d;
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+        }
+        .tabs{
+            overflow-x: hidden
+        }
+        .fixed-action-btn{
+            top: 53px !important;
+                right: auto; 
+                margin-left: 2px; 
+       }
+       .week{
+        height:50px;
+        vertical-align: 50%;
+        line-height: 50px;
+        font-size:18px
+       }
+       @media only screen and (max-width: 992px){
+table.responsive-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    display: inline-block !important;
+    position: relative;
+}
+nav .brand-logo {
+    padding:2px;
+      left: 0px;
+    -webkit-transform: none;
+    transform: none;
+}
+  }
+
+    </style>
+</head>
+
+<body>
+        <span id="watermark" style="font-size:1.64rem;" unselectable="on">Powered by <span style="font-size:1.64rem; color: #64c1b1">CYGEN</span></span>
+
+<header>
+    <div class="navbar-fixed">
+        <nav class="white top-nav" role="navigation">
+            <div class="nav-wrapper container-fluid">
+
+                    <span>
+                        <img src='{% static "sreesend/img/aimh.1.png" %}' alt="logo" id="logo-container" class="brand-logo">
+                    </span>
+                <ul class="right hide-on-med-and-down">
+                    <!-- <li><a href="{% url 'healthandrecords:first_form' %}">Evaluation Form</a></li> 
+                    <li><a href="#health_index_modal" class="modal-trigger">Health Index</a></li> -->
+                    <li>
+                        <a href="#!" class="dropdown-trigger" data-target="accountdrop">Account Settings
+                            <i class="material-icons right">arrow_drop_down</i></a>
+                    </li>
+                </ul>
+
+
+            </div>
+        </nav>
+    </div>
+    <!--Sidenav-->
+    <div class="container-fluid">
+        <ul id="slide-out" class="sidenav">
+            <!-- sidenav-fixed-->
+            <li>
+                <div class="user-view">
+                    <div class="background"><img src="{% static 'kc/img/sideimg.jpg' %}"></div>
+                    <a href="#user"><img class="circle" src="{% static 'kc/img/doctor.jpg' %}"></a>
+                    <a href="#name"><span class="white-text name">{{request.user.first_name}}</span></a>
+                    <a href="#email"><span class="white-text email">{{request.user.email}}</span></a>
+                </div>
+            </li>
+            <li><a href='{% url "healthandrecords:health_ana" %}'><i class="material-icons small">dashboard</i>Dashboard</a>
+            </li>
+            <li>
+                <a href='{% url "foodandacti:personal_info_update" %}'><i class="fas fa-utensils fa-2x"></i>Diet</a>
+            </li>
+            <li><a href='{% url "foodandacti:activityredirct" %}'><i class="material-icons small">directions_run</i>Activities
+                and Fitness</a>
+            </li>
+            <li><a href='{% url "foodandacti:summary" %}'><i class="fas fa-book-open fa-2x"></i>Summary</a></li>
+            <!-- <li><a href='{% url "healthandrecords:cygenpacks" %}'><i class="fas fa-heartbeat fa-2x"></i>Health
+                Package</a></li>
+            <li><a href="#!"><i class="fas fa-piggy-bank fa-2x"></i>Insurance Packs</a></li>
+            <li><a href="#!"><i class="far fa-hospital fa-2x"></i>Hospital Packs</a></li>
+            <li><a href="{% url 'healthandrecords:first_form' %}">Evaluation Form</a></li> 
+            <li><a href="#health_index_modal" class="modal-trigger">Health Index</a></li> -->
+            <li>
+                <a href="#!" class="dropdown-trigger" data-target="accountdrop2">Account Settings
+                    <i class="material-icons right">arrow_drop_down</i></a>
+            </li>
+        </ul>
+
+
+    </div>
+    <!--Sidenav end-->
+</header>
+<!-- Main-->
+<main>
+    <ul id="accountdrop" class="dropdown-content">
+        <li><a href='{% url "foodandacti:summary" %}'><i class="material-icons">account_circle</i>Profile</a></li>
+        <li><a href="#!"><i class="material-icons">settings</i>Settings</a></li>
+        <li class="divider"></li>
+        <li><a href='{% url "before_l:logout_view" %}'><i class="material-icons">power_settings_new</i>Logout</a></li>
+    </ul>
+    <ul id="accountdrop" class="dropdown-content">
+        <li><a href='{% url "foodandacti:summary" %}'><i class="material-icons">account_circle</i>Profile</a></li>
+        <li><a href="#!"><i class="material-icons">settings</i>Settings</a></li>
+        <li class="divider"></li>
+        <li><a href='{% url "before_l:logout_view" %}'><i class="material-icons">power_settings_new</i>Logout</a></li>
+    </ul>
+    <div class="fixed-action-btn ">
+        <a href="#" data-target="slide-out" class="left btn-floating red sidenav-trigger">
+            <i class="material-icons">menu</i>
+        </a>
+    </div>
+
+
+    <div id="diet" class="col s12">
+        <br>
+        <br>
+        <div class="row">
+            <div class="input-field col m3 s12">
+                <i class="material-icons prefix">date_range</i>
+                <input class="datepicker" id="date" type="text" class="validate">
+                <label for="date">Select Date</label>
+            </div>
+
+            <div class="col m12 s12 center-align">
+                <div class="card">
+
+                    <div class="card-stacked">
+                        <div class="card-content">
+                            <a class="btn-floating halfway-fab  waves-effect waves-light indigo modal-trigger"
+                               href="#pdiet_summary">
+                                <i class="material-icons">insert_chart</i>
+                                <div class="tooltip">Content</div>
+                            </a>
+                            <a class="btn-floating halfway-fab left waves-effect waves-light teal modal-trigger"
+                               href="#pdiet">
+                                <i class="material-icons">add</i></a>
+                            <table class="table responsive-table">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Food</th>
+                                    <th>Calorie (kcal)</th>
+                                    <th>Carbs(g)</th>
+                                    <th>Protien (g)</th>
+                                    <th>Fat (g)</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="success">
+                                    {% for notice in Breakfast %}
+                                    <th>Breakfast</th>
+
+
+                                    <td>{{notice.fodd_name}}</td>
+                                    <td class="food_Calories">{{notice.Calories|floatformat:1}}</td>
+                                    <td class="food_Carbs">{{notice.Carbs|floatformat:1}}</td>
+                                    <td class="food_Proteins">{{notice.Protein|floatformat:1}}</td>
+                                    <td class="food_Fats">{{notice.Fat|floatformat:1}}</td>
+
+                                    <td>
+                                        <a href="{% url 'foodandacti:fooddelete' notice.id %}"
+                                           class="btn-floating waves-effect waves-light red modal-trigger">
+                                            <i class="material-icons">do_not_disturb_on</i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                <tr class="info">
+
+                                    {% for notice in Lunch %}
+                                    <th>Lunch</th>
+
+                                    <td>{{notice.fodd_name}}</td>
+                                    <td class="food_Calories">{{notice.Calories|floatformat:1}}</td>
+                                    <td class="food_Carbs">{{notice.Carbs|floatformat:1}}</td>
+                                    <td class="food_Proteins">{{notice.Protein|floatformat:1}}</td>
+                                    <td class="food_Fats">{{notice.Fat|floatformat:1}}</td>
+
+                                    <td>
+                                        <a href="{% url 'foodandacti:fooddelete' notice.id %}"
+                                           class="btn-floating waves-effect waves-light red modal-trigger">
+                                            <i class="material-icons">do_not_disturb_on</i>
+                                        </a>
+                                    </td>
+
+                                </tr>
+                                {% endfor %}
+                                <tr class="success">
+                                    {% for notice in Snacks %}
+                                    <th>Snacks</th>
+
+                                    <td>{{notice.fodd_name}}</td>
+                                    <td class="food_Calories">{{notice.Calories|floatformat:1}}</td>
+                                    <td class="food_Carbs">{{notice.Carbs|floatformat:1}}</td>
+                                    <td class="food_Proteins">{{notice.Protein|floatformat:1}}</td>
+                                    <td class="food_Fats">{{notice.Fat|floatformat:1}}</td>
+
+                                    <td>
+                                        <a href="{% url 'foodandacti:fooddelete' notice.id %}"
+                                           class="btn-floating waves-effect waves-light red modal-trigger">
+                                            <i class="material-icons">do_not_disturb_on</i>
+                                        </a>
+                                    </td>
+
+                                </tr>
+                                {% endfor %}
+                                <tr class="info">
+                                    {% for notice in Dinner %}
+                                    <th>Dinner</th>
+
+                                    <td>{{notice.fodd_name}}</td>
+                                    <td class="food_Calories">{{notice.Calories|floatformat:1}}</td>
+                                    <td class="food_Carbs">{{notice.Carbs|floatformat:1}}</td>
+                                    <td class="food_Proteins">{{notice.Protein|floatformat:1}}</td>
+                                    <td class="food_Fats">{{notice.Fat|floatformat:1}}</td>
+
+                                    <td>
+                                        <a href="{% url 'foodandacti:fooddelete' notice.id %}"
+                                           class="btn-floating waves-effect waves-light red modal-trigger">
+                                            <i class="material-icons">do_not_disturb_on</i>
+                                        </a>
+                                    </td>
+
+
+                                </tr>
+
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+
+</main>
+<footer class="">
+
+</footer>
+
+<!--Modals -->
+<!--Modals -->
+<div id="pdiet" class="modal">
+    <div class="modal-content">
+        <h5 style="color:#5c6bc0">Diet</h5>
+        <div class="row">
+            <div class="input-field col s12 m12" style="margin-top:0px;">
+                <i class="material-icons prefix" style="color:#f12222">search</i>
+                <div class="auto-search">
+                    <div class="search-item"></div>
+                    <input type="text" value="" id="search1" name="breakf" class="search" autocomplete="off"
+                           style="height: 30px !important;padding-left:25px"/>
+                    <div id="foodname1" class="count"></div>
+                    <div class="test">
+                        <div class="testxx" id="search-results"></div>
+                    </div>
+                    <div class="serving">
+
+                        <form action="{% url 'foodandacti:editss' %}?{{ request.GET.urlencode }}" method='POST'>
+                            {% csrf_token %}
+                            <div class="serv">
+                                <div class="serving-name">Serving Table</div>
+
+                                <input type="text" id="newid" name="fname"><br>
+
+                                <select name="sectionmel" class="blds">
+                                    <option value="Breakfast">Breakfast</option>
+                                    <option value="Lunch">Lunch</option>
+                                    <option value="Dinner">Dinner</option>
+                                    <option value="Snacks">Snacks</option>
+                                </select>
+
+
+                                <div id="dynamicInput"><input type="text" id="foodnameid" value="" name='foodnames'
+                                                              class="nut-cal" readonly></div>
+                            </div>
+
+                            <div class="nutrients">
+                                <div class="nut-name">Nutrition Values</div>
+                                <div class="cal-items">Calories-</div>
+                                <input type="text" id="Caloriesid" value="" name="Calories" class="nut-cal"
+                                       style="width:50% !important" readonly>
+                                <div class="cal-items">Carbs-</div>
+                                <input type="text" id="Carbsid" value="" name="Carbs" class="nut-cal"
+                                       style="width:50% !important" readonly>
+                                <div class="cal-items">Protiens-</div>
+                                <input type="text" id="Protiensid" value="" name="Protiens" class="nut-cal"
+                                       style="width:50% !important" readonly>
+                                <div class="cal-items"> Fat-</div>
+                                <input type="text" id="Fatid" value="" name="Fat" class="nut-cal"
+                                       style="width:50% !important" readonly>
+                                <div class="submit-serv">
+                                    <input type="submit" value="submit" class="serving-submit"/>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">close</a>
+    </div>
+</div>
+
+
+<!--Diet Summary Modal -->
+<div id="pdiet_summary" class="modal">
+    <div class="modal-content">
+        <h4>Diet Summary</h4>
+        <div class="row">
+            <table>
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Calories (kcal)</th>
+                    <th>Carbs(g)</th>
+                    <th>Protiens (g)</th>
+                    <th>Fat(g)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>Total</th>
+                    <td id="calorieschosen"></td>
+                    <td id="Carbschosen"></td>
+                    <td id="Protienschosen"></td>
+                    <td id="Fatchosen"></td>
+                </tr>
+                <tr>
+                    <th>Daily Goal</th>
+
+                    <td id="caloriesdaily">{{newdaily | floatformat:2 }}</td>
+                    <td id="Carbsdaily"></td>
+                    <td id="Protiendaily"></td>
+                    <td id="Fatdaily"></td>
+                </tr>
+                <tr>
+                    <th>Remaining</th>
+                    <td id="caloriesremain"></td>
+                    <td id="Carbsremain"></td>
+                    <td id="Protienremain"></td>
+                    <td id="Fatremain"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">close</a>
+    </div>
+</div>
+
+
+<!--Health Index Modal-->
+<div id="health_index_modal" class="modal">
+    <div class="modal-content">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat right">Close</a>
+        <h5>Health Index Assessment</h5>
+        <br>
+        <form action='{% url "healthandrecords:today_hel" %}' method="POST" enctype=multipart/form-data>
+
+            {% csrf_token %}
+            <div class="row" style="background-color: #F5F7FA">
+                <div class="col m2"></div>
+                <div class="col m4">
+                    <div class="input-field">
+                        <input name="date" type="text" class="datepicker" required id="assess_for_date">
+                        <label for="assess_for_date">Select Date</label>
+                    </div>
+                    <div class="input-field">
+                        <input name="systolic" type="number" required id="systolic_assess">
+                        <label for="systolic_assess">Systolic Pressure(mm Hg)</label>
+                    </div>
+                    <div class="input-field">
+                        <input name="diastolic" type="number" required id="diastolic_assess">
+                        <label for="diastolic_assess">Diastolic Pressure(mm Hg)</label>
+                    </div>
+                </div>
+                <div class="col m4">
+                    <div class="input-field">
+                        <input name="glucose" type="number" required id="glucose">
+                        <label for="glucose">Glucose Level(mm Hg)</label>
+                    </div>
+                    <div class="input-field">
+                        <input name="HDL" type="number" required id="hdl_cholestrol">
+                        <label for="hdl_cholestrol">HDL Cholestrol(mm Hg)</label>
+                    </div>
+                    <div class="input-field">
+                        <input name="tc" type="number" required id="total_cholestrol">
+                        <label for="total_cholestrol">Totral Cholestrol(mm Hg)</label>
+                    </div>
+                </div>
+                <div class="col m2"></div>
+
+            </div>
+            <div class="right">
+                <button type="submit" class="btn">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+
+    </div>
+</div>
+
+
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src='{% static "kc/js/init.js" %}'></script>
+<script src='{% static "kc/js/materialize.js" %}'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<!-- <script src="js/dashboard.js"></script> -->
+<script>
+var pat_gender = "{{gender}}"
+var pat_exercise = "{{exercise}}";
+var height_f = parseInt("{{h_feet}}");
+var height_i = parseInt("{{h_inches}}");
+var targetnumberkg = "{{targetnumberkg}}";
+if (targetnumberkg ==''){
+    var weight = "{{weight}}";
+}
+else{
+    var weight = targetnumberkg;
+}
+var pat_age = "{{age}}";
+var height_cm = parseInt(((height_f*12)+height_i)*2.54)
+console.log('ddddddddd'+height_cm);
+if (pat_exercise == "Little_exercise"){
+        var exe_coef = 1.200;
+
+   }
+   else if (pat_exercise == "Light_exercise"){
+        var exe_coef = 1.375;
+
+   }
+   else if (pat_exercise == "Moderate_exercise"){
+        var exe_coef = 1.550;
+
+   }
+   else if (pat_exercise == "Heavy_exercise"){
+        var exe_coef = 1.775;
+   }
+   else{
+        var exe_coef = 1.900;
+   }
+ if (pat_gender =='Male'){
+    BMR = String(((88.362 + (13.397 * weight) + (4.799 * height_cm) - (5.677 * pat_age))*exe_coef).toFixed(2))
+    console.log('dddddddddddd'+BMR)
+    }
+    else{
+    BMR = String(((447.593 + (9.247 * weight) + (3.098 * height_cm) - (4.330 * pat_age ))*exe_coef).toFixed(2))
+    }
+   var calori = BMR
+
+ var calories = ((calori))
+
+
+document.getElementById("caloriesdaily").innerHTML =parseFloat((calories)).toFixed(2)
+ document.getElementById("Carbsdaily").innerHTML =parseFloat(calories*(125/1000)).toFixed(2)
+ document.getElementById("Protiendaily").innerHTML =parseFloat(calories*(52/1000)).toFixed(2);
+ document.getElementById("Fatdaily").innerHTML =parseFloat(calories*(1/36)).toFixed(2);
+</script>
+
+
+
+
+<script>
+
+   $(function(){
+            $(document).on("keyup",".auto-search .search",function() {
+	    var v = this.id;
+
+		$.ajax({
+			type:'POST',
+			url:"/fooddetails/search/",
+			dataType: "html",
+			data:   {"search_text" : $("#"+v).val(), "csrfmiddlewaretoken" : $("input[name=csrfmiddlewaretoken]").val() },
+			success: searchSuccess,
+
+		});
+	});
+
+});
+function searchSuccess(data,textStatus,jqXHR)
+{
+		$('#search-results').html(data);
+}
+
+        $(document).ready(function () {
+$(".modal").modal();
+        })
+
+        function changeSwitchValue(val){
+ var id = $(this).attr('id');
+ alert(val);
+ var url="fooddairy/recordupdate/"+String(val);
+ alert( window.location.pathname);
+ window.location.pathname = url;
+
+    }
+</script>
+<script>
+        $(document).ready(function () {
+            $('.tabs').tabs();
+            $('.datepicker').datepicker({
+                format: "yyyy-mm-dd",
+                autoClose: true
+            });
+var today= new Date();
+            var date="";
+            var month="";
+            if(today.getDate().toString().length==1){
+                date="0"+today.getDate().toString();
+            }
+            else{date= today.getDate();}
+            if(today.getMonth().toString().length==1){
+                month="0"+(today.getMonth()+1).toString();
+            }
+            else{month= today.getMonth()+1;}
+            var dt= today.getFullYear()+"-"+month+"-"+date;
+            $("#date").val(dt);
+            $("#date").change(function(){
+var val=$(this).val();
+             var currentUrl=window.location.pathname;
+             var changedURL=currentUrl+"?date="+val
+             console.log(changedURL);
+             window.location.href=changedURL;
+$(this).val(val);
+         });            $('.modal').modal();
+            $('select').formSelect();
+            $('.sidenav').sidenav();
+            $(".dropdown-trigger").dropdown({ hover: true });
+        });
+
+</script>
+
+<script>
+          var calsum = 0;
+          var carbsum=0;
+          var protiensum=0;
+          var fatsum=0;
+$('.food_Calories').each(function()
+{
+    calsum += parseFloat($(this).text());
+    document.getElementById("calorieschosen").innerHTML = (parseFloat(calsum).toFixed(2));
+
+
+});
+$('.food_Carbs').each(function()
+{
+    carbsum += parseFloat($(this).text());
+    document.getElementById("Carbschosen").innerHTML = parseFloat(carbsum).toFixed(2);
+
+
+});
+$('.food_Proteins').each(function()
+{
+    protiensum += parseFloat($(this).text());
+    document.getElementById("Protienschosen").innerHTML =parseFloat(protiensum).toFixed(2) ;
+
+
+});
+$('.food_Fats').each(function()
+{
+    fatsum += parseFloat($(this).text());
+    document.getElementById("Fatchosen").innerHTML = parseFloat(fatsum).toFixed(2);
+
+
+});
+ document.getElementById("caloriesremain").innerHTML = (parseFloat((document.getElementById("caloriesdaily").innerHTML)-calsum).toFixed(2));
+ document.getElementById("Carbsremain").innerHTML =parseFloat((document.getElementById("Carbsdaily").innerHTML)-carbsum).toFixed(2);
+ document.getElementById("Protienremain").innerHTML =parseFloat((document.getElementById("Protiendaily").innerHTML)-protiensum).toFixed(2);
+ document.getElementById("Fatremain").innerHTML =parseFloat((document.getElementById("Fatdaily").innerHTML)-fatsum).toFixed(2);
+
+
+
+</script>
+
+</body>
+
+</html>

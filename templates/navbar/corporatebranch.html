@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Corporate Branch</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'kc/css/dashboard.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'kc/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'kc/css/sb-admin.css'%}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'kc/css/ehr.css'%}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'kc/css/bootstrap-multiselect.css'%}">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static 'kc/css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.js"></script>
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js"></script>
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js.map"></script>
+
+    <style>
+        .navbar {
+            padding: 0px;
+        }
+         #corpbranch-form{
+            display:none;
+        }
+
+        .bg-dark {
+            background: #ffff !important;
+        }
+        .mandatory{
+            color:tomato;
+        }
+        .fixed-action-btn {
+            top: 53px !important;
+            right: auto;
+            margin-left: 2px;
+        }
+        .table td, .table th {
+            text-align: center !important;
+            /* padding: 15px 5px !important; */
+        }
+        #logo-container {
+            height: 100%;
+            width: 19%;
+            padding: 0px;
+        }
+        .ui-dialog .ui-dialog-title {
+            float: left;
+            margin: .1em 0;
+            white-space: nowrap;
+            font-size: 20px;
+            width: 90%;
+            overflow: hidden;
+            font-weight: 100;
+            text-overflow: ellipsis;
+            font-family: apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif !important;
+
+        }
+        .ui-widget{
+            font-family:apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif !important
+        }
+        .nav-link-text{
+            font-family: apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif !important;
+            font-size:16px!important
+        }
+        @media (min-width: 992px) {
+            .col-lg-3 {
+                -webkit-box-flex: 0;
+                -ms-flex: 0 0 19%;
+                flex: 0 0 19%;
+                max-width: 25%;
+                padding-top: 34px;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .col-lg-12 {
+                -webkit-box-flex: 0;
+                -ms-flex: 0 0 100%;
+                flex: 0 0 100%;
+                max-width: 100%;
+                /* padding-top: 60px; */
+            }
+        }
+
+        body {
+            background-color: #ffff;
+        }
+	#watermark
+        {
+        padding-right: 10px;
+        position: fixed;
+        bottom:5px;
+        right:5px;
+        opacity:0.6;
+        z-index:99;
+        color:#293d3d;
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+        }
+    </style>
+</head>
+
+<body>
+<span id="watermark" style="font-size:1.64rem;" unselectable="on">Powered by 
+<span style="font-size:1.64rem; color: #64c1b1">CYGEN</span>
+</span>
+    <header>
+        <div class="navbar-fixed">
+            <nav class="white top-nav nav-extended" role="navigation">
+                <div class="nav-wrapper container-fluid">
+                    <span>
+                        <img src='{% static "sreesend/img/aimh.1.png" %}' alt="logo" id="logo-container"
+                            class="brand-logo">
+                    </span>
+                    <ul class="right hide-on-med-and-down">
+                        <li>
+                            <a onclick="window.location.pathname='/logout/'" data-toggle="modal"
+                                data-target="#exampleModal" style="color:black; font-size: 16px;">
+                                Logout</a>
+
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!--Sidenav-->
+        <div class="container">
+                <ul id="slide-out" class="sidenav">
+                    <!-- sidenav-fixed-->
+                    <li>
+                        <div class="user-view">
+                            <div class="background"><img src="{% static 'kc/img/sideimg.jpg' %}"></div>
+                            <a href="#user"><img class="circle" src="{% static 'kc/img/doctor.jpg' %}"></a>
+                            <a href="#name"><span class="white-text name">{{request.user.first_name}}</span></a>
+                            <a href="#email"><span class="white-text email">{{request.user.email}}</span></a>
+                        </div>
+                    </li>
+    
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a  class="nav-link" href='/admindashboard/'>
+                            <i class="fa fa-tachometer" aria-hidden="true"></i>
+                            <span class="nav-link-text"
+                                style="font-family: sans-serif;font-size:16px!important;">Dashboard</span></a>
+                    </li>
+                    {% if user %}
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a class="nav-link" href='/adminlist/'>
+                            <i class="fa fa-user-o" aria-hidden="true"></i>
+                            <span class="nav-link-text"
+                                style="font-family: sans-serif;font-size:16px!important">Admin</span></a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a  class="nav-link" href='/doctorlist/'>
+                            <i class="fa fa-user-md" aria-hidden="true"></i>
+                            <span class="nav-link-text"
+                                style="font-family: sans-serif;font-size:16px!important">Doctor</span></a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a class="nav-link" href='/nurselist/'>
+                            <i class="fa fa-plus-square" aria-hidden="true"></i>
+                            <span class="nav-link-text"
+                                style="font-family: sans-serif;font-size:16px!important">Nurse</span></a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a class="nav-link" href='/medtechlist/'>
+                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                            <span class="nav-link-text"
+                                style="font-family: sans-serif;font-size:16px!important">MedTech</span></a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a class="nav-link" href='/corporatehrlist/'>
+                             <i class="fa fa-users" aria-hidden="true"></i>
+                            <span class="nav-link-text"
+                                style="font-family: sans-serif;font-size:16px!important">Corporate HR</span></a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a class="nav-link" href='/distributerlist/'>
+                            <i class="fa fa-hospital-o" aria-hidden="true"></i>
+                            <span class="nav-link-text"
+                                style="font-family: sans-serif;font-size:16px!important">Distributor</span></a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a class="nav-link" href='/branchlist/'>
+                            <i class="fa fa-building-o" aria-hidden="true"></i>
+                            <span class="nav-link-text"
+                                style="font-family: sans-serif;font-size:16px!important">Branch</span></a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a style="background-color:#69b7dd;" class="nav-link" href='/corporatebranchlist/'>
+                            <i class="fa fa-industry" aria-hidden="true"></i>
+                            <span class="nav-link-text"
+                                style="font-family: sans-serif;font-size:16px!important;color:#fff">Corporate Branch</span></a>
+                    </li>
+                    
+                </ul>
+    
+            </div>
+        <!--Sidenav end-->
+
+    </header>
+
+    <div class="content">
+        <div class="fixed-action-btn ">
+            <a href="#" data-target="slide-out" id="sidetrigger" class="left btn-floating  red sidenav-trigger">
+                <i class="material-icons">menu</i>
+            </a>
+        </div>
+        <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="content-details">
+                        <h3 style="text-align: center;font-family:apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif !important;">Corporate Branch</h3>
+
+                        <div class="row">
+                            <div class="col-md-12 ">
+                                    {% if user %}
+                                <div style="margin-top: 10px;display:none" class="add-btn right">
+                                    <i class="fa fa-plus fa-lg adding corp_branch-add" aria-hidden="true"
+                                        title="Create New Corporate Branch"></i>
+                                </div>
+                                {% else %}
+                                <div style="margin-top: 10px;" class="add-btn right">
+                                        <i class="fa fa-plus fa-lg adding corp_branch-add" aria-hidden="true"
+                                            title="Create New Corporate Branch"></i>
+                                    </div>
+                                {% endif %}
+                                <div class="Search">
+                                    <input id="myInput" type="search" class="docinput form-control" data-table="order-table"
+                                        placeholder="Search">
+                                </div>
+                            </div>
+                        </div>
+                        <!--create doctor-->
+                        {% csrf_token %}
+                        <div class="manage-table">
+                            <div id="corpbranch-form" title="Corporate">
+                                <form autocomplete="off">
+                                    <fieldset>
+                                        <div class="fields">
+                                            <div class="user-info">
+                                                <div class="row">
+
+                                                    <div class="col-md-3 ">
+                                                        <label for="corp_name" style="margin-bottom: 10px;
+                                                        padding-top: 8px;font-size: small;color:#000" class="field">Corporate name<span class="mandatory">*</span></label></div>
+                                                    <div class="col-md-9">
+                                                        <input type="text" name="mname" id="corp_name" value=""
+                                                            class="form-control"
+                                                            title="Please enter your middle name. Special charecter and numeric values are not allowed "
+                                                            onkeydown="return /[a-zA-Z\s]/i.test(event.key)" />
+                                                    </div>
+                                                    <div class="col-md-3 ">
+                                                        <label for="corp_code" style="margin-bottom: 10px;
+                                                        padding-top: 8px;font-size: small;color:#000" class="field">Corporate code<span class="mandatory">*</span></label></div>
+                                                    <div class="col-md-9">
+                                                        <input type="text" name="mname" id="corp_code" value=""
+                                                            class="form-control"
+                                                            title="Please enter your middle name. Special charecter and numeric values are not allowed "
+                                                            onkeydown="return /[a-zA-Z\s]/i.test(event.key)" />
+                                                    </div>
+						    <div class="col-md-3 ">
+                                                        <label for="nofvisits" style="margin-bottom: 10px;
+                                                        padding-top: 8px;font-size: small;color:#000" class="field">Number of Visits<span class="mandatory">*</span></label></div>
+                                                    <div class="col-md-9">
+                                                        <input type="text" name="mname" id="nofvisits" value=""
+                                                            class="form-control"/>
+                                                    </div>
+                                                     <div class="col-md-3 ">
+                                                        <label for="corp_address" style="margin-bottom: 10px;
+                                                        padding-top: 8px;font-size: small;color:#000" class="field">Corporate branch Address<span class="mandatory">*</span></label></div>
+                                                    <div class="col-md-9">
+                                                        <textarea type="text" name="mname" style="height: 180px" id="corp_address" value=""
+                                                            class="form-control"></textarea>
+                                                    </div>
+                                                    <div class="col-md-3"></div>
+                                                    <div class="col-md-9">
+                                                            <p></p>
+                                                        <div class="status" id="dialogbox" style="display: hide;">
+                                                            <span id="errorMsg" style="font-size:12px; color:red"
+                                                                class="alert " role="alert">
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                            <div class="manage-table">
+                                <table class="table table-bordered table-striped order-table table responsive-table"
+                                    style="    font-size: 13px;">
+                                    <thead>
+                                        <tr>
+                                            <th>Corporate Name</th>
+                                            <th>Corporate Code</th>
+					    <th>No of visits</th>
+
+                                             <th>Corporate Branch Address</th>
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody id="mycorpTable">
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                        <!--create user-->
+                        {% csrf_token %}
+
+                    </div>
+
+                </div>
+            </div>
+
+    </div>
+    <script>
+        $('#toggleNavPosition').click(function () {
+            $('body').toggleClass('fixed-nav');
+            $('nav').toggleClass('fixed-top static-top');
+        });
+
+
+    </script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <!-- <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
+    <script src='{% static "kc/js/init.js" %}'></script>
+    <script src='{% static "kc/js/materialize.js" %}'></script>
+    <script src='{% static "kc/js/adminscript.js" %}'></script>
+    <script src='{% static "kc/js/adminajax.js" %}'></script>
+<script>
+
+        var $crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+        window.drf = {
+            csrfHeaderName: "X-CSRFTOKEN",
+            csrfCookieName: "csrftoken"
+        };
+
+</script>
+<script>
+   (function(document) {
+	'use strict';
+
+	var LightTableFilter = (function(Arr) {
+
+		var _input;
+
+		function _onInputEvent(e) {
+			_input = e.target;
+			var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+			Arr.forEach.call(tables, function(table) {
+				Arr.forEach.call(table.tBodies, function(tbody) {
+					Arr.forEach.call(tbody.rows, _filter);
+				});
+			});
+		}
+
+		function _filter(row) {
+			var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+			row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+		}
+
+		return {
+			init: function() {
+				var inputs = document.getElementsByClassName('docinput');
+				Arr.forEach.call(inputs, function(input) {
+					input.oninput = _onInputEvent;
+				});
+			}
+		};
+	})(Array.prototype);
+
+	document.addEventListener('readystatechange', function() {
+		if (document.readyState === 'complete') {
+			LightTableFilter.init();
+		}
+	});
+
+})(document);
+</script>
+</body>
+
+</html>

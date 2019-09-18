@@ -1,0 +1,496 @@
+.setting-box{
+    padding: 10px 30px;
+}
+.settings-div{
+    margin-top: 50px;
+}
+.setting-subbox{
+    overflow: hidden;
+    box-shadow: 0px 0px 6px 0px #454545;
+}
+.settings-content,.settings-button{
+    padding: 10px;
+    font-size: 15px;
+}
+.settings-head{
+    width: fit-content;
+    color: white;
+    padding: 5px 20px 5px 20px;
+    border: none;
+    background: rgba(17, 45, 65, 0.6);
+    font-size: 14px;
+}
+.dele,.edit,.edit1,.edit2,.edit3,.edit4,.edit5,.edit6,.edit7,.edit8{
+    border: none;
+    color: white;
+    font-size: 14px;
+    padding: 7px;
+    border-radius: 4px;
+    background: #017b8b;
+    margin: 2px;
+}
+.dele:hover{
+    color:white;
+    text-decoration: none;
+}
+button{
+    border: none;
+    color: white;
+    font-size: 14px;
+    padding: 7px;
+    border-radius: 4px;
+    background: #64c1b1;
+    margin-right: 20px;
+}
+.settings-button{
+    float: right;
+}
+.admin {
+    margin-top: 70px;
+    position:relative;
+}
+.upload-profile{
+    height: 217.5px;
+    padding: 0px;
+    cursor: pointer;
+    overflow: hidden;
+    width: 217.5px;
+}
+.profile-img{
+width:200px;
+}
+.center {
+    width: 70%;
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    float:right;
+}
+
+.hideform {
+    display: none;
+}
+.profile {
+    z-index: 1;
+    padding: 2px 20px;
+    float: left;
+    border-collapse: inherit !important;
+}
+.edit-profile{
+    z-index: 2;
+    padding: 20px;
+    overflow: hidden;
+  }
+  .upload {
+      margin-top:10px;
+    border: 2px solid #efefef;
+}
+.profile-info {
+    overflow: hidden;
+      margin-top:10px;
+    border: 2px solid #efefef;
+}
+
+.close{
+    border: none;
+    color: #777676;
+    padding: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.profile-content{
+    padding: 5px;
+    color: #777676;
+}
+.edit-info{
+    padding: 5px;
+}
+.edit-name{
+    padding: 5px;
+    color: #017b8b;
+    font-weight: bold;
+}
+.edit-content{
+    padding:10px;
+}
+.form-control{
+    font-size: 14px;
+}
+.profile-name{
+    font-size: 15px;
+    font-weight: bold;
+    color: #017b8b;
+    padding: 10px 25px;
+}
+.form-name{
+    color: #777676;
+    padding: 5px 10px;
+    font-size: 15px;
+    /* font-weight: bold; */
+}
+.form-input{
+
+    padding: 5px 10px;
+}
+
+
+input.text {
+    margin-bottom: 12px;
+    width: 95%;
+   padding: .4em;
+ }
+ fieldset {
+    padding: 0;
+   border: 0;
+   margin-top: 25px;
+  }
+ h1 {
+    font-size: 1.2em;
+    margin: .6em 0;
+ }
+div#users-contain {
+    height: 400px;
+     margin: 20px 0;
+     box-shadow: 0px 1px 6px #454545
+ }
+ div#users-contain1 {
+    height: 100%;
+    margin: 20px 0;
+    box-shadow: 0px 1px 6px #454545;
+}
+  div#users-contain table {
+    margin: 1em 0;
+     border-collapse: collapse;
+    width: 100%;
+  }
+ div#users-contain table td, div#users-contain table th {
+    padding: 0.6em 30px;
+    text-align: left;
+    color: #888686;
+    font-size: 15px;
+ }
+ div#users-contain1 table {
+    margin: 1em 0;
+     border-collapse: collapse;
+    width: 100%;
+  }
+ div#users-contain1 table td, div#users-contain1 table th {
+    padding: .6em 10px;
+    text-align: left;
+    color: #888686;
+    font-size: 15px;
+ }
+ .ui-dialog .ui-state-error {
+     padding: .3em;
+  }
+ .validateTips {
+    border: 1px solid transparent;
+   padding: 0.3em;
+  }
+#doctor-form,#user-form,#nurse-form,#pharma-form,#laboratorist-form,#receptionist-form,#patient-form,#doctoravailability-form{
+    display: none;
+ }
+
+.ui-dialog {
+    position: absolute;
+    height: auto;
+    width: 700px !important;
+    top: 154px;
+    left: 496.5px;
+    box-shadow: 0px 0px 20px 2px #888888;
+    display: block;
+} 
+.ui-dialog-content {
+    display: block;
+    width: auto;
+    min-height: 0px;
+    max-height: none;
+     height:  100% !important;
+}
+.ui-widget-header {
+    border: none !important;
+    background:none !important;
+     color:black;
+    font-weight: bold;
+}
+
+.ui-dialog .ui-dialog-titlebar-close {
+  
+    border: none;
+    background: white;
+}
+.ui-dialog .ui-dialog-titlebar-close :before,.ui-dialog .ui-dialog-titlebar-close :after{
+    content: '✖';
+    border: none !important;
+    background: white !important;
+}
+label{
+    font-size: 14px;
+}
+.user-info{
+    padding: 10px;
+}
+.user-profile{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+.ui-widget-content a {
+     color:white !important;
+     text-decoration: none;
+}
+.info-name{
+    text-align: center;
+    color: #017b8b;
+    padding: 5px;
+    font-size: 15px;
+}
+.create-btn{
+    text-align: center;
+}
+.manage-div {
+    margin-top: 50px;
+    border: 2px solid #efefef;
+    padding: 10px;
+}
+.manage-name{
+    font-size: 17px;
+    font-weight: bold;
+    color: #107b8b;
+    padding: 10px 0px;
+}
+
+.manage-search {
+    padding: 10px 15px;
+}
+
+.manage-add{
+    padding: 15px;
+}
+#manage-form{
+    display: none;
+}
+
+.hide{
+
+display:none;
+}
+.upload-file{
+    padding: 10px;
+}
+#remove,#sign-remove,#uploadremove{
+    background: none ;
+    color: #017b8b;
+    font-weight: bold;
+    font-size: 20px;
+    display: inline-block;
+}
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+  }
+  
+  
+  .upload-btn-wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+  /*popup*/
+     
+.dropdown {
+    position: relative;
+    display:block;
+    margin-top:0.5em;
+    padding:0px;
+  }
+ @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .dropdown select::-ms-expand {
+      display: none;
+    }
+    select:focus::-ms-value {
+      background: transparent;
+      color: #222;
+    }
+  }
+  
+  body:last-child .dropdown::after, x:-moz-any-link {
+    display: none;
+  }
+   body:last-child .dropdown select, x:-moz-any-link {
+    padding-right: .8em;
+  }
+  
+   _::-moz-progress-bar, body:last-child .dropdown {
+    overflow: hidden;
+  }
+  /* Show only the custom icon */
+  _::-moz-progress-bar, body:last-child .dropdown:after {
+    display: block;
+  }
+  _::-moz-progress-bar, body:last-child .dropdown select {
+    /* increase padding to make room for menu icon */
+    padding-right: 1.9em;
+    /* `window` appearance with these text-indent and text-overflow values will hide the arrow FF up to v30 */
+    -moz-appearance: window;
+    text-indent: 0.01px;
+    text-overflow: "";
+    /* for FF 30+ on Windows 8, we need to make the select a bit longer to hide the native arrow */
+    width: 110%;
+  }
+  
+  /* At first we tried the following rule to hide the native select arrow in Firefox 30+ in Windows 8, but we'd rather simplify the CSS and widen the select for all versions of FF since this is a recurring issue in that browser */
+  /* @supports (-moz-appearance:meterbar) and (background-blend-mode:difference,normal) {
+  .dropdown select { width:110%; }
+  }   */
+  
+  
+  /* Firefox 7+ focus style - This works around the issue that -moz-appearance: window kills the normal select focus. Using semi-opaque because outline doesn't handle rounded corners */
+  _::-moz-progress-bar, body:last-child .dropdown select:focus {
+    outline: 2px solid rgba(180,222,250, .7);
+  }
+  
+  
+  /* Opera - Pre-Blink nix the custom arrow, go with a native select button */
+  x:-o-prefocus, .dropdown::after {
+    display:none;
+  }
+  
+  
+ 
+  /* Focus style */
+  select:focus {
+    outline:none;
+    box-shadow: 0 0 1px 3px rgba(180,222,250, 1);
+    color: black;
+    border:1px solid #aaa;
+    padding:10px !important;
+  }
+  
+  
+  /* Firefox focus has odd artifacts around the text, this kills that */
+  select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+  }
+  
+  option {
+    font-weight:normal;
+  }
+  
+  
+  /* These are just demo button-y styles, style as you like */
+  .button {
+    border-radius: .3em;
+    color:white;
+    background: #017b8b; /* Old browsers */
+   
+  }
+  
+  .output {
+    margin: 0 auto;
+  }
+  .hospital,.service{
+    color: black;
+    display: none;
+  }
+  
+  div#itemcode {
+    overflow: hidden;
+    padding: 5px;
+    box-shadow: 0px 1px 6px #454545;
+}
+.itemcode-name {
+    color: #017b8b;
+    padding: 5px;
+    font-size: 18px;
+    float: left;
+}
+.item-btn {
+    float: right;
+}
+.ui-widget-content {
+    border: none !important;
+    background: #ffffff/*{bgColorContent}*/ url(images/ui-bg_flat_75_ffffff_40x100.png)/*{bgImgUrlContent}*/ 50%/*{bgContentXPos}*/ 50%/*{bgContentYPos}*/ repeat-x/*{bgContentRepeat}*/;
+    color: #222222/*{fcContent}*/;
+}
+#hospitalselector{
+    padding:10px;
+}
+.table-content{
+    padding: 13px 8px;
+    margin-top: 40px;
+    text-align: center;
+    font-size: 15px;
+    overflow: auto;
+    color: #6c757d;
+}
+.select-items {
+    color:#efefef;
+    padding:5px;
+}
+.change-password{
+    margin-top: 70px;
+    border: 2px solid #efefef;
+    padding: 10px;
+    border-radius: 5px;
+
+}
+.change-name {
+    padding: 10px 20px;
+    color: #818182;
+}
+.password-name{
+    color:#017b8b;
+    font-weight: bold;
+    font-size: 16px;
+}
+.change-save{
+    float: right;
+}
+.upload-fileupload{
+    height: 400px;
+    margin: 20px 0;
+    box-shadow: 0px 1px 6px #454545;
+}
+.invoice-body{
+    margin-top: 60px;
+    border: 2px solid #efefef;
+    padding: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.invoice-name{
+    font-size: 16px;
+    font-weight: bold;
+    color: #107b8b;
+}
+.invoice-content{
+    padding: 15px 0px;
+}
+.invoice-text{
+    font-size: 14px;
+    text-align: justify;
+    padding: 10px 0px;
+}
+.is-btn{
+    border: none;
+    padding: 5px;
+    color: white;
+    background: #017b8b;
+    border-radius: 4px;
+}
+
+.ui-dialog {
+    padding:20px;
+}
+.ui-widget-overlay {
+    background: #aaaaaa/*{bgColorOverlay}*/ url(images/ui-bg_flat_0_aaaaaa_40x100.png)/*{bgImgUrlOverlay}*/ 50%/*{bgOverlayXPos}*/ 50%/*{bgOverlayYPos}*/ repeat-x/*{bgOverlayRepeat}*/;
+    opacity: .3/*{opacityOverlay}*/;
+    filter: Alpha(Opacity=30)/*{opacityFilterOverlay}*/;
+}
+.ui-dialog-title{
+color:#64c1b1;
+}

@@ -1,0 +1,2178 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% load conv_int %}
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Summary</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static 'kc/css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link href="{% static 'kc/css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="{% static 'kc/css/cygen.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
+    <style>
+        .select-dropdown {
+            top: 0px !important;
+        }
+
+        #logo-container {
+            height: 100%;
+            width: 17%;
+            padding: 4px;
+        }
+
+        #watermark {
+            padding-right: 10px;
+            position: fixed;
+            bottom: 5px;
+            right: 5px;
+            opacity: 0.6;
+            z-index: 99;
+            color: #293d3d;
+            -webkit-touch-callout: none;
+            /* iOS Safari */
+            -webkit-user-select: none;
+            /* Safari */
+            -khtml-user-select: none;
+            /* Konqueror HTML */
+            -moz-user-select: none;
+            /* Firefox */
+            -ms-user-select: none;
+            /* Internet Explorer/Edge */
+            user-select: none;
+            /* Non-prefixed version, currently supported by Chrome and Opera */
+        }
+
+        main {
+            padding: 1%;
+            background-color: #F5F7FA
+        }
+
+        .fixed-action-btn {
+            top: 53px !important;
+            right: auto;
+            margin-left: 2px;
+        }
+
+        .heading {
+            font-size: 24px;
+            font-weight: 300;
+        }
+
+        .risk_scores {
+            display: flex
+        }
+
+        @media only screen and (max-width: 992px) {
+            .risk_scores {
+                display: inherit;
+            }
+
+            nav .brand-logo {
+                padding: 2px;
+                left: 0px;
+                -webkit-transform: none;
+                transform: none;
+            }
+
+            #input-content {
+                width: 130px;
+            }
+        }
+
+        .cards {
+            min-height: 100%;
+
+            /* max-height:430px */
+        }
+
+
+        .disclaimer {
+            padding: 15px;
+            font-size: 11px;
+            text-align: justify;
+            border: 2px solid #585353;
+        }
+
+        .paragraph {
+            font-size: 15px
+        }
+
+        .content {
+            text-align: justify;
+        }
+    </style>
+</head>
+
+<body>
+    <span id="watermark" style="font-size:1.64rem;" unselectable="on">Powered by <span
+            style="font-size:1.64rem; color: #64c1b1">CYGEN</span></span>
+
+    <header>
+        <div class="navbar-fixed">
+            <nav class="white top-nav nav-extended" role="navigation">
+                <div class="nav-wrapper container-fluid">
+                    <span>
+                        <img src='{% static "sreesend/img/aimh.1.png" %}' alt="logo" id="logo-container"
+                            class="brand-logo">
+                    </span>
+                    <ul class="right hide-on-med-and-down">
+                        <!-- <li><a href="{% url 'healthandrecords:first_form' %}">Evaluation Form</a></li> -->
+                        <!-- <li><a href="#health_index_modal" class="modal-trigger">Health Index</a></li> -->
+                        <li>
+                            <a href="#!" class="dropdown-trigger" data-target="dropdown1">Account Settings
+                                <i class="material-icons right">arrow_drop_down</i></a>
+                        </li>
+                    </ul>
+
+
+
+                </div>
+
+            </nav>
+        </div>
+
+        <!--Sidenav-->
+        <div class="container">
+            <ul id="slide-out" class="sidenav">
+                <!-- sidenav-fixed-->
+                <li>
+                    <div class="user-view">
+                        <div class="background"><img src="{% static 'kc/img/sideimg.jpg' %}"></div>
+                        <a href="#user"><img class="circle" src="{% static 'kc/img/doctor.jpg' %}"></a>
+                        <a href="#name"><span class="white-text name">{{request.user.first_name}}</span></a>
+                        <a href="#email"><span class="white-text email">{{request.user.email}}</span></a>
+                    </div>
+                </li>
+                <li><a href='{% url "healthandrecords:health_ana" %}'><i
+                            class="material-icons small">dashboard</i>Dashboard</a></li>
+                <li>
+                    <a href='{% url "foodandacti:personal_info_update" %}'><i class="fas fa-utensils fa-2x"></i>Diet</a>
+                </li>
+                <li><a href='{% url "foodandacti:activityredirct" %}'><i
+                            class="material-icons small">directions_run</i>Activities and Fitness</a></li>
+                <li>
+                <li>
+                <li><a href='{% url "foodandacti:summary" %}'><i class="fas fa-book-open fa-2x"></i>Summary</a></li>
+
+                <!-- <li><a href='{% url "healthandrecords:cygenpacks" %}'><i class="fas fa-heartbeat fa-2x"></i>Health Package</a></li>
+                <li><a href="#!"><i class="fas fa-piggy-bank fa-2x"></i>Insurance Packs</a></li>
+                <li><a href="#!"><i class="far fa-hospital fa-2x"></i>Hospital Packs</a></li>
+                  <li><a href="{% url 'healthandrecords:first_form' %}">Evaluation Form</a></li> -->
+                <!-- <li><a href="#health_index_modal" class="modal-trigger">Health Index</a></li> -->
+                <li>
+                    <a href="#!" class="dropdown-trigger" data-target="dropdown2">Account Settings
+                        <i class="material-icons right">arrow_drop_down</i></a>
+                </li>
+            </ul>
+
+        </div>
+        <!--Sidenav end-->
+    </header>
+    <br>
+    <!-- Main-->
+    <main>
+        <!--Account Settings-->
+        <ul id="dropdown1" class="dropdown-content">
+            <li><a href='{% url "foodandacti:summary" %}'><i class="material-icons">account_circle</i>Profile</a></li>
+            <li><a href="#!"><i class="material-icons">settings</i>Settings</a></li>
+            <li class="divider"></li>
+            <li><a href='{% url "before_l:logout_view" %}'><i class="material-icons">power_settings_new</i>Logout</a>
+            </li>
+        </ul>
+        <ul id="dropdown2" class="dropdown-content">
+            <li><a href='{% url "foodandacti:summary" %}'><i class="material-icons">account_circle</i>Profile</a></li>
+            <li><a href="#!"><i class="material-icons">settings</i>Settings</a></li>
+            <li class="divider"></li>
+            <li><a href='{% url "before_l:logout_view" %}'><i class="material-icons">power_settings_new</i>Logout</a>
+            </li>
+        </ul>
+
+        <div id="summary" class="container-fluid">
+            <!--menu button-->
+            <div class="fixed-action-btn ">
+                <a href="#" data-target="slide-out" id="sidetrigger" class="left btn-floating  red sidenav-trigger">
+                    <i class="material-icons">menu</i>
+                </a>
+            </div>
+
+            <!--Summary Questions-->
+            {% if userinfo %}
+            <!--User Details-->
+            <div class="row card">
+                <div class="card-content">
+                    <span class="card-title teal-text text-darken-4"><i class="material-icons blue-text">person</i>
+                        General Details</span>
+                    <div class="col m4 s12">
+                        <div class="">
+                            <table>
+                                <tr>
+                                    <th>Name</th>
+                                    <td style="float:right;text-transform: capitalize">{{patientName}}</td>
+                                </tr>
+
+
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col m4 s12">
+                        <div class="">
+                            <table>
+
+                                <tr>
+                                    <th>Age</th>
+                                    <td style="float:right">{{userinfo.age}} years</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col m4 s12">
+                        <div class="">
+                            <table>
+                                <tr>
+                                    <th>Contact Number</th>
+                                    <td style="float:right">{{userinfo.PhoneNo}}</td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col m4 s12">
+                        <div class="">
+                            <table>
+                                <tr>
+                                    <th>Gender</th>
+                                    <td style="float:right;text-transform: capitalize">{{userinfo.Gender}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col m4 s12">
+                        <div class="">
+                            <table>
+
+                                <tr>
+                                    <th>Email</th>
+                                    <td style="float:right;word-break: break-all;">{{userinfo.email}}</td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col m4 s12">
+                            <div class="">
+                                <table>
+    
+                                    <tr>
+                                        <th>PHID</th>
+                                        <td style="float:right;word-break: break-all;"> {{phid}}</td>
+                                    </tr>
+    
+                                </table>
+                            </div>
+                        </div>
+			{% if corpo_id %}
+                    <div class="col m4 s12">
+                        <table>
+                            <tr>
+                                <th>Corporate Code</th>
+                                <td style="float:right">{{corpo_id}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    {% endif %}
+                    {% if corpo_id %}
+                    <div class="col m4 s12">
+                        <table>
+                            <tr>
+                                <th>Employee ID</th>
+                                <td style="float:right">{{emp_id}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    {% endif %}
+                    <div class="col m4 s12">
+                        <div class="">
+                            <table>
+                                <tr>
+                                    <th>Address</th>
+                                    <td style="float:right;text-transform: capitalize">{{userinfo.Address}}
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col m4 s12">
+                        <div class="">
+                            <table>
+
+                                <tr>
+                                    <th>Nearest Medical Faciity</th>
+                                    <td style="float:right">{{userinfo.hospitalAddress}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Demographic details-->
+            <div class="row card">
+                <div class="card-content">
+
+                    <div class="col m6 s12">
+                        <span class="card-title cyan-text text-darken-4"><i class="material-icons blue-text">ac_unit</i>
+                            Demographic Details</span>
+                        <span class="">
+                            <table>
+                                <tr>
+                                    <th>Marital Status</th>
+                                    <td style="float:right;text-transform: capitalize">{{userinfo.MaritalStatus}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Employment Status</th>
+                                    <td style="float:right;text-transform: capitalize">{{userinfo.EmployedStatus}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Housing Status</th>
+                                    <td style="float:right;text-transform: capitalize">{{userinfo.HousingStatus}}</td>
+                                    </br>
+                                </tr>
+                            </table>
+                            </br>
+                        </span>
+                    </div>
+                    <div class="col m6 s12">
+                        <span class="card-title red-text text-darken-4"><i
+                                class="material-icons blue-text">add_alert</i>
+                            Prevailing Conditions and Allergies</span>
+                        <div class="">
+                            <table>
+                                <tr>
+                                    <th>Notify any rare health condition (e.g.rare blood group) : </th>
+                                    <td style="float:right">{{userinfo.allergy}}</td>
+                                </tr>
+                            </table>
+                            </br>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!--Gaurdian and Doctor Details-->
+            <div class="row card">
+                <div class="card-content">
+
+                    <div class="col m6 s12">
+                        <span class="card-title green-text text-darken-4"><i class="material-icons blue-text">wc</i>
+                            Guardian/Spouse Details</span>
+                        <div class="">
+                            <table>
+                                <tr>
+                                    <th>Name</th>
+                                    <td style="float:right;text-transform: capitalize">{{userinfo.guardianname}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Contact No:</th>
+                                    <td style="float:right">+63 {{userinfo.ContactNo}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Address</th>
+                                    <td style="float:right;text-transform: capitalize">{{userinfo.gAddress}}</td>
+                                </tr>
+                            </table><br>
+                        </div>
+                    </div>
+                    <div class="col m6 s12">
+                        <span class="card-title amber-text text-darken-4"><i class="fas fa-user-md blue-text"></i>
+                            Family Doctor Details</span>
+                        <div class="">
+                            <table>
+                                <tr>
+                                    <th>Name</th>
+                                    <td style="float:right;text-transform: capitalize">{{userinfo.Doctorname}}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Contact Number</th>
+                                    <td style="float:right">+63 {{userinfo.Doctornumb}}</td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!--Physical Findings-->
+
+            <div class="row card">
+
+
+                <div class="card-content">
+                    <span class="card-title indigo-text text-darken-4"><i
+                            class="material-icons blue-text">accessibility</i>
+                        Physical Findings</span>
+                    <div class="col m4 s12">
+                        <div class="">
+                            <table>
+                                <tr>
+                                    <th>Height</th>
+                                    <td style="float:right">{{userperson.h_feet}} feet {{userperson.h_inches}} inches
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    {% if userperson.weight %}
+                    <div class="col m4 s12">
+                        <div class="">
+                            <table>
+
+                                <tr>
+                                    <th>Weight</th>
+                                    <td style="float:right">{{userperson.weight}} kgs</td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if usertemp.temperature %}
+                    <div class="col m4 s12">
+                        <div class="">
+                            <table>
+
+                                <tr>
+
+                                    <th>Temperature</th>
+                                    <td style="float:right">{{usertemp.temperature|floatformat:2}}&#x2103; (<imp
+                                            style=" font-size:11px">Reference range: 36.1 - 37.2&#x2103;</imp>)</td>
+                                </tr>
+
+
+                            </table>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="col m4 s12">
+                        <div class="">
+                            <table>
+                                <tr>
+                                    <th>BMI</th>
+                                    {% if userperson.ethnicity == 'Asian' %}
+                                    <td style="float:right">{{userbmi|floatformat:2}} (<imp style=" font-size:11px">Reference range: 18.5 - 23</imp>)</td>
+                                    {% else %}
+                                    <td style="float:right">{{userbmi|floatformat:2}} (<imp style=" font-size:11px">Reference range: 18.5 - 25</imp>)</td>
+                                    {% endif %}
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col m4 s12">
+                        <div class="">
+                            <table>
+
+                                <tr>
+                                    <th>Waist Circumference</th>
+
+                                    <td style="float:right">{{userperson.waist_circumference|floatformat:2}} cm </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col m4 s12">
+                        <div class="">
+                            <table>
+                                <tr>
+                                    {% if useroximeter.bpm %}
+                                    <th>Pulse Rate</th>
+
+                                    {% if userinfo.age > 6 and userinfo.age < 18 %}
+
+                                    <td style="float:right"> {{useroximeter.bpm}} beats per min (<imp
+                                            style=" font-size:11px">Reference range: 60-100 beats per min</imp>)</td>
+                                    {% endif %}
+                                    {% if userinfo.age >= 18 %}
+                                    <td style="float:right"> {{useroximeter.bpm}} beats per min (<imp
+                                            style=" font-size:11px">Reference range: 70-100 beats per min</imp>)</td>
+                                    {% endif %}
+
+                                    {% elif userbpm.pulse %}
+                                    <th>Pulse Rate</th>
+                                    {% if userinfo.age > 6 and userinfo.age < 18 %}
+                                    <td style="float:right"> {{userbpm.pulse}} beats per min (<imp
+                                            style=" font-size:11px">Reference range: 60-100 beats per min</imp>)</td>
+                                    {% endif %}
+                                    {% if userinfo.age >= 18 %}
+                                    <td style="float:right"> {{userbpm.pulse}} beats per min (<imp
+                                            style=" font-size:11px">Reference range: 70-100 beats per min</imp>)</td>
+                                    {% endif %}
+
+                                    {% endif %}
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                    {% if userperson.bp_systolic %}
+                    <div class="col m4 s12">
+                        <div class="">
+                            <table>
+
+
+                                <tr>
+                                    <th>Systolic</th>
+                                    <td style="float:right">{{userperson.bp_systolic|floatformat:2}} (mm Hg) (<imp style=" font-size:11px">Reference range: 120 mm Hg</imp>)</td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if userperson.bp_diastolic %}
+                    <div class="col m4 s12">
+                        <div class="">
+                            <table>
+
+                                <tr>
+                                    <th>Diastolic</th>
+                                    <td style="float:right">{{userperson.bp_diastolic|floatformat:2}} (mm Hg) (<imp style=" font-size:11px">Reference range: 80 mm Hg</imp>)</td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if useroximeter.spo %}
+                    <div class="col m4 s12">
+                        <div class="">
+                            <table>
+
+                                <tr>
+                                    <th>Oxygen Saturation </th>
+                                    <td style="float:right">{{useroximeter.spo|floatformat:2}} % (<imp
+                                            style=" font-size:11px">Reference range: 94 - 100 % </imp>)</td>
+
+                                </tr>
+
+
+                            </table>
+                        </div>
+                    </div>
+                    <!-- <p>&emsp;</p> -->
+                    {% endif %}
+                    <!-- <div class="card-content"> -->
+                    <div class="col m12 s12">
+                        </br>
+                        <!-- <span class="card-title indigo-text text-darken-4" style="line-height: 80px"> -->
+                        <span class="card-title indigo-text text-darken-4 " style="margin-top: 8px!important;">
+
+                            <i class="material-icons red-text">scatter_plot</i>
+                            Blood Chemistry</span>
+                        {% if himoblogin.hemoglobin %}
+                        <div class="col m4 s12">
+                            <div class="">
+                                <table>
+
+                                    <tr>
+                                        <th>Hemoglobin</th>
+                                        {% if userinfo.Gender == 'Male' %}
+                                        
+
+                                        <td style="float:right"> {{himoblogin.hemoglobin|floatformat:2}} (g/dL) (<imp
+                                                style=" font-size:11px">Reference range: 13.6 to 17.7 g/dL</imp>)</td>
+                                        
+                                        
+                                        {% else %}
+                                        
+                                       
+                                        <td style="float:right"> {{himoblogin.hemoglobin|floatformat:2}} (g/dL) (<imp
+                                                style=" font-size:11px">Reference range: 12.1 to 15.1 g/dL</imp>)</td>
+                                        
+                                        {% endif %}
+                                    </tr>
+
+
+                                </table>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if userglucos.glucose %}
+                        <div class="col m4 s12">
+                            <div class="">
+                                <table>
+
+                                    <tr>
+                                        <th>Blood Glucose</th>
+                                        <td style="float:right">{{userglucos.glucose|floatformat:2}} (mg/dL)  (<imp
+                                            style=" font-size:11px">Reference range: upto 140 mg/dL</imp>)</td>
+                                    </tr>
+
+
+                                </table>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if userperson.total_cholestoral %}
+                        <div class="col m4 s12">
+                            <div class="">
+                                <table>
+
+                                    <tr>
+                                        <th>Total Cholesterol</th>
+                                        <td style="float:right">{{userperson.total_cholestoral|floatformat:2}} mg/dL (<imp style="font-size:11px">Reference range: less than 200 mg/dL</imp>)
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if triglecyridea.tri %}
+                        <div class="col m4 s12">
+                            <div class="">
+                                <table>
+
+                                    <tr>
+                                        <th>Triglycerides </th>
+                                        <td style="float:right">{{triglecyridea.tri|floatformat:2}} (mg/dL) (<imp
+                                                style=" font-size:11px">Reference range: 150-199 mg/dL</imp>)</td>
+                                    </tr>
+
+
+
+
+                                </table>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if userperson.hdl_level %}
+                        <div class="col m4 s12">
+                            <div class="">
+                                <table>
+
+                                    <tr>
+                                        <th>HDL</th>
+                                        <td style="float:right">{{userperson.hdl_level|floatformat:2}} (mg/dL) (<imp
+                                                style=" ;font-size:11px">Reference range: 34-35 mg/dL</imp>)</td>
+                                    </tr>
+
+
+                                </table>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if ldlparamenter.ldl %}
+                        <div class="col m4 s12">
+                            <div class="">
+                                <table>
+                                    <tr>
+                                        <th>LDL </th>
+                                        <td style="float:right">{{ldlparamenter.ldl|floatformat:2}} (<imp
+                                                style=" ;font-size:11px">Reference range: 130-159 mg/dL</imp>)</td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if hbac1.hbac %}
+                        <div class="col m4 s12">
+                            <div class="">
+                                <table>
+
+
+                                    <tr>
+                                        <th>HBA1C</th>
+                                        {% if dialevel != 'Diagnosed' %}
+                                        <td style="float:right">{{hbac1.hbac|floatformat:2}} % (<imp
+                                                style=" ;font-size:11px">Reference range: 4-5.6 % </imp>)</td>
+                                        {% else %}
+                                        <td style="float:right">{{hbac1.hbac|floatformat:2}} % (<imp
+                                                style=" ;font-size:11px">Reference range: less than 7 %</imp>)</td>
+
+                                        {% endif %}
+                                    </tr>
+
+
+                                </table>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if ecgdata %}
+                        <div class="col m4 s12">
+                            <div class="">
+                                <table>
+
+                                    <tr>
+                                        <th>ECG Report</th>
+
+                                        <td style="float:right"><a href="/media/{{ ecgdata.pdf_file }}"
+                                                target="_blank">Click
+                                                here to view ECG Report</a></td>
+
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if ecg12data %}
+                        <div class="col m4 s12">
+                            <div class="">
+                                <table>
+
+                                    <tr>
+                                        <th>ECG 12 lead Report</th>
+                                        <td style="float:right"><a href="/media/{{ ecg12data.pdf_file }}"
+                                                target="_blank">Click
+                                                here to view ECG Report</a>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <!-- </div> -->
+
+                    <!-- <div class="col m4 s12">
+                        <div class="">
+                            <table>
+
+
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col m4 s12">
+                        <div class="">
+                            <table>
+
+
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col m4 s12">
+                        <div class="">
+                            <table>
+
+
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col m4 s12">
+                        <div class="">
+                            <table>
+
+
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col m4 s12">
+                        <div class="">
+                            <table>
+
+
+                            </table>
+                        </div>
+                    </div> -->
+
+                </div>
+                <div class="card-content">
+                    <div class="col m12 s12">
+                        </br>
+                        <span class="card-title cyan-text text-darken-4"><i
+                                class="material-icons blue-text">av_timer</i>
+                            Spiro meter analysis</span>
+                        <!-- <h1>{{userspirometer}}</h1> -->
+                        {% if userspirometer.fvc  %}
+                        <div class="col m4 s12">
+                            <div class="">
+                                <table>
+
+                                    <tr>
+                                        <th>FVC</th>
+                                        <td style="float:right">{{userspirometer.fvc|floatformat:2}} (<span style=" font-size:11px" id="fvc"></span>)
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="col m4 s12">
+                            <li>You Don't Have Spiro Meter Analysis Test Details</li>
+                        </div>
+                        {% endif %}
+                        {% if userspirometer.fev %}
+                        <div class="col m4 s12">
+                            <div class="">
+                                <table>
+                                    <tr>
+                                        <th>FEV1</th>
+                                        <td style="float:right">{{userspirometer.fev|floatformat:2}} (<span style=" font-size:11px" id="fev1"></span>)
+                                            </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if userspirometer.pef %}
+                        <div class="col m4 s12">
+                            <div class="">
+                                <table>
+
+                                    <tr>
+                                        <th>PEF</th>
+                                        <td style="float:right">{{userspirometer.pef|floatformat:2}} (<span  style=" font-size:11px" id="pefr"></span>)
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if userspirometer.fevfvc %}
+                        <div class="col m4 s12">
+                            <div class="">
+                                <table>
+
+                                    <tr>
+                                        <th>FEV1/FVC</th>
+                                        <td style="float:right">{{userspirometer.fevfvc|floatformat:2}} (<span style=" font-size:11px" id="fev1fvc"></span>)
+                                            </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if userspirometer.fef25 %}
+                        <div class="col m4 s12">
+                            <div class="">
+                                <table>
+
+                                    <tr>
+                                        <th>FEF25</th>
+                                        <td style="float:right">{{userspirometer.fef25|floatformat:2}}
+                                            
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if userspirometer.fef50 %}
+                        <div class="col m4 s12">
+                            <div class="">
+                                <table>
+
+                                    <tr>
+                                        <th>FEF50</th>
+                                        <td style="float:right">{{userspirometer.fef50|floatformat:2}}(<span style=" font-size:11px" id="fef50"></span>)
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if userspirometer.fef75 %}
+                        <div class="col m4 s12">
+                            <div class="">
+                                <table>
+
+                                    <tr>
+                                        <th>FEF75</th>
+                                        <td style="float:right">{{userspirometer.fef75|floatformat:2}}(<span style=" font-size:11px" id="fef75"></span>)
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if userspirometer.fef2575 %}
+                        <div class="col m4 s12">
+                            <div class="">
+                                <table>
+
+                                    <tr>
+                                        <th>FEF2575</th>
+                                        <td style="float:right">{{userspirometer.fef2575|floatformat:2}}(<span style=" font-size:11px" id="fef2575"></span>)
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+                <div class="card-content">
+                   
+                        <div class="col m12 s12">
+                            <span class=" card-title indigo-text text-darken-4" style=""></br><i class="material-icons blue-text">invert_colors</i>&nbsp;Urine Analysis</span>
+                            {% if urinedata  %}
+        
+                            {% if urinedata.nit %}
+        
+                            <div class="col m4 s12">
+                                <div class="">
+        
+                                    <table>
+        
+        
+                                        <tr>
+                                            <th>Nitrite </th>
+                                            <td style="float:right">{{urinedata.nit|floatformat:2}}</td>
+                                        </tr>
+        
+                                    </table>
+                                </div>
+                            </div>
+        
+                            {% endif %}
+                            {% if urinedata.ph %}
+                            <div class="col m4 s12">
+                                <div class="">
+        
+                                    <table>
+        
+                                        <tr>
+                                            <th>PH </th>
+                                            <td style="float:right">{{urinedata.ph|floatformat:2}} (<span style=" font-size:11px" >Reference range: 4.5-8.0</span>)</td>
+                                        </tr>
+        
+                                    </table>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if urinedata.bil %}
+                            <div class="col m4 s12">
+                                <div class="">
+        
+                                    <table>
+        
+        
+        
+                                        <tr>
+                                            <th>Protien</th>
+                                            <td style="float:right">{{urinedata.bil|floatformat:2}} (<span style=" font-size:11px" >Reference range: less than 150 mg/dL</span>)</td>
+                                        </tr>
+        
+                                    </table>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if urinedata.glu %}
+                            <div class="col m4 s12">
+                                <div class="">
+        
+                                    <table>
+        
+        
+        
+                                        <tr>
+                                            <th>Glucose</th>
+                                            <td style="float:right">{{urinedata.glu|floatformat:2}} (<span style=" font-size:11px" >Reference range: 130 mg/dL</span>)</td>
+                                        </tr>
+        
+                                    </table>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if urinedata.bil %}
+                            <div class="col m4 s12">
+                                <div class="">
+        
+                                    <table>
+        
+        
+        
+                                        <tr>
+                                            <th>Bilirubin</th>
+                                            <td style="float:right">{{urinedata.bil|floatformat:2}}</td>
+                                        </tr>
+        
+        
+                                    </table>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if urinedata.ket %}
+                            <div class="col m4 s12">
+                                <div class="">
+        
+                                    <table>
+        
+        
+                                        <tr>
+        
+                                            <th>Ketone body </th>
+                                            <td style="float:right">{{urinedata.ket|floatformat:2}} </td>
+                                        </tr>
+        
+                                    </table>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if urinedata.leu %}
+                            <div class="col m4 s12">
+                                <div class="">
+        
+                                    <table>
+                                        <tr>
+                                            <th>Leukocytes </th>
+                                            <td style="float:right">{{urinedata.leu|floatformat:2}} </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            {% endif %}
+        
+                        </div>
+                            {% else %}
+                    <div class="col m4 s12">
+                             <li>You Don't Have Urine Analysis Test Details</br></br></li>
+                    </div>
+                            {% endif %}
+                </div>
+
+            </div>
+
+
+            <!--Predictive Score-->
+            <span class="heading center risk-name"><i class="material-icons red-text">add_alert</i>
+                Risk Predictive Score</span>
+            <div class="row risk_scores">
+                <div class="col m3 s12 ">
+                    <div class="card cards">
+                        <div class="card-content">
+
+                            <span class="card-title">
+                                Hypertension : <span class="heading lighten-2">{{hyperlevel}}</span>
+                            </span>
+                            {% if hyperlevel == 'Not Available' %}
+                            <div class="content">
+                                <!-- <ul> -->
+
+                                <li>
+                                    Please redo the analysis.
+                                </li>
+
+
+                                <!-- </ul> -->
+                            </div>
+
+                            {% elif hyperlevel != 'Diagnosed'%}
+                            <div class="content">
+                                <!-- <ul> -->
+                                {% if userperson.gender == "Female" and  userperson.waist_circumference|to_int >= 80 or userperson.gender|lower == "Male"|lower and  userperson.waist_circumference|to_int > 85 or userperson.smoker == "Yes" or userperson.bp_systolic|to_int  > 140 %}
+
+                                {% if userperson.gender == "Female" and  userperson.waist_circumference|to_int >= 80 %}
+                                <li>
+                                    Keeping check on abdominal obesity will help in improving Hypertension risk.
+                                </li>
+
+                                {% endif %}
+                                {% if userperson.gender|lower == "Male"|lower and  userperson.waist_circumference|to_int > 85 %}
+
+                                <li>
+                                    Keeping check on abdominal obesity will help in improving Hypertension risk.
+                                </li>
+
+
+                                {% endif %}
+                                {% if userperson.smoker == "Yes" %}
+                                <li>
+                                    Cessation of smoking will help in improving Hypertension risk.
+                                </li>
+
+                                {% endif %}
+
+                                {% if userperson.bp_systolic|to_int  > 140 %}
+                                <li>
+                                    Please consult a doctor to maintain blood pressure within healthy range
+                                </li>
+
+
+                                {% endif %}
+                                {% else %}
+                                <!-- <br> -->
+                                <li>Follow the advice under diet and activity section to keep weight within healthy
+                                    range.</li>
+                                {% endif %}
+                                <!-- </ul> -->
+                            </div>
+
+                            {% else %}
+
+
+                            <div class="content">
+                                <!-- <ul> -->
+
+                                <li>
+                                    Follow the advice under diet and activity section to keep weight within healthy
+                                    range. Please consult a Specialist for better management of Hypertension
+                                </li>
+
+
+                                <!-- </ul> -->
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col m3 s12">
+                    <div class="card cards">
+                        <div class="card-content">
+                            <span class="card-title">
+                                Cardiac : <span class="heading lighten-2">{{heartlevel}}</span>
+                            </span>
+                            {% if heartlevel == 'Not Available' %}
+                            <div class="content">
+                                <!-- <ul> -->
+
+                                <li>
+                                    Please redo the analysis.
+                                </li>
+
+
+                                <!-- </ul> -->
+                            </div>
+
+                            {% elif heartlevel != 'Diagnosed' %}
+                            <div class="content">
+                                <!-- <ul> -->
+                                {% if userperson.smoker == "Yes" or userperson.bp_systolic|to_int  > 140 or userperson.total_cholestoral|to_int >= 200 or userperson.hdl_level|to_int >= 45 %}
+                                {% if userperson.smoker == "Yes" %}
+                                <li>
+                                    Cessation of smoking will help in improving cardiac risk.
+                                </li>
+                                {% endif %}
+                                {% if userperson.bp_systolic|to_int >= 140 %}
+                                <li>
+                                    Please consult a doctor to maintain blood pressure within healthy range
+                                </li>
+                                {% endif %}
+                                {% if userperson.total_cholestoral|to_int >= 200 %}
+                                <li>
+                                    Healthy diet and proper activity to lower total cholesterol will help in
+                                    improving cardiac risk
+                                </li>
+                                {% endif %}
+                                {% if userperson.hdl_level|to_int >= 45 %}
+                                <li>
+                                    Need to maintain HDL level within healthy range.
+                                </li>
+                                {% endif %}
+                                {% else %}
+                                <!-- <br> -->
+                                <li> Follow the advice under diet and activity section to keep weight within healthy
+                                    range </li>
+                                {% endif %}
+                                <!-- </ul> -->
+                            </div>
+                            {% else %}
+
+
+                            <div class="content">
+                                <!-- <ul> -->
+
+                                <li>
+                                    Follow the advice under diet and activity section to keep weight within healthy
+                                    range please consult a Specialist for better management of cardiac risk.
+                                </li>
+
+
+                                <!-- </ul> -->
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col m3 s12">
+                    <div class="card cards">
+                        <div class="card-content">
+                            <span class="card-title">
+                                Diabetes : <span class="heading lighten-2">{{dialevel}}</span>
+                            </span>
+                            {% if dialevel == 'Not Available' %}
+                            <div class="content">
+                                <!-- <ul> -->
+
+                                <li>
+                                    Please redo the analysis.
+                                </li>
+
+
+                                <!-- </ul> -->
+                            </div>
+                            {% elif dialevel != 'Diagnosed' %}
+                            <div class="content">
+                                <!-- <ul> -->
+                                {% if dialevel == 'Low' %}
+
+                                <li>Keeping body weight under check will help in maintaining current healthy range
+                                </li>
+
+                                {% endif %}
+
+
+                                {% if dialevel == 'Moderate' %}
+                                <li> Keeping body weight under check will help in maintaining healthy range</li>
+
+                                {% endif %}
+
+
+                                {% if dialevel == 'High' %}
+
+                                <li> Please consult a Doctor for better management of Diabetes.</li>
+
+
+                                {% endif %}
+
+
+
+                                <!-- </ul> -->
+                            </div>
+                            {% else %}
+                            <div class="content">
+                                <!-- <ul> -->
+
+                                <li>
+                                    Please consult a Doctor for better management of Diabetes.
+                                </li>
+
+
+                                <!-- </ul> -->
+                            </div>
+
+
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col m3 s12">
+                    <div class="card cards">
+                        <div class="card-content">
+                            <span class="card-title">
+                                Obesity : <span class="heading lighten-2">{{obeysitylevel}}</span>
+                            </span>
+                            {% if obeysitylevel == "Diagnosed" %}
+                            <li>Please follow the recommended calories suggested in the diet section and
+                                supplement it with right daily Activities </li>
+                            <li>Consult the Doctor to seek Medical advice for further assessment</li>
+                            {% elif obeysitylevel == "Underweight" %}
+
+                            <div class="content">
+                                <!-- <ul> -->
+                                <li>Please follow the recommended calories suggested in the diet section and
+                                    supplement it with right daily Activities </li>
+                                <!-- </ul> -->
+                            </div>
+                            {% endif %}
+                            {% if obeysitylevel == "Normal" %}
+                            <div class="content">
+                                <!-- <ul> -->
+                                <li>Please follow the recommended calories suggested in the diet section and
+                                    supplement it with right daily Activities </li>
+                                <!-- </ul> -->
+                            </div>
+                            {% endif %}
+
+                            {% if obeysitylevel == "Overweight" %}
+                            <div class="content">
+                                <!-- <ul> -->
+                                <li>Please follow the recommended calories suggested in the diet section and
+                                    supplement it with right daily Activities </li>
+                                <!-- </ul> -->
+                            </div>
+                            {% endif %}
+                            {% if obeysitylevel == "Pre-Obese" or obeysitylevel == "Obese" %}
+                            <div class="content">
+                                <!-- <ul> -->
+                                <li>Please follow the recommended calories suggested in the diet section and
+                                    supplement it with right daily Activities </li>
+                                <li>Consult the Doctor to seek Medical advice for further assessment</li>
+                                <!-- </ul> -->
+                            </div>
+                            {% endif %}
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            {% if medicalinfo %}
+            <div class="card">
+                    <div class="card-content" >
+                        <span class="card-title">Doctor given medication</span>
+                        <div id="doctor_medication_table"  >
+                            <table id="doctor_entered_data" class="card docmedtable">
+                                <thead>
+                                    <tr>
+                                        <th>Prescription Date</th>
+                                       <th>Generic Name of Medicine</th>
+                                        <th>Brand of Medicine</th>
+                                         <th>Dosage</th>
+                                        <!-- <th>Composition Name</th> -->
+                                        <th>Doctor &#39;s Name</th>
+
+                                        <!-- <th>No of times a day</th> -->
+
+                                        <th>With food</th>
+                                        <!-- <th>Reason</th> -->
+                                        <th>No of days</th>
+                                          <th>Times per day</th>
+                                    <th>Instructions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>{% for i in medicalinfo %}
+                                    <tr>
+                                        <td>{{i.PrescriptionDate}}</td>
+                                        <td>{{i.MedicationName}}</td>
+                                        <td>{{i.Reason}}</td>
+                                        <td>{{i.Dosage}}</td>
+
+                                        <td>{{i.Doctor}}</td>
+                                        
+
+    
+                                        <td>{{i.WithFood}}</td>
+                                        <!-- <td>{{i.Reason}}</td> -->
+                                        <td>{{i.Reactions}}</td>
+                                         <td>{{i.TMR_of_medicine}}</td>
+                                    <td>{{i.HWT_of_medicine}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+    
+                            </table>
+                            
+                            
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            {% endif %}
+
+            {% if doctherepaticpre %}
+            <div class="card" >
+                <div class="card-content" >
+                    <span class="card-title">Therapeutic Plan</span>
+                    {% if doctherepaticpre %}
+
+                    <table id="suggestion-table" >
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Doctor Name</th>
+                                <th>Therapeutic Plan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for doc in doctherepaticpre %}
+                            <tr>
+                                <td>{{doc.createdDate_t}}</td>
+                                <td>{{doc.docname_t}}</td>
+                                <td>{{doc.prescription_t}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <div class="col m4">
+                            <!-- <a class="waves-effect waves-light btn" id="add_suggestion"><i
+                                    class="material-icons left">add</i>Add Additional Diagnostics</a> -->
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% endif %}
+            {% if docpre %}             
+            <div class="card">
+                    <div class="card-content" >
+                        <span class="card-title">Additional Diagnostics</span>
+                        
+                        <div id="suggestion" >
+                            {% if docpre %}
+
+                            <table id="suggestion-table" >
+                                <thead>
+                                    <tr>
+                                        <th>Suggested Date</th>
+                                        <th>Doctor Name</th>
+                                        <th>Additional Diagnostics</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for doc in docpre %}
+                                    <tr>
+                                        <td>{{doc.createdDate}}</td>
+                                        <td>{{doc.docname}}</td>
+                                        <td>{{doc.prescription}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            {% else %}
+                            <div class="col m4">
+                                    <!-- <a class="waves-effect waves-light btn" id="add_suggestion"><i
+                                            class="material-icons left">add</i>Add SUGGESTION</a> -->
+                                </div>
+                            {% endif %}
+                            <br>
+                        
+                            <!-- <a id="add_row_suggestion" class="btn  right add-btn" style="margin-bottom: 20px;" hidden>Add Row</a><br> -->
+                        
+                                
+                            <form id="suggestion-form" action='{% url "usermanagement:doctorsuggetion" %}' method="post" enctype=multipart/form-data hidden>
+                                {% csrf_token %}
+                                <!-- <div class="input-field" id="input-content"> -->
+                                    <br>
+                                    <br>
+                                    <input name="docpatientid" value="{{user.pat_id}}" style="display:none">
+                                    <label style="font-size:12px"> Add Plan</label><br>
+                                    <input style="display:none" name="cdate" id="suggestion_date"/>
+                                    <textarea class="form-field" style="width:60%;height: 150px" name="presciption" id="presciption" required></textarea>
+                                    <br>
+                                <!-- </div> -->
+                                <button class="btn waves-effect waves-right center" id="submitprecription" hidden
+                                    type="submit">submit</button>
+                            </form>
+
+                            
+                        </div> 
+                    </div>
+                    
+            </div>
+            {% endif %}
+                <div class="card">
+                        <div class="card-content" >
+                            <span class="card-title" id="patmedititle">Your medication</span>
+                            
+                            <h6 class="pat_med_ques">Are you under medication? If yes, please click on add Medication else, click on
+                            skip medication.
+                        </h6><br>
+                        
+                       <div class="row pat_med_ques">
+                            <div class="col m2">
+                                <a class="waves-effect waves-light btn" id="add_pat_medication"><i
+                                        class="material-icons left">add</i>Add
+                                    Medication
+                                </a>
+                            </div>
+                            <div class="col m2">
+                                <a class="waves-effect waves-light btn " id="skip_pat_medication"><i
+                                        class="material-icons left">arrow_forward</i>Skip
+                                    Medication
+                                </a>
+                            </div>
+                        </div>
+                        <br>
+                        <div id="pat_medication_table" hidden >
+                            <table id="pat_entered_data" class="card medtable" id="pat-medication">
+                                    <thead>
+                                        <tr>
+                                            <th>Prescription Date</th>
+                                            <th>Generic Name of Medicine</th>
+                                            <th>Brand of Medicine</th>
+                                            <th>With food</th>
+                                            <th>Dosage</th>
+
+                                            <th>No of days</th>
+                                                <th>Times per day</th>
+                                    <th>Instructions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>{% for i in medicalinfoforpatient %}
+                                        <tr>
+                                            <td>{{i.PrescriptionDate}}</td>
+                                            <td>{{i.MedicationName}}</td>
+                                            <td>{{i.Reason}}</td>
+                                            <!-- <td>{{i.CompositionName}}</td> --> 
+
+                                            <td>{{i.WithFood}}</td>
+                                              <td>{{i.Dosage}}</td>
+                                            <!-- <td>{{i.Reason}}</td> -->
+                                            <td>{{i.Reactions}}</td>
+
+                                              <td>{{i.TMR_of_medicine}}</td>
+                                    <td>{{i.HWT_of_medicine}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+        
+                                </table>
+                            <form action='{% url "foodandacti:medicalinfopost" %}' method="post">
+                                {% csrf_token %}
+                                
+                                <a id="add_btn" class="btn  right add-btn" style="margin-bottom: 20px;">Add Row</a><br>
+                               
+                                <table id="pat_med_tab" class="card">
+    
+                                </table>
+                                <span class="red-text right" id="error" hidden>
+                                    <i class="material-icons prefix red-text">announcement</i>
+                                    &nbsp; Please fill all the fields</span>
+                               <input name="patientid" value="{{user.pat_id}}" style="display:none">
+                        
+                                <button class="btn waves-effect waves-right center" id="submit" hidden
+                                    type="submit">submit</button>
+                            </form>
+                            <br>
+                            </div>
+                            <div id="terms">
+                                    <div class="disclaimer" id="disclaimer">
+                                        <b> Disclaimer</b><br>
+                                        <div class="paragraph">
+            
+                                            <div class="text">1. The Summary Report relates only to the samples and individual
+                                                tested and
+                                                data fed, into the Cygen Algorithm, based upon the same and shows only the
+                                                tendencies
+                                                of development of identified medical conditions in future.</div>
+                                        </div>
+                                        <div class="paragraph">
+            
+                                            <div class="text">2. The individual tested and the Summary Report provided is only for
+                                                preventive
+                                                health care education of the individual tested.</div>
+                                        </div>
+                                        <div class="paragraph">
+            
+                                            <div class="text">3. If the age of individual tested was not stated in the test
+                                                requisition
+                                                form, adult reference range will be printed by default as the reference range of
+                                                individual.</div>
+                                        </div>
+                                        <div class="paragraph">
+            
+                                            <div class="text">4. The liability of Summary Report is limited to the cost of tests
+                                                only.</div>
+                                        </div>
+                                        <div class="paragraph">
+            
+                                            <div class="text">5. This summary report is not valid for medico legal purposes. Neither
+                                                Cygen
+                                                nor it's employees/representatives/affiliates assume any liability, responsibility
+                                                for
+                                                any loss or damages that may be incurred by any person as a result presuming the
+                                                meaning
+                                                or contents of the report.
+                                            </div>
+                                        </div>
+                                        <div class="paragraph">
+            
+                                            <div class="text">6. The Summary Report has its limitation to the tune of analysis of
+                                                sample
+                                                data generated , fed into the system and analysed through the Cygen algorithm and
+                                                need
+                                                correlation with other related tests and medical signs/symptoms.
+                                            </div>
+                                        </div>
+                                        <div class="paragraph">
+            
+                                            <div class="text">7. The information (including but not limited to the advice and
+                                                recommendations
+                                                ) in this Summary Report are intended solely as a general educational aid and are
+                                                neither
+                                                medical nor health care advice for any individual problem nor a substitute for
+                                                medical
+                                                or other professional advice and services from a qualified health care provider
+                                                familiar
+                                                with your medical history.
+                                            </div>
+                                        </div>
+                                        <div class="paragraph">
+            
+                                            <div class="text">8. Use of this Summary Report , doesn't create a doctor-patient
+                                                relationship.
+                                                Nothing contained in this report is intended to be used for medical diagnosis or
+                                                treatment.</div>
+                                        </div>
+            
+                                        <div class="paragraph">
+            
+                                            <div class="text">9. In case of doubt about Summary Report, please contact Cygen
+                                                immediately,
+                                                to verify your results on our toll free number.
+                                            </div>
+                                        </div>
+            
+                                        <br>
+                                        <div class="">
+                                            <button id="print" class="btn waves-effect"><i class="material-icons"></i>Print</button>
+                                        </div>
+                                    </div>
+            
+                                </div>
+                            </div>
+                </div>
+               
+            {% else %}
+            <form action='{% url "foodandacti:userinfopost" %}' method="post">
+                {% csrf_token %}
+                <div class="row risk_scores">
+                    <!--personal Details-->
+                    <div class="col m4 s12">
+                        <div class="card cards">
+                            <div class="card-content">
+                                <span class="card-title">Personal Details</span>
+                                <div class="input-field">
+                                    <textarea id="user_address" name="Address" required autocomplete="off"
+                                        class="materialize-textarea" data-length="120"></textarea>
+                                    <label for="user_address">Your Address</label>
+                                </div>
+                                <div class="input-field">
+                                    <textarea id="hospital_address" name="hospitalAddress" required autocomplete="off"
+                                        class="materialize-textarea" data-length="120"></textarea>
+                                    <label for="hospital_address">Nearest Hospital Facility</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--Gaurdian/Spouse Details-->
+                    <div class="col m4 s12">
+                        <div class="card cards">
+                            <div class="card-content">
+                                <span class="card-title">Guardian/Spouse Details</span>
+                                <div class="input-field">
+                                    <input type="text" id="guardian_name" name="guardianname" required
+                                        autocomplete="off">
+                                    <label for="guardian_name">Name</label>
+                                </div>
+                                <div class="input-field">
+                                    <div class="input-field col s3">
+                                        <select>
+                                            <option value="+63" selected>+63</option>
+                                        </select>
+
+                                    </div>
+                                    <div class="input-field col s9">
+                                        <label for="guardian_number">Contact No.</label>
+
+                                        <input id="guardian_number" name="ContactNo" autocomplete="off"
+                                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                            onkeypress='return event.charCode >= 48 && event.charCode <= 57 || event.key === "Backspace"'
+                                            type="text" maxlength="10">
+
+
+                                    </div>
+
+
+                                </div>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <div class="input-field">
+                                    <textarea id="guardian_address" class="materialize-textarea" data-length="120"
+                                        name="gAddress" required autocomplete="off"></textarea>
+                                    <label for="guardian_address">Address</label>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Family Doctor Details-->
+                    <div class="col m4 s12">
+                        <div class="card cards">
+                            <div class="card-content">
+                                <span class="card-title">Family Doctor Details</span>
+                                <div class="input-field">
+                                    <input type="text" id="doctor_name" name="Doctorname" autocomplete="off" required>
+                                    <label for="doctor_name">Doctor Name</label>
+                                </div>
+                                <div class="input-field">
+                                    <div class="input-field col s3">
+                                        <select>
+                                            <option value="+63" selected>+63</option>
+                                        </select>
+
+                                    </div>
+                                    <div class="input-field col s9">
+                                        <input id="doctor_number" name="Doctornumb" autocomplete="off"
+                                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                            onkeypress='return event.charCode >= 48 && event.charCode <= 57 || event.key === "Backspace"'
+                                            type="text" maxlength="10">
+                                        <label for="doctor_number">Doctor Contact No.</label>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <br>
+                                </div>
+                                <div class="input-field">
+                                    <textarea id="allergy" class="materialize-textarea"
+                                        style="padding:2.8rem 1px .8rem 0;height: 65px!important;" data-length="120"
+                                        name="allergy" required autocomplete="off"></textarea>
+                                    <label for="allergy">Notify any rare health condition or allergies (e.g.rare blood
+                                        group)</label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="right">
+                            <button class="btn waves-effect " type="submit">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            {% endif %}
+
+            <!--Medication & Terms-->
+
+            <!--Medication & Terms-->
+
+        </div>
+
+    </main>
+    <footer class="">
+
+    </footer>
+    <!--Health Index Modal-->
+   
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src='{% static "kc/js/init.js" %}'></script>
+    <script src='{% static "kc/js/materialize.js" %}'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <!-- <script src="js/dashboard.js"></script> -->
+    <script>
+            console.log({{user.pat_id}});
+            
+            $(document).ready(function () {
+                
+                $(".modal").modal();
+                /* $('.datepicker').datepicker({
+                    format: "yyyy-mm-dd",
+                    autoClose: true
+                }); */
+                $('select').formSelect();
+    
+                $("#add_pat_medication").click(function () {
+                    // $("#add_btn").prop("disabled",true);
+                    $("#submit").show();
+                    $("#pat_entered_data thead").hide();
+                    $("#terms").hide();
+                    $("#pat_medication_table").show();
+                }); //
+                
+               
+                $("#skip_pat_medication").click(function () {
+                    $("#pat_medication_table").hide();
+                    $("#terms").show();
+                    $("#patmedititle").hide();
+                });
+    
+                var i = $("#pat_med_tab tr").length;
+                if (i <= 0) {
+                    $("#submit").hide();
+                }
+                else { $("#submit").show(); }
+    
+    
+                function myvar(i) {
+                    return '<tr>' +
+                        '                                    <td>' +
+                        '                                        <div class="input-field" id="input-content">' +
+                        // '                                            <input name="patientid" value="'+{{user.id}}+'" style="display:none"> '+
+                       //' <input name="PrescriptionDate" value="'+today +'" id="prescription_date' + i + '" disabled >' +
+                       // '                                             <option value="'+today+'">'+today+'</option></select>'+
+                        '                                            <select name="PrescriptionDate" id="prescription_date' + i + '" class="validate">' +
+                        '                                             <option value="'+today+'">'+today+'</option></select>'+
+                      //  '                                            <label for="prescription_date' + i + '">Prescription Date</label>' +
+                        '                                        </div>' +
+                        '                                    </td>' +
+                        '                                    <td>' +
+                        '                                        <div class="input-field" id="input-content">' +
+                        '                                            <input name="MedicationName" type="text" id="medication_name' + i + '" class="validate">' +
+                        '                                            <label for="medication_name' + i + '">Generic Name of Medicine</label>' +
+                        '                                        </div>' +
+                        '                                    </td>' +
+                        '                                    <td>' +
+                        '                                        <div class="input-field" id="input-content">' +
+                        '                                            <input name="Reason" type="text" id="reason'+i+'" class="validate">' +
+                        '                                            <label style="font-size: 0.94rem;" for="reason'+i+'">Brand of Medicine</label>' +
+                        '                                        </div>' +
+                        '                                    </td>' +
+                        '                                     <td>' +
+                        '                                        <div class="input-field" id="input-content">' +
+                        '                                            <input name="dosage" type="text" id="dosage'+i+'" class="validate">' +
+                        '                                            <label style="font-size: 0.94rem;" for="dosage'+i+'">Dossage</label>' +
+                        '                                        </div>' +
+                        '                                    </td>' +
+                        '                                    <td>' +
+                        '                                        <div class="input-field" id="input-content">' +
+                        '                                            <select name="WithFood" value="" id="with_food' + i + '" class="validate">' +
+                        '                                                <option disabled value="" selected>Choose</option>' +
+                        '                                                <option value="Yes">Yes</option>' +
+                        '                                                <option value="No">No</option>' +
+                        '                                            </select>' +
+                        '                                            <label for="with_food' + i + '">With food ?</label>' +
+                        '                                        </div>' +
+                        '                                    </td>' +
+    
+                        '                                    <td>' +
+                        '                                        <div class="input-field" id="input-content">' +
+                        '                                            <input name="reaction" type="number" id="duration'+i+'" class="validate">' +
+                        '                                            <label for="duration'+i+'">No of days</label>' +
+                        '                                        </div>' +
+                        '                                    </td>' +
+                                             '                                    <td>' +
+                    '                                        <div class="input-field" id="input-content">' +
+                    '                                            <input name="tmr_of_medicine" type="text" id="medication_name2' + i + '" class="validate">' +
+                    '                                            <label for="medication_name2' + i + '">Times per day</label>' +
+                    '                                        </div>' +
+                    '                                    </td>' +
+                    '                                   <td>' +
+                    '                                        <div class="input-field" id="input-content">' +
+                    '                                            <input name="hwt_of_medicine" type="text" id="medication_nam3' + i + '" class="validate">' +
+                    '                                            <label for="medication_nam3' + i + '">Instructions</label>' +
+                    '                                        </div>' +
+                    '                                    </td>' +
+
+
+                        '                                    </tr>';
+                       
+    
+                }
+    
+    
+    
+                $("#add_btn").click(function () {
+                    $("#add_btn").attr("disabled", true);
+                    $("#submit").show();
+                    var valid = true;
+                    $("#pat_med_tab").find('input').each(function () {
+                        console.log("for loop:: "+$("#timing1".val()))
+                        if ($(this).val().toString().trim() == "") {
+    
+                            valid = valid && false;
+                        }
+                        else { valid = valid && true; }
+    
+                    });
+                    if (valid) {
+                        $("#error").hide();
+                        i = i + 1;
+                        $("#pat_med_tab").append(myvar(i));
+                        $('select').formSelect();
+                        /* $('.datepicker').datepicker({
+                            format: "yyyy-mm-dd",
+                            autoClose: true
+                        }); */
+                        //$(this).attr("disabled","disabled")
+                    }
+                    else { console.log("invalid"); $("#error").show(); }
+                });
+    
+                // when the user has already filled data
+    
+                var datalength = $("#pat_entered_data tbody tr").length;
+                if (datalength > 0) {
+                    $("#terms").show();
+                    $(".pat_med_ques").hide();
+                    $(".row .pat_med_ques").show();
+                    $("#pat_medication_table").show();
+                    
+                }
+                else {
+                    $("#terms").hide();
+                    $(".pat_med_ques").show();
+                    //$("#pat_medication_table").show();
+                    $("#pat_med_tab").append(myvar(i));
+                    $('select').formSelect();
+                    /*$('.datepicker').datepicker({
+                        format: "yyyy-mm-dd",
+                        autoClose: true
+                    }); */
+                }
+    
+            })
+    
+            //print
+    
+           
+            $(".dropdown-trigger").dropdown({ hover: true });
+    </script>
+    <script>
+            var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+const monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+];
+
+const d = new Date();
+
+    today =   monthNames[today.getMonth()]+' ' +dd + ', ' +  yyyy;
+
+    $("#prescription_date").val(today)
+        $("#prescription_date").readOnly = true;
+        $("#suggestion_date").val(today);
+    //document.getElementById("prescription_date").value=today
+    //document.getElementById("prescription_date").readOnly = true;
+
+
+         
+    </script>
+
+    <script>
+       
+        $("#print").click(function () {
+            $(".pat_med_ques,.fixed-action-btn, .modal, .material-icons, header ,#print").hide();
+            var disp_setting = "toolbar=yes,location=yes,";
+            disp_setting += "directories=yes,menubar=yes,";
+            disp_setting += "scrollbars=yes,width=900px,  left=0, top=25";
+            var content_vlue = document.getElementById('summary').innerHTML;
+            var docprint = window.open("", "", disp_setting);
+            docprint.document.open();
+            docprint.document.write('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"');
+            docprint.document.write('"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">');
+            docprint.document.write('<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">');
+            docprint.document.write('<head>');
+            docprint.document.write('<style type="text/css">@page {  margin: 1cm} body{ margin:10px;');
+
+            //docprint.document.write('<style type="text/css">body{ margin:10px;');
+            //
+            // docprint.document.write('#footer {position: fixed;width: 100%;bottom: 0;left: 0; right: 0;}');
+            // docprint.document.write('body { padding-top: 50px;}');
+            docprint.document.write('font-family:verdana,Arial;color:#000;');
+            docprint.document.write('font-family:Verdana, Geneva, sans-serif; font-size:12px;}');
+            docprint.document.write('table tr th{padding-left:50px; text-align:left;width:300px!important;}');
+            docprint.document.write('table tr td{padding-left:50px; text-align:left;width:500px;margin-right:12px}');
+            docprint.document.write(' .card{padding-top:10px; width:100%}');
+            docprint.document.write('.card-title{font-size:18px; margin-top:15px; color:#017b8b;padding-bottom:10px}');
+            docprint.document.write('.heading{font-size:20px}');
+            docprint.document.write('.content li{padding-top:20px}');
+            //docprint.document.write('.disclaimer{font-size:8px; text-align:justify; border:1px solid #454545; margin-top:30px; padding:10px;orphans:2;widows:2; page-break-before: always;}');
+
+            docprint.document.write('.disclaimer{font-size:8px; text-align:justify; border:1px solid #454545; margin-top:10px; padding:10px;orphans:2;widows:2; page-break-before: auto;}');
+            docprint.document.write('.number{float:left;}');
+            docprint.document.write('.text{padding-left:10px;}');
+            docprint.document.write('.add-btn{display:none;}');
+            docprint.document.write('.risk-name{top:10px; color:#107b8b;}');
+            // docprint.document.write('#pat_entered_data tr th {padding-left:0px;  width:100px;height:50px;pagging:0px 5px !important;}');//border:1px solid #454545
+            // docprint.document.write('#pat_entered_data .medtable table thead tr th {text-align:left;padding-right:0px!important;width:100px;}');
+
+            // docprint.document.write('#pat_entered_data tbody tr td {padding-left:0px!important;}');
+
+            // docprint.document.write('.suggestion-title {padding-top:10px !important;}');//border:1px solid #454545
+
+            // docprint.document.write('#suggestion-table thead {padding-left:0px !important; font-weight: normal; width:100px;height:50px;pagging:0px !important;}');//border:1px solid #454545
+            // docprint.document.write('#suggestion-table tbody tr td {padding-left:0px ;}');
+
+            // docprint.document.write('.medtable tbody th {padding-left:0px!important;}');
+
+            // docprint.document.write('.medtable thead  th{padding-left:0px!important;}');
+
+            // docprint.document.write('.medtable tbody tr td {padding-left:0px!important;}');
+
+            docprint.document.write('a{color:#000;text-decoration:none;}');
+            // docprint.document.write('.footer, .footer-space {height: 100px;}');
+            // docprint.document.write('.footer {position: fixed;bottom: 0;}');
+            docprint.document.write('img{height:50px;width:100px; padding:0px} ');
+            docprint.document.write('#watermark{padding-right: 10px;position: fixed;bottom:5px;right:5px;opacity:0.6;z-index:99;color:#293d3d; -webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}</style>');
+            docprint.document.write('</head><body onLoad="self.print()">');
+            docprint.document.write('<img src="../static/sreesend/img/aimh.1.png" alt="logo"  height:100px;width:100px>');
+            docprint.document.write('<div class="info" style="float:right">www.aimhealthph.com</div>');
+
+            docprint.document.write(content_vlue);
+            // docprint.document.write('<div class="footer"> Footer </div>');
+
+            docprint.document.write('<span id="watermark" style="font-size:1.64rem;" unselectable="on">Powered by <span style="font-size:1.64rem; color: #64c1b1">CYGEN</span></span>');
+            docprint.document.write('</body></html>');
+            docprint.document.close();
+            docprint.focus();
+            $(".pat_med_ques,.fixed-action-btn, .modal, .material-icons, header ,#print").show();
+        });
+
+        $(".dropdown-trigger").dropdown({ hover: true });
+    </script>
+<script>
+        var age = Number(`{{ userinfo.age }}`)
+        var ht = Number(`{{ userperson.h_feet }}` * 12) + Number(`{{ userperson.h_inches }}`)
+        var wt = Number(`{{ userperson.weight }}`)
+        var gender= `{{userinfo.Gender}}`
+
+        var FVC=""
+        var FEV1=""
+        var FEV1FVC=""
+        var PEFR=""
+        var FEF2575=""
+        var FEF50=""
+        var FEF75=""
+        var FVCLLN=""
+        var FEV1LLN=""
+        var FEV1FVCLLN=""
+        var PEFRLLN=""
+        var FEF2575LLN=""
+        var FEF50LLN=""
+        var FEF75LLN=""
+
+        if(gender == "Male"){
+            if(age>=18){
+                FVC +="Reference range: "+( -5.048-0.014*age+0.054*ht +0.006*wt - (1.645*0.478)).toFixed(2) + " to " //lower limit
+                FVC += (-5.048-0.014*age+0.054*ht +0.006*wt + (1.645*0.478)).toFixed(2)   //upper limit
+                $("#fvc").html(FVC)
+
+                FEV1 += "Reference range: "+ (-3.682-0.024*age+0.046*ht - (1.645*0.402)).toFixed(2)+ " to "
+                FEV1 +=  (-3.682-0.024*age+0.046*ht + (1.645*0.402)).toFixed(2)
+                $("#fev1").html(FEV1)
+
+                FEV1FVC ="Reference range: "+(74.866-0.233*age+0.107*ht-0.075*wt - (1.645*5.58)).toFixed(2)+" to "
+                FEV1FVC +=(74.866-0.233*age+0.107*ht-0.075*wt + (1.645*5.58)).toFixed(2)
+                $("#fev1fvc").html(FEV1FVC)
+
+                PEFR ="Reference range: "+ (Math.exp(0.346-0.004*age+0.011*ht+0.5*0.158*0.158-1.645*0.158)).toFixed(2)+ " to " 
+                PEFR += (Math.exp(0.346-0.004*age+0.011*ht+0.5*0.158*0.158+1.645*0.158)).toFixed(2)
+                $("#pefr").html(PEFR)
+
+                FEF2575= "Reference range: "+(Math.exp(-0.091-0.019*age+0.011*ht+0.5*0.271*0.271-1.645*0.271)).toFixed(2)+ " to " 
+                FEF2575 += (Math.exp(-0.091-0.019*age+0.011*ht+0.5*0.271*0.271+1.645*0.271)).toFixed(2)
+                $("#fef2575").html(FEF2575)
+
+                FEF50 = "Reference range: "+(Math.exp(0.573-0.016*age+0.008*ht+0.5*0.262*0.262-1.645*0.262)).toFixed(2)+ " to " 
+                FEF50 += (Math.exp(0.573-0.016*age+0.008*ht+0.5*0.262*0.262+1.645*0.262)).toFixed(2)
+                $("#fef50").html(FEF50)
+
+                FEF75 ="Reference range: "+ (Math.exp(-0.789-0.057*age+0.017*ht-0.007*wt+0.000344*age*age+0.5*0.350*0.350-1.645*0.350)).toFixed(2)+ " to " 
+                FEF75 += (Math.exp(-0.789-0.057*age+0.017*ht-0.007*wt+0.000344*age*age+0.5*0.350*0.350+1.645*0.350)).toFixed(2)
+                $("#fef75").html(FEF75)
+            }
+            else{
+                FVC= (Math.exp(-1.687+0.016*ht+0.022*age+0.5*0.111*0.111)).toFixed(2)
+                FVCLLN = "Reference range: "+ Number(Math.exp(Math.exp(-1.687+0.016*ht+0.022*age+0.5*0.111*0.111)-(1.645*0.111))).toFixed(2)+" to "+ Number(Math.exp(Math.exp(-1.687+0.016*ht+0.022*age+0.5*0.111*0.111)+(1.645*0.111))).toFixed(2)
+                console.log("kid"+Number(Math.exp(FVC-(1.645*0.111))).toFixed(2));
+                $("#fvc").html(FVCLLN);
+
+                FEV1= (Math.exp(-1.748+0.015*ht+0.031*age+0.5*0.115*0.115)).toFixed(2) 
+                FEV1LLN ="Reference range: "+  (Math.exp(Math.exp(-1.748+0.015*ht+0.031*age+0.5*0.115*0.115)-(1.645*0.115))).toFixed(2)+" to "+(Math.exp(Math.exp(-1.748+0.015*ht+0.031*age+0.5*0.115*0.115) + (1.645*0.115))).toFixed(2)
+                $("#fev1").html(FEV1LLN)
+
+                FEV1FVC=(74.866-0.233*age+0.107*ht-0.075*wt).toFixed(2)
+                FEV1FVCLLN = "Reference range: "+( Math.exp(74.866-0.233*age+0.107*ht-0.075*wt-(1.645* 5.58))).toFixed(2)+" to "+(Math.exp(74.866-0.233*age+0.107*ht-0.075*wt + (1.645*5.58))).toFixed(2)
+                // alert(FEV1FVCLLN)
+                $("#fev1fvc").html(FEV1FVCLLN)
+
+                PEFR= (Math.exp(-0.319+0.009*ht+0.051*age+0.5*0.131*0.131)).toFixed(2) 
+                PEFRLLN = "Reference range: "+ (Math.exp(Math.exp(-0.319+0.009*ht+0.051*age+0.5*0.131*0.131)-(1.645*0.131))).toFixed(2)+" to "+(Math.exp(Math.exp(-0.319+0.009*ht+0.051*age+0.5*0.131*0.131) + (1.645*0.131))).toFixed(2)
+                $("#pefr").html(PEFRLLN)
+
+                FEF2575= (Math.exp(-0.951+0.011*ht+0.035*age+0.5*0.181*0.181)).toFixed(2)
+                FEF2575LLN = "Reference range: "+ (Math.exp(Math.exp(-0.951+0.011*ht+0.035*age+0.5*0.181*0.181)-(1.645*0.181))).toFixed(2)+" to "+(Math.exp(Math.exp(-0.951+0.011*ht+0.035*age+0.5*0.181*0.181) + (1.645*0.181))).toFixed(2)
+                $("#fef2575").html(FEF2575LLN)
+
+                FEF50= (Math.exp(-7.641+1.594*Math.log(ht)+0.322*Math.log(age) +0.5*0.230*0.230)).toFixed(2)
+                FEF50LLN = "Reference range: "+ (Math.exp(Math.exp(-7.641+1.594*Math.log(ht)+0.322*Math.log(age) +0.5*0.230*0.230)-(1.645*0.230))).toFixed(2)+" to "+(Math.exp(Math.exp(-7.641+1.594*Math.log(ht)+0.322*Math.log(age) +0.5*0.230*0.230) + (1.645*0.230))).toFixed(2)
+                $("#fef50").html(FEF50LLN)
+
+                FEF75= (Math.exp(-2.008+0.011*ht+0.049*age+0.5*0.327*0.327)).toFixed(2)                 
+                FEF75LLN = "Reference range: "+ (Math.exp(Math.exp(-2.008+0.011*ht+0.049*age+0.5*0.327*0.327)-(1.645*0.327))).toFixed(2)+" to "+(Math.exp(Math.exp(-2.008+0.011*ht+0.049*age+0.5*0.327*0.327) + (1.645*0.327))).toFixed(2)
+                $("#fef75").html(FEF75LLN)
+            }
+        }
+        else{
+            if(age>=18){
+                FVC ="Reference range: "+(20.07-0.010*age-0.261*ht+0.000972*ht*ht- (1.645*0.315)).toFixed(2)+" to "+( 20.07-0.010*age-0.261*ht+0.000972*ht*ht + (1.645*0.315)).toFixed(2)
+                $("#fvc").html(FVC);
+
+                FEV1 ="Reference range: "+(-2.267-0.019*age+0.033*ht- (1.645*0.286)).toFixed(2)+" to "+(-2.267-0.019*age+0.033*ht + (1.645*0.286)).toFixed(2)
+                $("#fev1").html(FEV1);
+
+                FEV1FVC ="Reference range: "+(73.539-0.330*age+0.151*ht-0.074*wt- (1.645*5.08)).toFixed(2)+" to "+(73.539-0.330*age+0.151*ht-0.074*wt+ (1.645*5.08)).toFixed(2)
+                $("#fev1fvc").html(FEV1FVC);
+
+                PEFR ="Reference range: "+(Math.exp(0.346-0.004*age+0.011*ht+0.5*0.198*0.0198-1.645*0.198)).toFixed(2)+" to "+(Math.exp(0.346-0.004*age+0.011*ht+0.5*0.198*0.198+1.645*0.198)).toFixed(2)
+                $("#pefr").html(PEFR);
+
+                FEF2575 ="Reference range: "+(Math.exp(-0.091-0.019*age+0.011*ht+0.5*0.308*0.308-1.645*0.308)).toFixed(2)+" to "+(Math.exp(-0.091-0.019*age+0.011*ht+0.5*0.308*0.308+1.645*0.308)).toFixed(2)
+                $("#fef2575").html(FEF2575);
+
+                FEF50 ="Reference range: "+(Math.exp(0.573-0.016*age+0.008*ht+0.5*0.292*0.292-1.645*0.292)).toFixed(2)+" to "+( Math.exp(0.573-0.016*age+0.008*ht+0.5*0.292*0.292+1.645*0.292)).toFixed(2)
+                $("#fef50").html(FEF50);
+
+                FEF75 ="Reference range: "+(0.423-0.090*age+0.000799*age*age+0.017*ht-(1.645*0.372)).toFixed(2)+" to "+(0.423-0.090*age+0.000799*age*age+0.017*ht+(1.645*0.372)).toFixed(2)
+                $("#fef75").html(FEF75);
+            }
+            else{
+                FVC=Math.exp(-9.989+(2.018*Math.log(ht))+(0.324*Math.log(age)) +(0.5*0.117*0.117))
+                FVCLLN ="Reference range: "+(Math.exp(Math.exp(-9.989+(2.018*Math.log(ht))+(0.324*Math.log(age)) +(0.5*0.117*0.117))-(1.645*0.117))).toFixed(2)+" to "+(Math.exp(Math.exp(-9.989+(2.018*Math.log(ht))+(0.324*Math.log(age)) +(0.5*0.117*0.117))+(1.645*0.117))).toFixed(2)
+                $("#fvc").html(FVCLLN);
+
+                FEV1=Math.exp(-10.055+(1.990*Math.log(ht))+(0.358*Math.log(age)) +(0.5*0.115*0.115))
+                FEV1LLN="Reference range: "+(Math.exp(Math.exp(-10.055+(1.990*Math.log(ht))+(0.358*Math.log(age)) +(0.5*0.115*0.115))-(1.645*0.115))).toFixed(2)+" to "+(Math.exp(Math.exp(-10.055+(1.990*Math.log(ht))+(0.358*Math.log(age)) +(0.5*0.115*0.115))-(1.645*0.115))).toFixed(2)
+                $("#fev1").html(FEV1LLN);
+
+                PEFR=Math.exp(-6.341+(1.362*Math.log(ht))+(0.469*Math.log(age)) +(0.5*0.142*0.142))
+                PEFRLLN="Reference range: "+(Math.exp(Math.exp(-6.341+(1.362*Math.log(ht))+(0.469*Math.log(age)) +(0.5*0.142*0.142))-(1.645*0.142))).toFixed(2)+" to "+(Math.exp(Math.exp(-6.341+(1.362*Math.log(ht))+(0.469*Math.log(age)) +(0.5*0.142*0.142))-(1.645*0.142))).toFixed(2)
+                $("#pefr").html(PEFRLLN);
+
+                FEF2575=Math.exp(-7.89+(1.641*Math.log(ht))+(0.317*Math.log(age)) +(0.5*0.176*0.176))
+                FEF2575LLN="Reference range: "+(Math.exp(Math.exp(-7.89+(1.641*Math.log(ht))+(0.317*Math.log(age)) +(0.5*0.176*0.176))-(1.645*0.176))).toFixed(2)+" to "+(Math.exp(Math.exp(-7.89+(1.641*Math.log(ht))+(0.317*Math.log(age)) +(0.5*0.176*0.176))-(1.645*0.176))).toFixed(2)
+                $("#fef2575").html(FEF2575LLN);
+
+                FEF50=-2.258+(0.027*ht)+(0.125*age)
+                FEF50LLN= "Reference range: "+(Math.exp(-2.258+(0.027*ht)+(0.125*age)-(1.645*0.691))).toFixed(2)+" to "+(Math.exp(-2.258+(0.027*ht)+(0.125*age)-(1.645*0.691))).toFixed(2)
+                $("#fef50").html(FEF50LLN);
+
+                FEF75=Math.exp(-9.139+(1.676*Math.log(ht))+(0.468*Math.log(age)) +(0.5*0.323*0.323))
+                FEF75LLN="Reference range: "+(Math.exp(Math.exp(-9.139+(1.676*Math.log(ht))+(0.468*Math.log(age)) +(0.5*0.323*0.323))-(1.645*0.323))).toFixed(2)+" to "+(Math.exp(Math.exp(-9.139+(1.676*Math.log(ht))+(0.468*Math.log(age)) +(0.5*0.323*0.323))-(1.645*0.323))).toFixed(2)
+                $("#fef75").html(FEF75LLN);
+
+                FEV1FVC=73.539-0.330*age+0.151*ht-0.074*wt
+                FEV1FVCLLN="Reference range: "+(Math.exp(73.539-0.330*age+0.151*ht-0.074*wt-(1.645*5.08))).toFixed(2)+" to "+(Math.exp(73.539-0.330*age+0.151*ht-0.074*wt-(1.645*5.08))).toFixed(2)
+                $("#fev1fvc").html(FEV1FVCLLN);                        
+            }
+        }
+	 $("#pat-medication").submit(function () {
+                var valid = true;
+                $("#pat_med_tab").find('input').each(function () {
+                    if ($(this).val().toString().trim() == "") {
+
+                        valid = valid && false;
+                    }
+                    else { valid = valid && true; }
+
+                });
+                if (valid) {
+                    $("#error").hide();
+                    i = i + 1;
+                    $("#pat_med_tab").append(myvar(i));
+                    $('select').formSelect();
+                    return true;
+                    
+                }
+                else { console.log("invalid"); $("#error").show(); 
+                return false;
+                }
+            });
+</script>
+</body>
+
+</html>

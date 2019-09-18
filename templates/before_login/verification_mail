@@ -1,0 +1,14 @@
+
+{% block subject %} Verify your e-mail address of your Cygen Healthtech Account {% endblock %}
+{% block plain %}
+
+Dear {{username}},
+Your Cygen Account User ID is: {{email}}
+Please click on the link to confirm your registration,
+http://{{ domain }}{% url 'before_l:activate' uidb64=uid token=token %}
+
+With regards,
+CyGen Team
+Redesigning healthcare delivery
+
+{% endblock %}

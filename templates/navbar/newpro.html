@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Health Tech</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HealthTech</title>
+    <link href="{% static 'navbarcss/bootstrap.min.css'%}" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'navbarcss/css/font-awesome.min.css'%}" rel="stylesheet" type="text/css">
+    <!-- Custom styles for this template-->
+    <link href="{% static 'navbarcss/sb-admin.css'%}" rel="stylesheet">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.8.2.js"></script>
+</head>
+<style>
+.card-header1{
+   font-size: 20px;
+    color: #017b8b;
+    text-align: center;
+    font-weight: bold;
+        padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: rgba(0,0,0,.03);
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+ .box{
+
+        display: none;
+    }
+#overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: #000;
+filter:alpha(opacity=70);
+-moz-opacity:0.7;
+-khtml-opacity: 0.7;
+opacity: 0.7;
+z-index: 100;
+display: none;
+}
+.cnt223 a{
+text-decoration: none;
+}
+.popup {
+    width: 100%;
+    margin: 0 auto;
+    display: none;
+    position: fixed;
+    z-index: 101;
+}
+.container{
+    margin-top: 5%;
+}
+.cnt223{
+min-width: 400px;
+width: 400px;
+min-height: 150px;
+margin: 100px auto;
+background: #f3f3f3;
+position: relative;
+z-index: 103;
+padding: 15px 35px;
+border-radius: 5px;
+box-shadow: 0 2px 5px #000;
+
+}
+
+.cnt223 p{
+clear: both;
+    color: #555555;
+    / text-align: justify; /
+    font-size: 20px;
+    font-family: sans-serif;
+}
+.cnt223 p a{
+color: #d91900;
+font-weight: bold;
+}
+.cnt223 .x{
+float: right;
+height: 35px;
+left: 22px;
+position: relative;
+top: -25px;
+width: 34px;
+}
+.cnt223 .x:hover{
+cursor: pointer;
+}
+
+.popup-subinput {
+    float: left;
+    padding: 10px;
+}
+.popup-subname{
+padding:10px;
+}
+.form-control1{
+    width: 15px;
+}
+.form-control2
+{
+display: block;
+    width: 48%;
+    padding: 10px;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+    @media screen and (max-width:768px){
+    .form-control2
+{
+    width: 100%;
+    }
+    }
+.close{
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    background: #017b8b;
+    border-radius: 3px;
+}
+.link1,.link{
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    color: white;
+    background: #017b8b;
+    border-radius: 3px;
+        cursor: pointer;
+}
+.diaeses-validation{
+    padding: 10px;
+}
+.popup-name{
+    padding: 10px;
+      text-align: center;
+    color: #017b8b;
+    font-weight: bold;
+}
+
+.content-body{
+padding:10px;
+}
+#eval-submit{
+    float: right;
+    background: #017b8b;
+    border: none;
+     margin: 10px;
+}
+.label-name{
+    color: #9a9999;
+    font-weight: bold;
+        text-align: justify;
+        font-size: 14px;
+}
+.form-group {
+    margin-bottom: 1rem;
+    padding: 10px;
+}
+.evalution-form{
+    border: 2px solid #efefef;
+    padding: 0px ;
+    margin-top: 85px;
+    margin-bottom: 10px;
+}
+.dieases-types,ul,li{
+color:#454545;
+}
+
+ @media screen and (max-width:768px){
+ popup {
+    .popup {
+    width: 100%;
+    margin: 0 auto;
+    display: none;
+    position: fixed;
+    z-index: 101;
+    margin-left: -45px;
+
+}
+}
+@media screen and (max-width:768px){
+.cnt223 {
+    min-width: 20%;
+    width: 80%;
+    min-height: 150px;
+    margin: 0px auto;
+    background: #f3f3f3;
+    position: relative;
+    z-index: 103;
+    padding: 15px 35px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px #000;
+    margin-top: 10%;
+}
+}
+
+@media screen and (max-width:768px){
+.evalution-form{
+padding-right:0px !important;
+padding-left:0px !important;
+    margin-bottom: 10px;
+}
+}
+
+</style>
+<script type='text/javascript'>
+$(function(){
+var overlay = $('<div id="overlay"></div>');
+overlay.show();
+overlay.appendTo(document.body);
+$('.popup').show();
+$('.close').click(function(){
+$('.popup').hide();
+overlay.appendTo(document.body).remove();
+return false;
+});
+
+});
+
+
+
+
+
+</script>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href='#'><img src="{% static 'img/logo-2.png' %}" width="160"></a>
+
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+
+    </div>
+</nav>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href='{% url "before_l:index" %}'>Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class='popup'>
+    <div class='cnt223'>
+          <div class="div1">
+                <div class="popup-name">Do you have any of these Diseases</div>
+                <div class="dieases-types">
+                    <div class="disease-input"><div class="popup-subinput"><input type="checkbox" class="filtercheck" id="form-group1" name="form-disease"></div><div class="popup-subname">Hypertension</div></div>
+                    <div class="disease-input"><div class="popup-subinput"><input type="checkbox" class="filtercheck" id="form-group2" name="form-disease"></div><div class="popup-subname">Diabetes</div></div>
+                    <div class="disease-input"><div class="popup-subinput"><input type="checkbox" class="filtercheck" id="form-group3" name="form-disease"></div><div class="popup-subname">Cardiac</div></div>
+                </div>
+
+                <div class="diaeses-validation"><input type="submit" id="firstcheckbox" value="Yes" class="link1" disabled="disabled">
+                    <input type="button" class="link1" value="No"></div>
+       </div>
+<div class="div2">
+        <form id="popup" action="#" method="post">
+
+            <div class="popup-name">Please click on the disease you want to evaluate
+
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group1">
+                        <div class="popup-subinput"><input id="fornewpro" type="checkbox" name="colorCheckbox"
+                                                           value="Hypertension"
+                                                           class="form-control1"></div>
+                        <div class="popup-subname"> Hypertension</div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group2">
+                        <div class="popup-subinput"><input id="fornewpro1" type="checkbox" name="colorCheckbox"
+                                                           value="Diabetes"
+                                                           class="form-control1"></div>
+                        <div class="popup-subname"> Diabetes</div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group3">
+                        <div class="popup-subinput"><input id="fornewpro2" type="checkbox" name="colorCheckbox"
+                                                           value="Cardiac"
+                                                           class="form-control1"></div>
+                        <div class="popup-subname"> Cardiac</div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12"><input type="submit" id="submit" onClick="showchecked()" class="close"
+                                              value="submit" disabled></div>
+            </div>
+        </form>
+
+</div>
+    </div>
+</div>
+
+
+        <div class="col-lg-10 offset-lg-1 col-md-10 offset-md-1 col-sm-12 col-xs-16 ">
+<div class="evalution-form">
+            <div class="card-header1">
+                Evaluation form
+            </div>
+            <div class="card1-body">
+                <form action="{% url 'healthandrecords:first_form' %}" method="POST" enctype=multipart/form-data>
+                {% csrf_token %}
+
+                    <div class="card-body1">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+
+                                    <label class="label-name" for="dia-age">Age (Year):</label>
+                                    <input type="number" class="form-control" id="dia-age" min="1" max="300" name="age" autocomplete="off">
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+
+                                    <label class="label-name" for="dia-wgt">Weight (Kg):</label>
+                                    <input type="number" class="form-control" min="1" max="200" name="weight" id="dia-wgt" autocomplete="off">
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="label-name" for="dia-hgt">Height (Feet):</label>
+                                    <select class="form-control" id="dia-hgt" name="h_feet" autocomplete="off">
+                                        <option value="" disabled selected>Feet</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+
+                                    <label class="label-name" for="dia-hgt1">Height (Inches):</label>
+                                    <select class="form-control" id="dia-hgt1" name="h_inch" autocomplete="off">
+                                        <option value="" disabled selected>Inches</option>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+
+                                    <label class="label-name" for="dia-gender">Gender:</label>
+                                    <select class="form-control" id="dia-gender" autocomplete="off" name="gender" onchange='CheckColors(this.value);'>
+                                        <option value="" disabled selected>Select</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Male">Male</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+
+                                    <label class="label-name" for="hyper-smkr">Smoker:</label>
+                                    <select class="form-control" id="hyper-smkr" autocomplete="off"  name="smoker">
+                                        <option value="" disabled selected>Select</option>
+                                        <option value="No"> Non-Smoker</option>
+                                        <option value="Yes"> Smoked in last 12 months</option>
+                                        <option value="Yes"> More than 10/day</option>
+                                        <option value="Yes"> 10-19/day</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+
+                                    <label class="label-name" for="hyper-bp">Systolic BP (mm/Hg):</label>
+                                    <select class="form-control" id="hyper-bp" autocomplete="off" name="systolic">
+                                        <option value="" disabled selected>Systolic</option>
+                                        <option value="110">Less than 120</option>
+                                        <option value="125">120-129</option>
+                                        <option value="135">130-139</option>
+                                        <option value="145">140-149</option>
+                                        <option value="155">150-159</option>
+                                        <option value="165">160-169</option>
+                                        <option value="175">170-179</option>
+                                        <option value=" 180">More than 180</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="label-name" for="hyper-bpdia">Diastolic BP (mm/Hg):</label>
+                                    <select required class="form-control" name="diastolic" autocomplete="off" id="hyper-bpdia">
+                                        <option value="" disabled selected>Diastolic</option>
+                                        <option value=79>Less than 80</option>
+                                        <option value=85>80-89</option>
+                                        <option value=95>90-99</option>
+                                        <option value=105>100-109</option>
+                                        <option value=115>110-119</option>
+                                        <option value=126>More than 120</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="label-name" for="dia-emp">Employment:</label>
+                                    <select required class="form-control" name="employment" autocomplete="off" id="dia-emp">
+                                        <option value="" disabled selected>Select</option>
+                                        <option value="Self Employed">Self Employed</option>
+                                        <option value="Employed">Employed</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="label-name" for="dia-ai">Annual Income:</label>
+                                    <select required class="form-control" name="annualincome" autocomplete="off" id="dia-ai">
+                                        <option value="" disabled selected>Select</option>
+                                        <option value="500000">Below 5,00,000</option>
+                                        <option value="1000000">5,00,000-10,00,000</option>
+                                        <option value="1500000">10,00,000-15,00,000</option>
+                                        <option value="7000000"> 15,00,000-20,00,000</option>
+                                        <option value="10000000">Above 20,00,000</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="label-name" for="dia-house">Housing Status:</label>
+                                    <select required class="form-control" name="housingstatus" autocomplete="off" id="dia-house">
+                                        <option value="" disabled selected>Select</option>
+                                        <option value="Own">Own</option>
+                                        <option value="Loan">Loan</option>
+                                        <option value="Rent">Rent</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="label-name" for="dia-ms">Maritial Status:</label>
+                                    <select required class="form-control" name="maritialstatus" autocomplete="off" id="dia-ms">
+                                        <option value="" disabled selected>Select</option>
+                                        <option value="Single">Single</option>
+                                        <option value="Married">Married</option>
+                                        <option value="Married">Widowed</option>
+                                        <option value="Married">Separated</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                            <div class="Cardiac box">
+                        <div class="card-body1">
+                            <div id="div3">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="label-name" for="crd-bg">Have you treated for Systolic
+                                                B.P:</label>
+                                            <select class="form-control" id="crd-bg" name="treatedforsystolicbp" autocomplete="off" >
+                                                <option value="dia-bg" disabled selected>Select</option>
+                                                <option value="Yes"> Yes</option>
+                                                <option value="No"> No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="label-name" for="crd-hdl">HDL Cholesterol Level (mg/dL):</label>
+                                            <select class="form-control" id="crd-hdl" name="hdllevel" autocomplete="off">
+                                                <option value="" disabled selected>Select</option>
+                                                <option value="38">Less than 40</option>
+                                                <option value="45">40-49</option>
+                                                <option value="55">50-59</option>
+                                                <option value="65">More than 60</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="label-name" for="crd-tc">Total Cholesterol Level (mg/dL):</label>
+                                            <select class="form-control" id="crd-tc" name="totalcholestoral" autocomplete="off">
+                                                <option value="" disabled selected>Select</option>
+                                                <option value="150"> <160</option>
+                                                <option value="170"> 160-199</option>
+                                                <option value="215"> 200-239</option>
+                                                <option value="250"> 240-279</option>
+                                                <option value="290"> More than 280</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="Diabetes box">
+
+                        <div class="card-body1">
+
+                            <div id="div1">
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="label-name" for="hyper-hyper">Hypertension:</label>
+                                            <select class="form-control" id="hyper-hyper" name="hypertension" autocomplete="off">
+                                                <option value="" disabled selected>Select</option>
+                                                <option value="Yes"> Yes</option>
+                                                <option value="No">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="label-name" for="dia-exe">Exercise:</label>
+                                            <select class="form-control" id="dia-exe" name="exercise" autocomplete="off">
+                                                <option value="" disabled selected>Select</option>
+                                                <option value="Yes"> Yes</option>
+                                                <option value="No"> No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="label-name" for="dia-fam">Do any one in the family Mother,
+                                                Father, Sister or Brother with Diabetes:</label>
+                                            <select class="form-control" id="dia-fam" name="familydiabetes" autocomplete="off">
+                                                <option value="dia-bg" disabled selected>Select</option>
+                                                <option value="Yes"> Yes</option>
+                                                <option value="No"> No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="label-name" id="myfemale" for="dia-gst">Have you ever been found to have
+                                                gestational
+                                                diabetes
+                                                or
+                                                given
+                                                birth to a baby weighing 9 pounds or more:</label>
+                                            <select class="form-control"   id="myfemale1" name="geostationaldia" autocomplete="off">
+                                                <option value="" disabled selected>Select</option>
+                                                <option value="Yes"> Yes</option>
+                                                <option value="No"> No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="Hypertension box">
+                        <div class="card-body1">
+                            <div id="div2">
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="label-name" for="hyper-wst">Waist circumference measured below
+                                                the
+                                                ribs (cm):</label>
+                                            <select class="form-control" id="hyper-wst" name="waistcircumference" autocomplete="off">
+                                                <option value="" disabled selected>Select</option>
+                                                <option value="80">For men Less than 85 cm</option>
+                                                <option value="86">For men >85 cm<94cm</option>
+                                                <option value="90">For men Less than 94 cm</option>
+                                                <option value="96">For men 94–102 cm</option>
+                                                <option value="75">For women Less than 80 cm</option>
+                                                <option value="83">For women 80-88 cm</option>
+                                                <option value="90">For women More than 88 cm</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm">
+                            <button type="submit" class="btn btn-primary" id="eval-submit">Submit</button>
+                            <!--<label for="ppd-edit">
+                                <input id="ppd-edit" type="checkbox" name="Edit"> Edit</label>-->
+                        </div>
+                    </div>
+                </form>
+            </div>
+</div>
+        </div>
+
+<script>
+
+
+
+$(".filtercheck").click(function(){
+var atLeastOneIsChecked = $('input[name="form-disease"]:checked').length > 0;
+
+
+if (atLeastOneIsChecked){
+$(".link1").removeAttr("disabled");
+
+}
+else{
+
+$(".link1").attr("disabled", true);
+
+}
+});
+
+    var checkboxes = $("input[type='checkbox'].form-control1");
+
+    submitButt = $("input[type='submit']");
+
+checkboxes.click(function() {
+
+    submitButt.attr("disabled", !checkboxes.is(":checked"));
+
+});
+</script>
+
+
+<script type="text/javascript">
+function showchecked() {
+    var checkedlist=[];
+$("input[name='colorCheckbox']").each( function () {
+if ($(this).is(":checked"))
+{
+
+ var inputValue = $(this).attr("value");
+
+ checkedlist.push(inputValue,);
+$("." + inputValue).toggle();
+
+}
+
+    });
+}
+
+</script>
+  <script type="text/javascript">
+function CheckColors(val){
+
+
+                if (val === 'Female') {
+
+                    $("#myfemale,#myfemale1").show();
+
+
+                } else {
+
+                    $("#myfemale,#myfemale1").hide();
+
+                 }
+}
+         </script>
+   <script>
+$(function () {
+
+    $(".div1").show();
+      $(".div2").hide();
+
+    $(".link1, .link2").bind("click", function () {
+
+      $(".div1, .div2").hide();
+
+      if ($(this).attr("class") == "link1")
+      {
+        $(".div2").show();
+
+      }
+      else
+      {
+        $(".div1").show();
+      }
+    });
+
+});
+
+
+</script>
+<script>
+    $(".link1").click(function () {
+    $(".disease-input").each(function () {
+        var filter1 = $(this).find('.filtercheck').attr('id');
+        if ($(this).find('input.filtercheck:checked').length>0) {
+            $('.' + filter1).hide();
+        }
+    });
+});
+</script>
+
+</body>
+</html>

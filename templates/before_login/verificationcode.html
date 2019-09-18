@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>HealthTech</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="keywords" content="HTML5 Template" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <!-- Font -->
+        <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Arimo:300,400,700,400italic,700italic' />
+        <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css' />
+        <!-- Font Awesome Icons -->
+        <link href="{% static 'sreesend/css/font-awesome.min.css' %}"  rel='stylesheet' type='text/css' />
+        <!-- Bootstrap core CSS -->
+        <link href="{% static 'sreesend/css/bootstrap.min1.css' %}"  rel="stylesheet" />
+        <link href="{% static 'sreesend/css/hover-dropdown-menu21.css' %}"  rel="stylesheet" />
+
+        <link href="{% static 'sreesend/css/style.css' %}"  rel="stylesheet" />
+
+    </head>
+    <style>
+    .user-login{
+        width: 350px;
+    /* height: 331px; */
+    margin: 0 auto;
+    }
+
+    .user-login{
+        width: 350px;
+    /* height: 331px; */
+    margin: 0 auto;
+    }
+    .email-radio{
+    float: left;
+}
+.enter {
+    border: 2px solid #efefef;
+    /* width: 100%; */
+    border-radius: 4px;
+}
+.ver-name {
+    font-size: 24px;
+    color: #017b8b;
+}
+.ver-name {
+    font-size: 18px;
+    text-align: justify;
+    color: #017b8b;
+}
+.ver-submit{
+    background-color: #017b8b;
+    /* height: 35px; */
+    /* width: 80px; */
+    text-align: center;
+    border-radius: 4px;
+    float: right;
+    padding: 5px;
+    color:white;
+}
+.ver {
+    box-shadow: 0px 0px 2px 2px #efefef;
+    /* background: #efefef; */
+    padding: 16px;
+        overflow: hidden;
+}
+.ver-email{
+    color: #a39f9f;
+    padding-left: 20px;
+    font-weight: bold;
+    font-size: 15px;
+}
+.v-email,.v-phone {
+    padding: 5px;
+}
+.messages,li{
+text-align:center;
+color:red;
+}
+
+    </style>
+    <body>
+    <div id="page">
+        <header id="sticker" class="sticky-navigation">
+            <!-- Sticky Menu -->
+            <div class="sticky-menu relative">
+                <!-- navbar -->
+                <div id="navigation" class="navbar navbar-default navbar-bg-light" role="navigation">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                                <div class="navbar-header">
+                                <!-- Button For Responsive toggle -->
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span></button>
+                                <!-- Logo -->
+
+                                <a class="navbar-brand" href="#">
+                                    <img class="site_logo" alt="Site Logo" src="{% static 'sreesend/img/logo.gif' %}"  />
+                                </a></div>
+
+                                <!-- Navbar Collapse -->
+                                <div id="topnav" class="navbar-collapse collapse">
+                                    <!-- nav -->
+                                    <ul class="nav navbar-nav">
+                                        <li><a href='{% url "before_l:index" %}'  class="scroll">HOME</a>
+											</li>
+                                        <li>
+                                            <a href="#about-us" class="scroll">ABOUT</a>
+                                        </li>
+                                        <li>
+                                            <a href="#services" class="scroll  ">SERVICES</a>
+                                        </li>
+										<li>
+                                            <a href="#team" class="scroll  ">TEAM</a>
+                                        </li>
+
+                                         <li>
+                                            <a href="#contact-us" class="scroll">CONTACT US</a>
+                                        </li>
+                                        <li>
+                                            <a href='{% url "before_l:loged" %}'  class="scroll">LOGIN/SIGNUP</a>
+                                        </li>
+
+                                        <!-- Header Contact -->
+
+                                        <div class="location">
+   <img class="image-location" src="{% static 'sreesend/img/location.png' %}"  width="30px" height="30px" />
+      <b><span id ="city"></span>, <span id= "country"></span></b>
+</div>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+                <script>
+                     $.getJSON('https://geoip-db.com/json/geoip.php?jsonp=?')
+                           .done (function(location)
+                           {
+                               $('#country').html(location.country_name);
+                            $('#city').html(location.city);
+                           });
+             </script>
+                                    </ul>
+                                </div>
+                                <!-- /.navbar-collapse -->
+                            </div>
+                            <!-- /.col-md-12 -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container -->
+                </div>
+                <!-- navbar -->
+            </div>
+            <!-- Sticky Menu -->
+        </header>
+        <section class="page-section">
+
+
+  {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+
+
+<div class="div1">
+<div class="col-md-12">
+                         <form action='{% url "before_l:activate" %}' method="POST" >
+
+                            <div class="col-md-4 col-md-offset-4 ver">
+                           <div class="row">   <div class="col-md-12 ver-name">Enter 6 digit Activation Code you received either via sms and email</div>
+</div>
+          <div class="row">                   {% csrf_token %}
+<div class="col-md-12">
+  <input  type="number" name="verificationcode" required style="width:283px" placeholder="Enter your Code"  class="enter" />
+</div></div>
+                                 <div class="row">
+<div class="col-md-12">
+
+                                <button name="submit" value="submit" class="ver-submit">Submit</button>
+                                            <a href='#' class="link2" >Resend Verification Code</a>
+
+</div></div>
+                        	<!-- . buttons-box -->
+ </div>
+                        </form>
+                    </div></div>
+<div class="div2">
+                   <div class="col-md-12">
+                        <form action='{% url "before_l:resendvrfication" %}' method="POST"  >
+
+                            <div class="col-md-4 col-md-offset-4 ver">
+
+                                <div class="row"> <div class="col-md-12 ver-name">Resend Verification Code</div></div>
+
+                            {% csrf_token %}
+ <div class="row">
+                                <div class="col-md-12">
+                                    <div class="v-email">  <div class="email-radio"> <input type="radio"  onchange='CheckColors(this.id);' name="yesno" id="yesCheck"></div>  <div class="ver-email">Email </div></div>
+
+                                <div class="v-phone"><div class="email-radio">  <input type="radio" onchange='CheckColors(this.id);'  name="yesno" id="noCheck"><br></div>  <div class="ver-email"> phone</div></div>
+    <div id="ifYes" style="display:none">
+
+       Enter your Email  <input type='text' id='acc'  class="enter" placeholder="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name='email'>
+    </div>
+<div id="ifno" style="display:none">
+      Enter your Phone<input type='text' id='other3' class="enter" placeholder="Phone number" pattern="[0-9]{1}[0-9]{9}" name='phone'><br>
+
+</div></div></div>
+                                 <div class="row">
+<div class="col-md-12">
+
+                             <input type="submit" class="ver-submit" placeholder="Submit">
+
+</div></div>
+                        	<!-- . buttons-box -->
+ </div>
+                        </form>
+
+                    </div></div>
+
+
+
+            <!-- .content -->
+
+</section>
+        <!-- page-section -->
+        <footer id="footer">
+
+            <!-- footer-top -->
+            <div class="copyright">
+                <div class="container">
+                    <div class="row1">
+                        <!-- Copyrights -->
+                        <div class="col-xs-10 col-sm-6 col-md-6"> &copy; 2018 <a href="https://cygengroup.com">cygengroup.com</a>. HealthTech.
+
+                        <!-- Terms Link -->
+
+                        <a href="#">Terms of Use</a> /
+                        <a href="#">Privacy Policy</a></div>
+                        <div class="col-xs-2  col-sm-6 col-md-6 text-right page-scroll gray-bg icons-circle i-3x">
+                            <!-- Goto Top -->
+                            <a href="#page">
+                                <i class="glyphicon glyphicon-arrow-up"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- footer-bottom -->
+        </footer>
+        <!-- request -->
+
+        <!-- footer -->
+    </div>
+      <script>
+$(function () {
+
+    $(".div1").show();
+      $(".div2").hide();
+
+    $(".link1, .link2").bind("click", function () {
+
+      $(".div1, .div2").hide();
+
+      if ($(this).attr("class") == "link1")
+      {
+        $(".div1").show();
+      }
+      else
+      {
+        $(".div2").show();
+      }
+    });
+
+});
+
+
+</script>
+     <script type="text/javascript">
+function CheckColors(val){
+
+
+                if (val === 'yesCheck') {
+
+                    $("#ifYes").show();
+
+                    $("#ifno").hide();
+                }
+                 else if (val === 'noCheck') {
+
+                    $("#ifYes").hide();
+
+                    $("#ifno").show();
+
+
+                }
+                else {
+
+                    $("#ifYes,#ifno").hide();
+
+                 }
+}
+         </script>
+	</body>
+</html>

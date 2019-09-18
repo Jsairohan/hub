@@ -1,0 +1,14 @@
+{% block subject %} Welcome to AimHealth Family!{% endblock %}
+{% block plain %}
+
+Dear {{user}},
+Thank you for registering with AimHealth.
+From here onwards, we will take care of your health and help you in leading a healthier and happier life.Your temporary password is
+ {{userpassword}} (this temporary password will expire in 3 days). 
+Please click to login https://testaim.cygen.in/loginpage/  
+
+Thank you
+With regards,
+AimHealth Team
+Redesigning healthcare delivery
+{% endblock %}

@@ -1,0 +1,337 @@
+
+
+.select_food{
+    margin-top: 70px;
+        margin-right: 30px;
+}
+@media only screen and (max-width: 768px){
+.select_food {
+
+    margin-right: 0px;
+    margin-left: 10px;
+}
+}
+.food-pro
+ {
+       float: right;
+    display: flex;
+
+}
+.food-calu{
+        height: 55px;
+    border-bottom: 4px solid #efefef;
+
+
+}
+.food-cal {
+    height: 40px;
+    border: 2px solid #efefef;
+    margin-bottom: 10px;
+    background: #efefef;
+    padding: 5px;
+}
+@media only screen and (max-width: 768px){
+.food-cal {
+    height: 70px;
+    }
+    }
+   .Calories {
+   width: 70px;
+    text-align: center;
+    color: white;
+    background-color: rgba(17, 45, 65, 0.6);
+    border-right: 2px solid #ffffff;
+    font-weight: bold;
+}
+.food-name
+{
+        float: left;
+    color: #017b8b;
+    font-weight: bold;
+
+}
+.meal-name{
+       float: left;
+    font-weight: bold;
+    color: #9ca2a2;
+}
+.meal-button{
+      float: right;
+margin-right: 6px;
+    margin-top: 5px;
+
+}
+.break-fast{
+ height: 40px;
+}
+.food_display {
+   width: 70px;
+    text-align: center;
+
+}
+.food_display1{
+   width: 20px;
+    text-align: center;
+
+}
+.food_displayCalories {
+   width: 70px;
+    text-align: center;
+
+}
+.food_displayCarbs {
+   width: 70px;
+    text-align: center;
+
+}
+.food_displayProtein {
+   width: 70px;
+    text-align: center;
+
+}
+.food_displayFat {
+   width: 70px;
+    text-align: center;
+
+}
+.totals{
+    float: left;
+    width: 250px;
+    text-align: right;
+        font-weight: bold;
+}
+@media only screen and (max-width: 768px){
+.totals {
+    float: none;
+    width: 100%;
+    text-align: justify;
+    font-weight: bold;
+}
+}
+/*popup*/
+.popup-overlay{
+  /*Hides pop-up when there is no "active" class*/
+  visibility:hidden;
+  position:absolute;
+  background:#ffffff;
+
+     margin-bottom: 10px;
+  width:50%;
+  box-shadow: 0px 1px 20px 8px #454545;
+  left:25%;
+}
+@media screen and (max-width:768px){
+.popup-overlay {
+    visibility: hidden;
+    position: absolute;
+    background: #ffffff;
+    margin-bottom: 10px;
+     width: 92%;
+    box-shadow: 0px 1px 20px 8px #454545;
+    right: 20px;
+    left: 20px;
+}
+}
+.popup-overlay.active{
+  /*displays pop-up when "active" class is present*/
+      visibility: visible;
+    margin-top: 70px;
+    text-align: center;
+}
+
+.popup-content {
+  /*Hides pop-up content when there is no "active" class */
+ visibility:hidden;
+}
+
+.popup-content.active {
+  /*Shows pop-up content when "active" class is present */
+  visibility:visible;
+}
+
+button{
+  display:inline-block;
+  vertical-align:middle;
+  border-radius:30px;
+  margin:.20rem;
+  font-size: 1rem;
+  color:#666666;
+  background:   #ffffff;
+  border:1px solid #666666;
+}
+
+
+
+.close-btn{
+    background-color: red;
+    border: none;
+    font-weight: bold;
+    color: white;
+    border-radius: 2px;
+    font-size: 13px;
+    padding: 2px 6px;
+    cursor: pointer;
+}
+.test{
+height:300px;
+overflow-y:auto;
+}
+.serving{
+
+      display: none;
+    width: 570px;
+    text-align: left;
+
+    /* margin-left: 21px; */
+    padding-left: 10px;
+    /* padding-bottom: 10px; */
+    /* padding: 10px; */
+}
+@media only screen and (max-width: 768px){
+.serving {
+    display: none;
+    width: 100%;
+    }
+    }
+#newid
+{
+    width: 200px;
+
+}
+@media only screen and (max-width: 768px){
+#newid
+{
+    width: 100px;
+    border: 2px solid #efefef;
+}
+
+}
+.blds,
+{
+        margin-top: 10px;
+    margin-bottom: 0px;
+    border: none;
+    padding: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: rgba(17, 45, 65, 0.6);
+}
+
+.serving-submit{
+    background-color: #5c6bc0;
+    border: none;
+    font-weight: bold;
+    color: white;
+    border-radius: 2px;
+    font-size: 15px;
+       padding: 6px 10px;
+    text-transform: capitalize;
+    margin-top: 40px;
+   float: right;
+    margin-bottom: 10px;
+        cursor: pointer;
+    /* align-items: flex-start; */
+}
+.serving-name{
+   font-size: 17px;
+    font-weight: bold;
+        color: #f12222;
+margin-top:25px;
+}
+.nutrients{
+    width: 200px;
+    float: right;
+    /* margin-right: 50px; */
+    margin-top: 22px;
+    margin-bottom: 10px;
+    color: black;
+}
+@media only screen and (max-width: 768px){
+.nutrients{
+    width: 150px;
+    float: none;
+}
+}
+.serv{
+    float: left;
+
+}
+@media only screen and (max-width: 768px){
+.serv {
+    float: left;
+    width: 100%;
+}
+}
+.nut-name{
+   font-size: 17px;
+    font-weight: bold;
+        color: #f12222;
+
+}
+.nut-cal{
+    padding: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    border: none;
+       width: 130px;
+}
+@media only screen and (max-width: 768px){
+.nut-cal{
+width:80px;
+}
+}
+.date{
+        margin-top:70px;
+    margin-left: 7%;
+
+}
+ #prev,#next{   border: none;
+    border-radius: 38px;
+    color: white;
+    height: 27px;
+    width: 21px;
+    /* size: 41px; */
+    background-color: #017b8b;
+
+}
+#datepicker{
+    border: none;
+    color: white;
+    border-radius: 5px;
+    order-radius: 9px;
+    width: 100px;
+    background-color: #027b8a;
+    text-align: center;
+        cursor: pointer;
+}
+.ui-widget-header {
+    border: 1px solid #017b8b !important;
+    background: #017b8b !important;
+    color: #ffffff;
+    font-weight: bold;
+
+}
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+    border: 1px solid #017b8b !important;
+    background: #027b8a !important;
+    color: #027b8a;
+}
+.ui-state-hover{
+border: 1px solid #027b8a !important;
+    background: #027b8a !important;
+    color: #027b8a;
+
+}
+.ui-icon-hover{
+color: #027b8a;
+}
+.ui-datepicker-prev-hover,.ui-datepicker-next-hover{
+color: #027b8a !important;
+}
+.ui-icon ui-icon-circle-triangle-e-hover{
+color: #027b8a !important;
+}
+.Calories1{
+    width: 30px;
+}

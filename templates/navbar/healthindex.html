@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+        <title>HealthTech</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="keywords" content="HTML5 Template" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="shortcut icon" href="{% static 'sreesend/img/logo1.png' %}"  />
+
+     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <link href="{% static 'navbarcss/bootstrap.min.css'%}"  rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="{% static 'navbarcss/css/font-awesome.min.css'%}" rel="stylesheet" type="text/css">
+  <!-- Custom styles for this template-->
+  <link href="{% static 'navbarcss/sb-admin.css'%}" rel="stylesheet">
+    <link href="{% static 'navbarcss/history-recorder.css'%}" rel="stylesheet">
+
+
+
+</head>
+<style>
+	.box {
+  width: 20%;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.2);
+  padding: 35px;
+  border: 2px solid #fff;
+  border-radius: 20px/50px;
+  background-clip: padding-box;
+  text-align: center;
+}
+
+.button {
+  font-size: 1em;
+  padding: 10px;
+  color: #fff;
+  border: 2px solid orange;
+  border-radius: 20px/50px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+.button:hover {
+  background: orange;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: orange;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+    .content,.content1,.content2{
+        display: none;
+    }
+    .button{
+        float:right;
+    }
+    .text{
+        width: 100%;
+        padding: 10px;
+
+    }
+    .text1{
+        height: 29px;
+        width: 50px;
+        margin-top: 10px;
+        border: solid;
+        cursor: pointer;
+        text-align: center;
+    }
+    .text2{
+        display: none;
+    }
+    #submit,.info,#submit1,.info1,#submit2,.info2{
+        background-color: #017b8b;
+    border: 1px;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    }
+    .input{
+        margin-bottom: 5px;
+    }
+textarea {
+  max-width: 100%;
+}
+    </style>
+
+<body>
+
+  <div class="content-wrapper">
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href='{% url "before_l:index" %}'>Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<div class="container">
+	<div class="row">
+			<div class="col-md-8 offset-md-2 col-sm-10 offset-sm-1 col-xs-12">
+<form action='{% url "healthandrecords:today_hel" %}'   method="POST" enctype=multipart/form-data>
+
+  {% csrf_token %}
+ <div class="body-content">
+
+		<div class="col-md-12 col-sm-12 col-xs-12 health-index"><b>HEALTH INDEX</b></div>
+
+<div class="health">
+<div class="row">
+	<div class="col-md-8 col-sm-8 col-xs-8 date">Date</div>
+	<div class="col-md-4 col-sm-4 col-xs-4 float-right">
+		<input type="date" class="text-input" name="date" required/>
+	</div></div>
+	<div class="row">
+	<div class="col-md-8 col-sm-8 col-xs-8 date">Blood Pressure (mm Hg)</div>
+	<div class="col-md-4 col-sm-4 col-xs-4 float-right">
+		<input type="number" name="systolic" class="text-input" placeholder="Systolic" required/>
+	<input type="number" name="diastolic" class="text-input" placeholder="Diastolic" required/>
+	</div>
+	</div>
+	<div class="row">
+			<div class="col-md-8 col-sm-8 col-xs-8 date">Glucose Level (mmol/L)</div>
+			<div class="col-md-4 col-sm-4 col-xs-4 float-right">
+		<input type="number" name="glucose" class="text-input" placeholder="Glucose Level" required/>
+	 </div>
+	 </div>
+	 <div class="row">
+			<div class="col-md-8 col-sm-8 col-xs-8 date">HDL cholesterol (mmol/L)</div>
+			<div class="col-md-4 col-sm-4 col-xs-4 float-right">
+		<input type="number" name="HDL" class="text-input" placeholder="HDL cholesterol" required/>
+	 </div>
+	</div>
+	<div class="row">
+			<div class="col-md-8 col-sm-8 col-xs-8 date">Total cholesterol (mmol/L)</div>
+			<div class="col-md-4 col-sm-4 col-xs-4 float-right">
+		<input type="number" name="tc" class="text-input" placeholder="Total cholesterol" required/>
+	 </div>
+</div>
+
+
+<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12"> <input type="submit" value="Submit" class="submit4"> </div>
+	</div></div>
+
+ </div>
+
+
+
+ </form>
+</div>
+</div>
+</div>
+  </div>
+	 <script src='{% static "js/bootstrap.bundle.min.js" %}'></script>
+
+</body>
+
+</html>

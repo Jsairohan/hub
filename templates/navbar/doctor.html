@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Doctor Creation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'kc/css/dashboard.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'kc/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'kc/css/sb-admin.css'%}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'kc/css/ehr.css'%}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'kc/css/bootstrap-multiselect.css'%}">
+    
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+    
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static 'kc/css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.js"></script>
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js"></script>
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js.map"></script>
+
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+    <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+    <style>
+        .navbar {
+            padding: 0px;
+        }
+
+        .bg-dark {
+            background: #ffff !important;
+        }
+
+        .fixed-action-btn {
+            top: 53px !important;
+            right: auto;
+            margin-left: 2px;
+        }
+
+        #logo-container {
+            height: 100%;
+            width: 19%;
+            padding: 0px;
+        }
+        .form-control:disabled, .form-control[readonly] {
+            background-color: #ffff;
+            opacity: 1;
+        }
+        .mandatory{
+            color: tomato
+        }
+        .ui-widget{
+        font-family:apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif !important
+        }
+        .ui-dialog {
+            /* position: absolute; */
+            /* height: auto; */
+            width: 800px !important;
+            /* top: 154px; */
+            /* left: 496.5px; */
+            /* box-shadow: 0px 0px 20px 2px #888888; */
+            /* display: block; */
+        }
+        .table td, .table th {
+            text-align: center !important;
+            /* padding: 15px 5px !important; */
+        }
+        label {
+            font-size: 1.2rem;
+            color: #000;
+        }
+        .field {
+            margin-bottom: 10px;
+            padding-top: 8px;
+            font-size: small;
+        }
+        .ui-dialog .ui-dialog-title {
+            float: left;
+            margin: .1em 0;
+            white-space: nowrap;
+            font-size: 20px;
+            width: 90%;
+            overflow: hidden;
+            font-weight: 100;
+            text-overflow: ellipsis;
+            font-family: apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif !important;
+        }
+        .nav-link-text{
+            font-family: apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif !important;
+
+        }
+         .caret{
+            display: none;
+        }
+         input.select-dropdown{
+            display: none !important;
+        }
+        /* multi select */
+        .btn {
+            white-space: initial !important;
+            background-color: white !important;
+            border-color: #cccccc;
+            color: black;
+            overflow: hidden;
+            height: 35px !important;
+            width: 212px !important;
+        }
+
+        .dropdown-menu {
+            /* transform: translate3d(0px, 0px, 0px) !important; */
+            max-height: 200px;
+            overflow: scroll;
+        }
+        ::-webkit-scrollbar {
+            width: 0.4em !important;
+            height:  0 !important;
+        }
+
+        .multiselect-clear-filter {
+            display: none;
+        }
+        .multiselect-search{
+            margin-right: 8px;
+        }
+
+        @media (min-width: 992px) {
+            .col-lg-3 {
+                -webkit-box-flex: 0;
+                -ms-flex: 0 0 19%;
+                flex: 0 0 19%;
+                max-width: 25%;
+                padding-top: 34px;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .col-lg-12 {
+                -webkit-box-flex: 0;
+                -ms-flex: 0 0 100%;
+                flex: 0 0 100%;
+                max-width: 100%;
+                /* padding-top: 60px; */
+            }
+        }
+
+        body {
+            background-color: #ffff;
+            font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+        }
+	#watermark
+        {
+        padding-right: 10px;
+        position: fixed;
+        bottom:5px;
+        right:5px;
+        opacity:0.6;
+        z-index:99;
+        color:#293d3d;
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+        }
+    </style>
+     <script>
+        $(function () {
+            $('#docqualification,#docspeciality').multiselect({
+                includeSelectAllOption: false,
+                enableFiltering: true,
+                numberDisplayed: 1,
+                enableCaseInsensitiveFiltering: true,
+                filterPlaceholder: 'Search for Qualification'
+            });
+            // $('#docspeciality').val(['1', '2']);
+            $('#docspeciality').multiselect({
+                includeSelectAllOption: false,
+                enableFiltering: true,
+                numberDisplayed: 1,
+                enableCaseInsensitiveFiltering: true,
+                filterPlaceholder: 'Search for Speciality'
+            });
+        });
+
+        // $(document).ready(function() {
+        //     $("#docspeciality").multiselect({
+        //     selectedText: "# of # selected"
+        //     });
+        //     var hidValue = $("#hidSelectedOptions").val();
+        //     var selectedOptions = hidValue.split(",");
+        //     for(var i in selectedOptions) {
+        //         var optionVal = selectedOptions[i];
+        //         $("#docspeciality").find("option[value="+optionVal+"]").prop("selected", "selected");
+        //     }
+        //     $("#docspeciality").multiselect('refresh');
+        // });
+    </script>
+</head>
+
+<body>
+<span id="watermark" style="font-size:1.64rem;" unselectable="on">Powered by 
+<span style="font-size:1.64rem; color: #64c1b1">CYGEN</span>
+</span>
+    <header>
+        <div class="navbar-fixed">
+            <nav class="white top-nav nav-extended" role="navigation">
+                <div class="nav-wrapper container-fluid">
+                    <span>
+                        <img src='{% static "sreesend/img/aimh.1.png" %}' alt="logo" id="logo-container"
+                            class="brand-logo">
+                    </span>
+                    <ul class="right hide-on-med-and-down">
+                        <li>
+                            <a onclick="window.location.pathname='/logout/'" data-toggle="modal"
+                                data-target="#exampleModal" style="color:black; font-size: 16px;">
+                                Logout</a>
+
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!--Sidenav-->
+        <div class="container">
+                <ul id="slide-out" class="sidenav">
+                    <!-- sidenav-fixed-->
+                    <li>
+                        <div class="user-view">
+                            <div class="background"><img src="{% static 'kc/img/sideimg.jpg' %}"></div>
+                            <a href="#user"><img class="circle" src="{% static 'kc/img/doctor.jpg' %}"></a>
+                            <a href="#name"><span class="white-text name">{{request.user.first_name}}</span></a>
+                            <a href="#email"><span class="white-text email">{{request.user.email}}</span></a>
+                        </div>
+                    </li>
+    
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a  class="nav-link" href='/admindashboard/'>
+                            <i class="fa fa-tachometer" aria-hidden="true"></i>
+                            <span class="nav-link-text"
+                                style="font-family: sans-serif;font-size:16px!important;">Dashboard</span></a>
+                    </li>
+                    {% if user %}
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a class="nav-link" href='/adminlist/'>
+                            <i class="fa fa-user-o" aria-hidden="true"></i>
+                            <span class="nav-link-text"
+                                style="font-family: sans-serif;font-size:16px!important">Admin</span></a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a style="background-color:#69b7dd;" class="nav-link" href='/doctorlist/'>
+                            <i class="fa fa-user-md" aria-hidden="true"></i>
+                            <span class="nav-link-text"
+                                style="font-family: sans-serif;font-size:16px!important;color:#fff">Doctor</span></a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a class="nav-link" href='/nurselist/'>
+                            <i class="fa fa-plus-square" aria-hidden="true"></i>
+                            <span class="nav-link-text"
+                                style="font-family: sans-serif;font-size:16px!important">Nurse</span></a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a class="nav-link" href='/medtechlist/'>
+                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                            <span class="nav-link-text"
+                                style="font-family: sans-serif;font-size:16px!important">MedTech</span></a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a class="nav-link" href='/corporatehrlist/'>
+                             <i class="fa fa-users" aria-hidden="true"></i>
+                            <span class="nav-link-text"
+                                style="font-family: sans-serif;font-size:16px!important">Corporate HR</span></a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a class="nav-link" href='/distributerlist/'>
+                            <i class="fa fa-hospital-o" aria-hidden="true"></i>
+                            <span class="nav-link-text"
+                                style="font-family: sans-serif;font-size:16px!important">Distributor</span></a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a class="nav-link" href='/branchlist/'>
+                            <i class="fa fa-building-o" aria-hidden="true"></i>
+                            <span class="nav-link-text"
+                                style="font-family: sans-serif;font-size:16px!important">Branch</span></a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a class="nav-link" href='/corporatebranchlist/'>
+                            <i class="fa fa-industry" aria-hidden="true"></i>
+                            <span class="nav-link-text"
+                                style="font-family: sans-serif;font-size:16px!important">Corporate Branch</span></a>
+                    </li>
+                    
+                </ul>
+    
+            </div>
+        <!--Sidenav end-->
+
+    </header>
+
+    <div class="content">
+        <div class="fixed-action-btn ">
+            <a href="#" data-target="slide-out" id="sidetrigger" class="left btn-floating  red sidenav-trigger">
+                <i class="material-icons">menu</i>
+            </a>
+        </div>
+ <!-- <div class="content-wrapper"> -->
+        <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="content-details" >
+                        <h3 style="text-align: center;font-family: apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif !important;">Doctor</h3>
+                        <div class="row">
+                            <div class="col-md-12 ">
+                                {% if user %}
+                                <div style="margin-top: 10px;display:none" class="add-btn right">
+                                        <i class="fa fa-plus fa-lg adding doctor-adduser" aria-hidden="true"
+                                        title="Create New Doctor"></i>
+                                </div>
+                                        {% else %}
+                                        <div style="margin-top: 10px;" class="add-btn right">   
+                                                <i class="fa fa-plus fa-lg adding doctor-adduser" aria-hidden="true"
+                                                title="Create New Doctor"></i>
+                                        </div>
+                                {% endif %}
+                                
+                                <div class="Search">
+                                    <input id="myInput" type="search" class="docinput form-control" data-table="order-table"
+                                        placeholder="Search">
+                                </div>
+                            </div>
+                        </div>
+    
+                        <!--create doctor-->
+                        {% csrf_token %}
+                        <div class="manage-table">
+                            <div id="doctor-form" title="Doctor profile">
+                                <form autocomplete="off">
+                                    <fieldset>
+                                        <div class="fields">
+                                            <div class="user-info">
+                                                <div class="row">
+                                                    <div class="col-md-2 required">
+                                                        <label for="fname" class="field">First Name<span class="mandatory">*</span></label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <input type="text"
+                                                            title="Please enter your first name. Special charecter and numeric values are not allowed "
+                                                            onkeydown="return /[a-zA-Z\s]/i.test(event.key)" name="fname"
+                                                            id="docfname" value="" class="form-control" />
+                                                    </div>
+                                                    <div class="col-md-2 ">
+                                                        <label for="mname" class="field">Middle Name</label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <input type="text" name="mname" id="docmname" value=""
+                                                            class="form-control"
+                                                            title="Please enter your middle name. Special charecter and numeric values are not allowed "
+                                                            onkeydown="return /[a-zA-Z\s]/i.test(event.key)" />
+                                                    </div>
+                                                    <div class="col-md-2 required">
+                                                        <label for="lname" class="field"> Last Name<span class="mandatory">*</span></label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <input type="text"
+                                                            title="Please enter your last name. Special charecter and numeric values are not allowed "
+                                                            onkeydown="return /[a-zA-Z\s]/i.test(event.key)" name="lname"
+                                                            id="doclname" value="" class="form-control" minlength="1"
+                                                            maxlength="35" />
+                                                    </div>
+                                                    <div class="col-md-2 required">
+                                                        <label for="contact" class="field">Contact No<span class="mandatory">*</span></label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="input-group-prepend ">
+                                                            <input id="docCountryCode" style=" height:35px !important;width: 46px;" class="form-control " readonly value="+63">
+                                                            <input style=" height:35px !important;" name="contact"
+                                                                id="doccontact" class="form-control "
+                                                                title="Contact number must be 10 digits"
+                                                                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                                onkeypress='return event.charCode >= 48 && event.charCode <= 57 || event.key === "Backspace"'
+                                                                type="number" maxlength="10" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2" id="docgendername">
+                                                        <label for="Gender" class="field">Gender<span class="mandatory">*</span></label>
+                                                    </div>
+                                                    <div class="col-md-4" id="docgendername">
+                                                        <select style=" height:40px !important;" class="form-control" id="docgender"
+                                                            title="Select gender" >
+                                                            <option value="" disabled selected>Select
+                                                            </option>
+                                                            <option value="Male">Male
+                                                            </option>
+                                                            <option value="Female">Female
+                                                            </option>
+                                                            
+                                                        </select>
+    
+                                                    </div>
+                                                    <div class="col-md-2 required" id="docemaillabel">
+                                                        <label for="email" class="field"> Email<span class="mandatory">*</span></label>
+                                                    </div>
+                                                    <div class="col-md-4" id="docemailinput">
+                                                        <input type="text" autocomplete="off"
+                                                            title="Enter a valid email address" name="email" id="docemail"
+                                                            value="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                                                            class="form-control" />
+    
+                                                    </div>
+                                                    <div class="col-md-2 required" id="docbranchcodela">
+                                                        <label for="email" class="field" title="Enter user name ">Branch Code<span class="mandatory">*</span></label>
+                                                    </div>
+                                                    <div class="col-md-4" id="docbranchcodein">
+                                                        <select style=" height:40px !important;" type="text" name="docbcode" id="branchcode" value=""
+                                                            class="form-control" autocomplete="off" >
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-2 required" id="docspecialityname">
+                                                        <label for="Speciality" class="field"> Speciality<span class="mandatory">*</span></label></div>
+                                                    <div class="col-md-4">
+                                                        <div class="specialityContent">
+                                                            <select multiple style=" height:40px !important;" class="form-control" id="docspeciality">
+                                                                <option value="" disabled >Select speciality</option>
+                                                                <option value="Allergy & Immunology">Allergy & Immunology</option>
+                                                                <option value="Anesthesiology">Anesthesiology</option>
+                                                                <option value="Colon & Rectal Surgery">Colon & Rectal Surgery</option>
+                                                                <option value="Dermatology">Dermatology</option>
+                                                                <option value="Emergency Medicine">Emergency Medicine</option>
+                                                                <option value="Family Medicine">Family Medicine</option>
+                                                                <option value="Family Practice">Family Practice</option>
+                                                                <option value="Internal Medicine">Internal Medicine</option>
+                                                                <option value="Internal Medicine-Pediatrics">Internal Medicine-Pediatrics</option>
+                                                                <option value="Medical Genetics">Medical Genetics</option>
+                                                                <option value="Neurological Surgery">Neurological Surgery</option>
+                                                                <option value="Neurology">Neurology</option>
+                                                                <option value="Nuclear Medicine">Nuclear Medicine</option>
+                                                                <option value="Obstetrics & Gynecology">Obstetrics & Gynecology</option>
+                                                                <option value="Ophthalmology">Ophthalmology</option>
+                                                                <option value="Orthopaedic Surgery">Orthopaedic Surgery</option>
+                                                                <option value="Otolaryngology">Otolaryngology</option>
+                                                                <option value="Pathology-Anatomic & Clinical">Pathology-Anatomic & Clinical</option>
+                                                                <option value="Physical Medicine & Rehabilitation">Physical Medicine & Rehabilitation</option>
+                                                                <option value="Plastic Surgery">Plastic Surgery</option>
+                                                                <option value="Preventive Medicine">Preventive Medicine</option>
+                                                                <option value="Psychiatry">Psychiatry</option>
+                                                                <option value="Radiology-Diagnostic">Radiology-Diagnostic</option>
+                                                                <option value="Surgery-General">Surgery-General</option>
+                                                                <option value="Thoracic Surgery">Thoracic Surgery</option>
+                                                                <option value="Urology">Urology</option>
+                                                                <option value="Advanced Heart Failure">Advanced Heart Failure</option>
+                                                                <option value="Heart Transplant Cardiology">Heart Transplant Cardiology</option>
+                                                                <option value="Cardiovascular Disease">Cardiovascular Disease</option>
+                                                                <option value="Clinical Cardiac Electrophysiology">Clinical Cardiac Electrophysiology</option>
+                                                                <option value="Critical Care Medicine">Critical  Medicine</option>
+                                                                <option value="Endocrinology">Endocrinology</option>
+                                                                <option value="Diabetes ">Diabetes </option>
+                                                                <option value="Metabolism">Metabolism</option>
+                                                                <option value="Gastroenterology">Gastroenterology</option>
+                                                                <option value="Geriatric Medicine">Geriatric </option>
+                                                                <option value="Hematology">Hematology</option>
+                                                                <option value="Oncology">Oncology</option>
+                                                                <option value="Infectious Disease">Infectious Disease
+                                                                </option>
+                                                                <option value="Interventional Cardiology">Interventional
+                                                                    Cardiology</option>
+                                                                <option value="Nephrology">Nephrology</option>
+                                                                <option value="Oncology">Oncology</option>
+                                                                <option value="Pulmonary Disease">Pulmonary Disease</option>
+                                                                <option value="Critical Care Medicine">Critical Care
+                                                                    Medicine</option>
+                                                                <option value="Rheumatology">Rheumatology</option>
+                                                                <option value="Sports Medicine">Sports Medicine</option>
+                                                                <option value="Transplant Hepatology">Transplant Hepatology
+                                                                </option>
+                                                                <option value="Biochemical Genetics">Biochemical Genetics
+                                                                </option>
+                                                                <option value=" Molecular Genetic Pathology">Molecular
+                                                                    Genetic Pathology</option>
+                                                                <option value="Endovascular Surgical Neuroradiology">
+                                                                    Endovascular Surgical Neuroradiology</option>
+                                                                <option value="Child Neurology">Child Neurology</option>
+                                                                <option value="Clinical Neurophysiology">Clinical
+                                                                    Neurophysiology</option>
+                                                                <option value="Endovascular Surgical Neuroradiology">
+                                                                    Endovascular Surgical Neuroradiology</option>
+                                                                <option value="Neuromuscular Medicine">Neuromuscular
+                                                                    Medicine</option>
+                                                                <option value="Pain Medicine">Pain Medicine</option>
+                                                                <option
+                                                                    value="Female Pelvic Medicine & Reconstructive Surgery">
+                                                                    Female Pelvic Medicine & Reconstructive Surgery</option>
+                                                                <option value="Ophthalmic Plastic & Reconstructive Surgery">
+                                                                    Ophthalmic Plastic & Reconstructive Surgery</option>
+                                                                <option value="Adult Reconstructive Orthopaedics">Adult
+                                                                    Reconstructive Orthopaedics</option>
+                                                                <option value="Foot Ankle Orthopaedics">Foot Ankle
+                                                                    Orthopaedics</option>
+                                                                <option value="Ankle Orthopaedics">Ankle Orthopaedics
+                                                                </option>
+                                                                <option value="Hand Surgery">Hand Surgery</option>
+                                                                <option value="Musculoskeletal Oncology">Musculoskeletal
+                                                                    Oncology</option>
+                                                                <option value="Orthopaedic Sports Medicine">Orthopaedic
+                                                                    Sports Medicine</option>
+                                                                <option value="Foot & Ankle Orthopaedics">Foot & Ankle
+                                                                    Orthopaedics</option>
+                                                                <option value="Orthopaedic Surgery of the Spine">Orthopaedic
+                                                                    Surgery of the Spine</option>
+                                                                <option value="Orthopaedic Trauma">Orthopaedic Trauma
+                                                                </option>
+                                                                <option value=" Pediatric Orthopaedics">Pediatric
+                                                                    Orthopaedics</option>
+                                                                <option value="Otology - Neurotology">Otology - Neurotology
+                                                                </option>
+                                                                <option value="Pediatric Otolaryngology">Pediatric
+                                                                    Otolaryngology</option>
+                                                                <option value="Blood Banking - Transfusion Medicine">Blood
+                                                                    Banking - Transfusion Medicine</option>
+                                                                <option value="Chemical Pathology">Chemical Pathology
+                                                                </option>
+                                                                <option value="Cytopathology">Cytopathology</option>
+                                                                <option value="Forensic Pathology">Forensic Pathology
+                                                                </option>
+                                                                <option value="Hematology">Hematology</option>
+                                                                <option value="Medical Microbiology">Medical Microbiology
+                                                                </option>
+                                                                <option value="Neuropathology">Neuropathology</option>
+                                                                <option value="Pediatric Pathology">Pediatric Pathology
+                                                                </option>
+                                                                <option value="Adolescent Medicine">Adolescent Medicine
+                                                                </option>
+                                                                <option value="Child Abuse Pediatrics">Child Abuse
+                                                                    Pediatrics</option>
+                                                                <option value="Developmental-Behavioral Pediatrics">
+                                                                    Developmental-Behavioral Pediatrics</option>
+                                                                <option value="Neonatal-Perinatal Medicine">
+                                                                    Neonatal-Perinatal Medicine</option>
+                                                                <option value="Pediatric Cardiology">Pediatric Cardiology
+                                                                </option>
+                                                                <option value="Pediatric Critical Care Medicine">Pediatric
+                                                                    Critical Care Medicine</option>
+                                                                <option value="Pediatric Emergency Medicine">Pediatric
+                                                                    Emergency Medicine</option>
+                                                                <option value=" Pediatric Endocrinology">Pediatric
+                                                                    Endocrinology</option>
+                                                                <option value="Pediatric Gastroenterology">Pediatric
+                                                                    Gastroenterology</option>
+                                                                <option value="Pediatric Hematology-Oncology">Pediatric
+                                                                    Hematology-Oncology</option>
+                                                                <option value="Pediatric Infectious Diseases">Pediatric
+                                                                    Infectious Diseases</option>
+                                                                <option value="Pediatric Nephrology">Pediatric Nephrology
+                                                                </option>
+                                                                <option value="Pediatric Pulmonology">Pediatric Pulmonology
+                                                                </option>
+                                                                <option value="Pediatric Rheumatology">Pediatric
+                                                                    Rheumatology</option>
+                                                                <option value="Pediatric Sports Medicine">Pediatric Sports
+                                                                    Medicine</option>
+                                                                <option value="Pediatric Transplant Hepatology">Pediatric
+                                                                    Transplant Hepatology</option>
+                                                                <option value="Neuromuscular Medicine">Neuromuscular
+                                                                    Medicine</option>
+                                                                <option value="Pain Medicine">Pain Medicine</option>
+                                                                <option value="Spinal Cord Injury Medicine">Spinal Cord
+                                                                    Injury Medicine</option>
+                                                                <option value="Sports Medicine">Sports Medicine</option>
+                                                                <option value="Craniofacial Surgery">Craniofacial Surgery
+                                                                </option>
+                                                                <option value="Hand Surgery">Hand Surgery</option>
+                                                                <option value="Medical Toxicology">Medical Toxicology
+                                                                </option>
+                                                                <option value="Addiction Psychiatry">Addiction Psychiatry
+                                                                </option>
+                                                                <option value="Child & Adolescent Psychiatry">Child &
+                                                                    Adolescent Psychiatry</option>
+                                                                <option value="Forensic Psychiatry">Forensic Psychiatry
+                                                                </option>
+                                                                <option value="Geriatric Psychiatry">Geriatric Psychiatry
+                                                                </option>
+                                                                <option value="Radiation Oncology">Radiation Oncology
+                                                                </option>
+                                                                <option value="Abdominal Radiology">Abdominal Radiology
+                                                                </option>
+                                                                <option value="Cardiothoracic Radiology">Cardiothoracic
+                                                                    Radiology</option>
+                                                                <option value="Endovascular Surgical Neuroradiology">
+                                                                    Endovascular Surgical Neuroradiology</option>
+                                                                <option value="Muscoskeletal Radiology">Muscoskeletal
+                                                                    Radiology</option>
+                                                                <option value="Neuroradiology">Neuroradiology</option>
+                                                                <option value="Nuclear Radiology">Nuclear Radiology</option>
+                                                                <option value="Pediatric Radiology">Pediatric Radiology
+                                                                </option>
+                                                                <option value="Vascular & Interventional Radiology">Vascular
+                                                                    & Interventional Radiology</option>
+                                                                <option value="Sleep Medicine">Sleep Medicine</option>
+                                                                <option value="Pediatric Surgery">Pediatric Surgery</option>
+                                                                <option value="Surgical Critical Care">Surgical Critical
+                                                                    Care</option>
+                                                                <option value="Vascular Surgery">Vascular Surgery</option>
+                                                                <option value="Congenital Cardiac Surgery">Congenital
+                                                                    Cardiac Surgery</option>
+                                                                <option value="Thoracic Surgery-Integrated">Thoracic
+                                                                    Surgery-Integrated</option>
+                                                                <option value="Pediatric Urology">Pediatric Urology</option>
+                                                            </select>
+                                                            <input type="hidden" id="hidSelectedOptions" value="5,8,9" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2 required" id="doclicensename">
+                                                        <label for="License" class="field">License Number<span class="mandatory">*</span></label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <input type="text" name="License" id="doclicense" value=""
+                                                            class="form-control" maxlength="25" />
+                                                    </div>
+                                                    <div class="col-md-2 required" id="docqualificationname">
+                                                        <label for="Qualification" style="padding-top: 12px;" class="field">Qualification<span class="mandatory">*</span></label></div>
+                                                    <div class="col-md-4 input-field " id="docqualificationvalue">
+                                                        <select multiple id="docqualification"class="form-control" >
+                                                            <option value="BDS">BDS </option>
+                                                            <option value="BAMS">BAMS</option>
+                                                            <option value="BUMS">BUMS</option>
+                                                            <option value="BHMS"> BHMS</option>
+                                                            <option value="DNB"> DNB</option>
+                                                            <option value="DM">DM</option>
+                                                            <option value="DO"> DO</option>
+                                                            <option value="MCh">MCh</option>
+                                                            <option value="MBBS">MBBS</option>
+                                                            <option value="MD"> MD</option>
+                                                            <option value="MS">MS</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-2 required" id='docexperiencename'>
+                                                        <label for="Experience" class="field" style="padding-top: 27px;">Experience<span class="mandatory">*</span></label>
+                                                    </div>
+                                                    <div class="col-md-4" id='docexperiencenamen'>
+                                                        <div class="input-group-prepend">
+                                                            <div>
+                                                                <label class="field">Years<select class="form-control"
+                                                                        style="width:100px; height:40px !important;"
+                                                                        id='selectYear'>
+                                                                    </select></label>
+                                                            </div>&emsp;
+                                                            <div><label class="field">Months <select class="form-control"
+                                                                        style="width:100px; height:40px !important;"
+                                                                        id='docexperience'></select></label>
+    
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="col-md-12"> -->
+                                                    <div class="status" id="dialogboxDoctor1" style="display: none;">
+                                                        <span id="errorMsgFirstName" style="font-size:12px; color:red"
+                                                            class="alert " role="alert">
+                                                        </span>
+                                                    </div>
+                                                    <div class="status" id="dialogboxDoctor9" style="display: none;">
+                                                        <span id="errorMsgLastName" style="font-size:12px; color:red"
+                                                            class="alert " role="alert">
+                                                        </span>
+                                                    </div>
+                                                    <div class="status" id="dialogboxDoctor8" style="display: none;">
+                                                        <span id="errorMsgemail" style="font-size:12px; color:red"
+                                                            class="alert " role="alert">
+                                                        </span>
+                                                    </div>
+                                                    <div class="status" id="dialogboxDoctor3" style="display: none;">
+                                                        <span id="errorMsgUsername" style="font-size:12px; color:red"
+                                                            class="alert " role="alert">
+                                                        </span>
+                                                    </div>
+                                                    <div class="status" id="dialogboxUsername" style="display: none;">
+                                                        <span id="errorMsgUserName1" style="font-size:12px; color:red"
+                                                            class="alert " role="alert">
+                                                        </span>
+                                                    </div>
+                                                    <div class="status" id="dialogboxDoctor5" style="display: none;">
+                                                        <span id="errorMsgSpeciality" style="font-size:12px; color:red"
+                                                            class="alert " role="alert">
+                                                        </span>
+                                                    </div>
+                                                    <div class="status" id="dialogboxDoctor7" style="display: none;">
+                                                        <span id="errorMsgLicenceNumber" style="font-size:12px; color:red"
+                                                            class="alert " role="alert">
+                                                        </span>
+                                                    </div>
+                                                    <div class="status" id="dialogboxDoctor2" style="display: none;">
+                                                        <span id="errorMsgContact" style="font-size:12px; color:red"
+                                                            class="alert " role="alert">
+                                                        </span>
+                                                    </div>
+                                                    <div class="status" id="dialogboxDoctor6" style="display: none;">
+                                                        <span id="errorMsgExperience" style="font-size:12px; color:red"
+                                                            class="alert " role="alert">
+                                                        </span>
+                                                    </div>
+                                                    <div class="status" id="dialogboxDoctor4" style="display: none;">
+                                                        <span id="errorMsgQualification" style="font-size:12px; color:red"
+                                                            class="alert " role="alert">
+                                                        </span>
+                                                    </div>
+                                                    <!-- </div> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+    
+                            <div class="manage-table">
+                                <table class="table table-bordered table-striped order-table table responsive-table"
+                                    style="    font-size: 13px;">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Branch</th>
+                                            <th>License</th>
+                                            <th>Qualification</th>
+                                            <th>Speciality</th>
+                                            <th>Experience</th>
+                                            <th>Profile</th>
+                                            {% if user %}
+                                            <th style="display:none">Edit</th>
+                                            <th style="display:none">Delete</th>
+                                            {% else %}
+                                            <th>Edit</th>
+                                            <th>Delete</th>
+                                            {% endif %}
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody id="myTable">
+                                        <tr id="selectdoctor">
+                                        </tr>
+                                    </tbody>
+                                </table>
+    
+                            </div>
+                        </div>
+                        <!--create user-->
+                        {% csrf_token %}
+    
+                    </div>
+                </div>
+            </div>
+        <!-- </div> -->
+    </div>
+   
+    <script>
+       
+        $('#toggleNavPosition').click(function () {
+            $('body').toggleClass('fixed-nav');
+            $('nav').toggleClass('fixed-top static-top');
+        });
+        $(document).ready(function(){
+            $('select').formSelect();
+        });
+        $(document).ready(function() {
+            $('#docgender,#docspeciality,#docqualification,#selectYear,#docexperience').formSelect();
+            
+        });
+    </script>
+    <script>
+        var $crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+        window.drf = {
+            csrfHeaderName: "X-CSRFTOKEN",
+            csrfCookieName: "csrftoken"
+        };
+
+    var month = '';
+        for (i = 0; i <= 12; i++) {
+
+            month += '<option val=' + i + '>' + i + '</option>';
+        }
+
+        $('#docexperience').html(month);
+        var year = '';
+        for (i = 0; i <= 70; i++) {
+            year += '<option val=' + i + '>' + i + '</option>';
+        }
+        $('#selectYear').html(year);
+
+    </script>
+    <!-- <script>
+        function get_doctor_data(call_back){
+ console.log(" ### get_patient_data ###");
+         $.ajax({
+             type: "GET",
+             url: "/getdoctors/",
+             contentType: "application/json",
+             dataType: "json",
+             success: function (data, status) {
+            //        alert("Data: " + data + "\nStatus: " + status);
+                    call_back(data,status);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                //Process error actions
+                console.log( XMLHttpRequest.responseText);
+                console.log(XMLHttpRequest.status + ' ' +
+                    XMLHttpRequest.statusText);
+
+                return false;
+              }
+        });
+}
+    </script> -->
+    <script>
+   (function(document) {
+	'use strict';
+
+	var LightTableFilter = (function(Arr) {
+
+		var _input;
+
+		function _onInputEvent(e) {
+			_input = e.target;
+			var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+			Arr.forEach.call(tables, function(table) {
+				Arr.forEach.call(table.tBodies, function(tbody) {
+					Arr.forEach.call(tbody.rows, _filter);
+				});
+			});
+		}
+
+		function _filter(row) {
+			var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+			row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+		}
+
+		return {
+			init: function() {
+				var inputs = document.getElementsByClassName('docinput');
+				Arr.forEach.call(inputs, function(input) {
+					input.oninput = _onInputEvent;
+				});
+			}
+		};
+	})(Array.prototype);
+
+	document.addEventListener('readystatechange', function() {
+		if (document.readyState === 'complete') {
+			LightTableFilter.init();
+		}
+	});
+
+})(document);
+</script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <!-- <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
+    <script src='{% static "kc/js/init.js" %}'></script>
+    <script src='{% static "kc/js/materialize.js" %}'></script>
+    <script src='{% static "kc/js/adminscript.js" %}'></script>
+    <script src='{% static "kc/js/adminajax.js" %}'></script>
+
+    <script>
+     var suser='{{user}}'
+    </script>
+</body>
+
+</html>

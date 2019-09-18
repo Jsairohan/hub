@@ -1,0 +1,237 @@
+<!--<!DOCTYPE html>-->
+{% load static %}
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="{% static 'sreesend/css/bootstrap.min.css'%}">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="{% static 'sreesend/css/login-signup.css'%}">
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <link rel="shortcut icon" href="{% static 'sreesend/img/logo1.png' %}" />
+
+</head>
+<style>
+    #head-nav {
+        box-shadow: 0px 0px 2px 2px #efefef;
+        margin: 15px;
+    }
+
+    .head-logo {
+        color: #017b8b;
+        font-weight: 500;
+        font-size: 30px;
+    }
+
+    .nav-link {
+        color: rgba(117, 115, 115, 0.85);
+        font-size: 17px;
+    }
+
+    < !--.container .watermark {
+        -->< !--opacity: 0.5;
+        -->< !--color: #bfbfbf;
+        -->< !--position: fixed;
+        -->< !--top: 575;
+        -->< !--left: 85%;
+        -->< !--
+    }
+
+    -->< !--.container .content {
+        -->< !--position: absolute;
+        -->< !--bottom: 0;
+        -->< !--background: WHITE;
+        /* Black background with 0.5 opacity */
+        -->< !--color: #e6e6e6;
+        -->< !--width: 100%;
+        -->< !--padding: 20px;
+        -->< !--
+    }
+
+    -->< !--body {
+        -->< !--background: #000;
+        -->< !--
+    }
+
+    -->p {
+        color: white;
+    }
+
+    #watermark {
+        padding-right: 10px;
+        position: fixed;
+        bottom: 5px;
+        right: 5px;
+        opacity: 0.6;
+        z-index: 99;
+        color: #293d3d;
+        -webkit-touch-callout: none;
+        /* iOS Safari */
+        -webkit-user-select: none;
+        /* Safari */
+        -khtml-user-select: none;
+        /* Konqueror HTML */
+        -moz-user-select: none;
+        /* Firefox */
+        -ms-user-select: none;
+        /* Internet Explorer/Edge */
+        user-select: none;
+        /* Non-prefixed version, currently supported by Chrome and Opera */
+    }
+</style>
+
+<body>
+    <span id="watermark" style="font-size:1.64rem;" unselectable="on">Powered by <span
+            style="font-size:1.64rem; color: #64c1b1">CYGEN</span></span>
+
+    <!--style="background-image: url('{% static "sreesend/img/back1.jpg"%}')";-->
+    <div class="container">
+        <br>
+        <div class="login-form" style="
+             height: 100%;position: fixed;margin-left: 1%;
+             top: 50%;left: 50%;transform: translate(-54%, -49%);
+             padding: 20px;padding-top: 130px;margin-right: 25px;margin-left: 20px;">
+            <div>
+                <div>
+                    <img src="{% static 'sreesend/img/aimh.1.png' %}" style="width:370px;height:80px;">
+                </div>
+                <div style="width:370px;height:80px;">
+                    <h6 style="color:#ff8080">For security purpose, password change is mandatory upon first login.</h6>
+                    <div class="panel">
+                        <h2 style="color:#315879;font-weight:bold;font-size:25px;">Change Password</h2>
+                    </div>
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <!--fas fa-key-->
+                        <span class="form-group-addon"><i class="fas fa-key"></i></span>
+                        <input type="password" class="form-control" id="input-npwsd" placeholder="Enter New Password">
+                    </div>
+                    <div class="status" id="dialogboxNewPassword2" style="display: none;">
+                        <span id="errorMsgNewPassword2" style="font-size:12px; color:red" class="alert " role="alert">
+                        </span></div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="input-repwsd" placeholder="Re-enter Password">
+                    </div>
+                    <div class="status" id="dialogboxNewPassword" style="display: none;">
+                        <span id="errorMsgNewPassword" style="font-size:12px; color:red" class="alert " role="alert">
+                        </span></div>
+                    <div class="status" id="dialogboxNewPassword3" style="display: none;">
+                        <span id="errorMsgNewPassword3" style="font-size:12px; color:red" class="alert " role="alert">
+                        </span></div>
+
+                    <div class="status" id="dialogboxReenterNewPassword" style="display: none;">
+                        <span id="errorMsgReenterNewPassword" style="font-size:12px; color:red" class="alert "
+                            role="alert">
+                        </span></div>
+                    <div><br></div>
+                    <button type="submit" id="loginsubmit" class="btn btn-primary"
+                        style="background-color: #315879;border-color: #315879;color: #fff;font-size:20px">Save</button>
+                </div>
+
+            </div>
+
+
+
+        </div>
+        <!--<div class="container">-->
+        <!--<div class="watermark" style="font-family: Cambria" >-->
+        <!--powered by CYGEN</div></div>-->
+        <!--<div class="container">-->
+        <!--<div class="content">-->
+        <!--powered by CYGEN-->
+        <!--</div></div>-->
+        <!-- <div id="watermark"><img src="{% static 'sreesend/img/cygenfi.jpg' %}"  style="width:280px;height:50px;"></div> -->
+        <script>
+            window.drf = {
+                csrfHeaderName: "X-CSRFTOKEN",
+                csrfCookieName: "csrftoken"
+            };
+        </script>
+
+
+        <script src="{% static 'js/csrf.js' %}"></script>
+        <script src="{% static 'js/apicals.js' %}"></script>
+        <script src="{% static 'js/adminajax.js' %}"></script>
+        <script>
+
+            $("#loginsubmit").on("click", function () {
+                var pass = String($("#input-npwsd").val());
+                var new_pass = String($("#input-repwsd").val());
+
+                if (pass == '' & new_pass == '') {
+                    $("#dialogboxNewPassword").show();
+                    $("#errorMsgNewPassword").html('Please Enter New password and Re-Enter Password');
+                    $("#dialogboxNewPassword").delay(2000).fadeOut();
+                }
+
+                else if (new_pass == '') {
+                    $("#dialogboxReenterNewPassword").show();
+                    $("#errorMsgReenterNewPassword").html('please ReEnter new password');
+                    $("#dialogboxReenterNewPassword").delay(2000).fadeOut();
+                }
+
+                else if (pass == '') {
+                    $("#dialogboxNewPassword2").show();
+                    $("#errorMsgNewPassword2").html('please  enter new password');
+                    $("#dialogboxNewPassword2").delay(2000).fadeOut();
+                }
+
+                else if (pass != new_pass) {
+                    $("#dialogboxNewPassword3").show();
+                    $("#errorMsgNewPassword3").html("New password and Reentered password should be same ");
+                    $("#dialogboxNewPassword3").delay(2000).fadeOut();
+                }
+
+                else {
+                    if (pass == new_pass) {
+
+                        var newlogin_data = {
+
+                            "password": String($("#input-npwsd").val()),
+
+
+                        };
+                    }
+                    else {
+                        //alert('error');
+                    }
+
+        
+                        $.ajax({
+                        type: "POST",
+                            url: "/reset/",
+                                data: JSON.stringify(newlogin_data),
+                                    contentType: "application/json",
+                                        dataType: "json",
+                                            success: function (data, status) {
+                                                window.location.pathname = '/reset-success/';
+
+                                            },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        //Process error actions
+                        // alert( XMLHttpRequest.responseText);
+                        console.log(XMLHttpRequest.status + ' ' +
+                            XMLHttpRequest.statusText);
+                        return false;
+                    }
+                })
+
+        }
+
+
+    });
+
+
+        </script>
+
+        <script>
+
+        </script>
+</body>
+
+</html>

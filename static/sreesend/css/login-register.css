@@ -1,0 +1,130 @@
+.nav-tabs > li > a {
+    text-align: center;
+    color: #454545;
+    font-size: 16px;
+    font-weight: bold;
+}
+.login-email{
+    padding: 10px 10px 10px 10px;
+}
+.login-password{
+    padding: 10px 10px 10px 10px;
+}
+.login-submit{
+    padding: 10px 10px 10px 10px;
+}
+.text-field{
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #efefef;
+}
+.text-submit
+{
+text-align: center;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    background: #017b8b;
+    color: white;
+    font-weight: bold;
+    border: 2px solid #017b8b;
+}
+.forgot-password{
+text-align:center;
+}
+
+::placeholder{
+color:#454545;
+}
+.signup-fname,.signup-lname,.signup-email1,.signup-password,.signup-cpassword,.signup-phoneno{
+    padding: 10px;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    color: white;
+    font-weight: bold;
+    cursor: default;
+    border: none;
+    background: #017b8b;
+    }
+    .messages>li{
+text-align:center;
+color:red;
+    }
+  .password  {
+    /* padding: 20px; */
+    /* padding-left: 10px; */
+    text-align: center;
+    text-decoration: underline;
+    color: #017b8b;
+}
+
+   .reg-content {
+    padding: 10px;
+        color: #7f7474;
+}
+.reg-input{
+
+    border: 2px solid #efefef;
+    width: 100%;
+    padding: 5px;
+    border-radius: 6px;
+
+}
+::placeholder{
+color:#b1abab;
+}
+.reg-btn{
+    float: right;
+    border: none;
+    color: white;
+    background: #017b8b;
+    padding: 8px 15px 8px 15px;
+    border-radius: 5px;
+    /* text-align: center; */
+    margin-right:3%;
+}
+.register {
+    background: #ffffff;
+    box-shadow: 1px 2px 11px 5px #efefef;
+}
+.terms-text-container {
+    height: 200px;
+    overflow: auto;
+    border: 2px solid #aba5a5;
+    padding: 10px;
+    font-size: 10px;
+    /* color: #454545; */
+}
+.signup{
+        font-size: 24px;
+    text-align: center;
+    /* font-weight: bold; */
+    color: #017b7b;
+}
+.reg{
+    margin-bottom: 5px;
+}
+.terms-checkbox-container{
+    padding: 10px;
+    font-size: 12px;
+}
+.terms-container{
+   padding: 10px;
+}
+p {
+    margin: 0px;
+}
+.acceptterms{
+    float: left;
+}
+.agree{
+    margin-left: 15px;
+}
+.number{
+float:left;
+}
+.text{
+padding-left:10px;
+}
+

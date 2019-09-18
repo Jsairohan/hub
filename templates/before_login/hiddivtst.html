@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<style>
+#myDIV {
+    width: 100%;
+    padding: 50px 0;
+    text-align: center;
+    background-color: lightblue;
+    margin-top: 20px;
+}
+#myDIV12 {
+    width: 100%;
+    padding: 50px 0;
+    text-align: center;
+    background-color: red;
+    margin-top: 20px;
+}
+</style>
+</head>
+<body>
+
+<p>Click the "Try it" button to toggle between hiding and showing the DIV element:</p>
+
+<button id='click1' onclick="myFunction(this.id)">Try it</button>
+<button id='click12' onclick="myFunction(this.id)">Try12 it</button>
+<div id="myDIV">
+This is my DIV element.
+</div>
+<div id="myDIV12">
+This is my DIV11111111111111111112222222222 element.
+</div>
+<p><b>Note:</b> The element will not take up any space when the display property set to "none".</p>
+
+<script>
+
+$("#myDIV").hide();
+$("#myDIV12").hide();
+
+function myFunction(id) {
+alert(id);
+if(id === "click1"){
+$("#myDIV12").hide();
+    var x = document.getElementById("myDIV");
+    }
+    else if(id === "click12"){
+    $("#myDIV").hide();
+    var x = document.getElementById("myDIV12");
+    }
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>

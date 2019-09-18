@@ -1,0 +1,29 @@
+.sidediv{
+    background-color: #16a085;
+    height:83vh !important;
+    margin-bottom: 0px
+}
+.user{
+    text-align: center;
+    
+}
+body{
+    margin-top:0px
+}
+.datepicker-date-display{
+    display: none !important;
+}
+/* header, main, footer {
+    padding-left: 300px;
+  }
+
+  @media only screen and (max-width : 992px) {
+    header, main, footer {
+      padding-left: 0;
+    }
+  } */
+
+  main {
+    padding: 1%;
+    
+}

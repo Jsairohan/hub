@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>HealthTech</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,400i&amp;subset=latin-ext" rel="stylesheet">
+ <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ <link href="{% static 'navbarcss/bootstrap.min.css'%}"  rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="{% static 'navbarcss/css/font-awesome.min.css'%}" rel="stylesheet" type="text/css">
+  <!-- Custom styles for this template-->
+  <link href="{% static 'navbarcss/sb-admin.css'%}" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'navbarcss/mala_plans_details.css'%}">
+
+</head>
+
+<body>
+
+  <div class="content-wrapper">
+  <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href='{% url "before_l:index" %}'>Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+	 <div id="page">
+
+
+	<div class="sp2">
+        <button class="accordion" >whats your plan </button>
+<div class="panel">
+{% if context.sumassured %}
+
+	<tr>	  <td>Sum covered upto:</td>
+							<td><b>  {{ context.sumassured}}  </b></td>
+			 </tr><br>
+{% endif %}
+	{% if b %}
+		<tr><td>How much can i claim outside are of cover:</td>
+							<td><b>  how </b></td>
+			 </tr><br>
+	{% endif %}
+	{% if context.pre_hosp %}
+		 <tr> <td>Pre-Hospitalisation
+                  Treatment: </td><td><b>  {{ context.pre_hosp}} </b><br></td>
+              </tr>
+	{% endif %}
+	{% if context.posthosp %}
+			  <tr> <td>Post-Hospitalisation
+                  Treatment: </td><td><b>  {{ context.posthosp}} </b><br></td>
+              </tr>
+	{% endif %}
+</div>
+<button class="accordion">In Patient treatment</button>
+
+<div class="panel">
+{% if context.hosp_room %}
+        <tr>
+     <td>Hospital Room & Board: </td>
+			    <td><b>  {{context.hosp_room}}  </b><br></td>
+			 </tr>
+    {% endif %}
+{% if  context.hosp_sup %}
+<tr>
+    <td>Hospital Supplies and Services:</td>
+    <td><b>  {{ context.hosp_sup}}</b><br></td>
+  </tr>
+{% endif %}
+    {% if context.daily_cash %}
+  <tr>
+    <td> Daily Cash Allowance:</td>
+    <td><b>  {{context.daily_cash}}</b><br></td>
+  </tr>
+{% endif %}
+    {% if context.inpatient %}
+  <tr>
+      <td>In-Hospital Physician Visit:</td>
+    <td><b>  {{context.inpatient}} </b><br></td>
+  </tr>
+{% endif %}
+    {% if context.inpatient %}
+  <tr>
+    <td>Intensive Care Unit (ICU)
+        and Treatment Charges:</td>
+    <td><b>  {{context.inpatient}} </b><br></td>
+  </tr>
+{% endif %}
+
+
+
+</div>
+
+<button class="accordion"> Surgical Benefits</button>
+<div class="panel">
+    {% if context.orgon_don %}
+    <tr><td>Surgical Fees:</td>
+    <td><b>  {{context.orgon_don}} </b><br></td></tr>
+    {% endif %}
+    {% if context.orgon_don %}
+	<tr><td>Anaesthetist Fees:</td>
+    <td><b>  {{context.orgon_don}} </b><br></td></tr>
+{% endif %}
+    {% if context.orgon_don %}
+	<tr><td>Operating Theatre Fees:</td>
+    <td><b>  {{context.orgon_don}}</b><br></td></tr>
+{% endif %}
+
+
+</div>
+
+<button class="accordion">Outpatient Treatments</button>
+<div class="panel">
+
+
+
+    {% if context.day_care %}
+  <tr><td>Day-Care Surgery:</td>
+    <td><b>  {{ context.day_care}}  </b><br></td></tr>
+{% endif %}
+</div>
+
+
+   <button class="accordion">    Additional Benefit</button>
+   <div class="panel">
+ {% if context.Ayush %}
+  <tr>
+    <td>Reimbursement for Alternative Treatment fees
+:</td><td><b>  {{context.Ayush}} </b> </td>
+     </tr><br>
+       {% endif %}
+   </div>
+
+</div>
+</div>
+
+  </div>
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].onclick = function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight){
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  }
+}
+</script>
+    <!-- Bootstrap core JavaScript-->
+
+     <script src='{% static "js/bootstrap.bundle.min.js" %}'></script>
+
+</body>
+
+</html>

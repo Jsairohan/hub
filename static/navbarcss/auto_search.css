@@ -1,0 +1,132 @@
+.search{
+height: 30px;
+    width: 300px;
+    border: none;
+    color: black;
+    background-color: #b3b3b3;
+    border-radius: 22px;
+    padding: 10px 10px 10px 10px;
+}
+@media only screen and (max-width: 768px){
+.search {
+    height: 30px;
+    width: 100%;
+    }
+    }
+.right_col {
+
+        position: relative;
+    margin-top:8%;
+}
+.search-results{
+
+}
+.auto-search{
+padding: 10px;
+
+}
+.my_class{
+}
+.food_name{
+    float: left;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.serve{
+padding-left: 18px;
+    font-size: 14px;
+
+}
+.set
+{
+    color: #6b6d6d;
+    /* font-weight: bold; */
+    cursor: pointer;
+    /* border-bottom: 1px solid black; */
+    padding-bottom: 10px;
+    border-radius: 7px;
+    margin-bottom: 10px;
+    padding-right: 15px;
+    box-shadow: 1px 0px 5px 1px #b3b3b3;
+}
+
+
+
+.food{
+   padding: 13px 18px;
+}
+.add{
+    margin-left: 10px;
+    margin-right: 10px;
+    /* padding-left: 6px; */
+    /* padding-top: 0px; */
+    /* margin-top: -11px; */
+    /* padding: 22px; */
+    border-radius: 22px;
+    font-weight: bold;
+    height: 22px;
+    width: 22px;
+    border: none;
+    background-color: #4bb567;
+}
+.remove{
+
+    height: 22px;
+    width: 22px;
+    /* margin-top: -11px; */
+
+    border-radius: 22px;
+    font-weight: bold;
+    border: none;
+    background-color: #b54b4b;
+}
+.count{
+
+    width: auto;
+    font-size: 14px;
+    font-weight: bold;
+
+        padding-top: 2px;
+}
+.content{
+
+}
+.calorie-name{
+    float: left;
+    height: 25px;
+    width: 110px;
+    /*margin-right: 25px;*/
+    position: relative;
+    display: block;
+}
+.test{
+    margin-top: 40px;
+}
+.testing{
+        margin-top: 25px;
+}
+.no-food{
+background-color: #454545;
+    color: white;
+    border-radius: 10px;
+    margin-left: 10px;
+    padding: 10px;
+    box-shadow: 3px 3px 5px 1px #b3b3b3;
+}
+@media screen and  (max-width:768px){
+.table-bar {
+    overflow-x: scroll !important;
+}
+}
+@media screen and  (max-width:768px){
+.profile{
+margin-top: 65px;
+}
+}
+.food-click{
+color: #017b8b;
+font-size:16px;
+font-weight: bold;
+
+}

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Patient Analysis chart </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'kc/css/dashboard.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'kc/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'kc/css/sb-admin.css'%}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static 'kc/css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <!-- <script src='{% static "kc/js/test.js" %}'></script> -->
+    <style>
+        .navbar {
+            padding: 0px;
+        }
+
+        canvas {
+            /* background-color: white */
+            background-color:none;
+        }
+        .canvasjs-chart-credit{
+            display:none
+        }
+        .bg-dark {
+            background: #ffff !important;
+        }
+
+        .fixed-action-btn {
+            top: 53px !important;
+            right: auto;
+            margin-left: 2px;
+        }
+
+        #logo-container {
+            height: 100%;
+            width: 19%;
+            padding: 0px;
+        }
+
+        .table td, .table th {
+            text-align: center !important;
+            /* padding: 15px 5px !important; */
+        }
+        @media (min-width: 992px) {
+            .col-lg-3 {
+                -webkit-box-flex: 0;
+                -ms-flex: 0 0 19%;
+                flex: 0 0 19%;
+                max-width: 25%;
+                padding-top: 34px;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .col-lg-12 {
+                -webkit-box-flex: 0;
+                -ms-flex: 0 0 100%;
+                flex: 0 0 100%;
+                max-width: 100%;
+                padding-top: 12px;
+            }
+        }
+
+        body {
+            background-color: azure;
+        }
+        #watermark
+        {
+            padding-right: 10px;
+            position: fixed;
+            bottom:5px;
+            right:5px;
+            opacity:0.6;
+            z-index:99;
+            color:#293d3d;
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Safari */
+            -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+        }
+    </style>
+</head>
+
+<body>
+    <span id="watermark" style="font-size:1.64rem;" unselectable="on">Powered by 
+            <span style="font-size:1.64rem; color: #64c1b1">CYGEN</span>
+    </span>
+    <header>
+        <div class="navbar-fixed">
+            <nav class="white top-nav nav-extended" role="navigation">
+                <div class="nav-wrapper container-fluid">
+                    <span>
+                        <img src='{% static "sreesend/img/aimh.1.png" %}' alt="logo" id="logo-container"
+                            class="brand-logo">
+                    </span>
+                    <ul class="right hide-on-med-and-down">
+                        <li>
+                            <a onclick="window.location.pathname='/logout/'" data-toggle="modal"
+                                data-target="#exampleModal" style="color:black; font-size: 16px;">
+                                Logout</a>
+
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!--Sidenav-->
+        <div class="container">
+            <ul id="slide-out" class="sidenav">
+                <li>
+                    <div class="user-view">
+                        <div class="background"><img src="{% static 'kc/img/sideimg.jpg' %}"></div>
+                        <a href="#user"><img class="circle" src="{% static 'kc/img/doctor.jpg' %}"></a>
+                        <a href="#name"><span class="white-text name">{{request.user.first_name}}</span></a>
+                        <a href="#email"><span class="white-text email">{{request.user.email}}</span></a>
+                    </div>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                    <a style="background-color:#69b7dd;" class="nav-link" href='/hrdashboard/'>
+                        <i class="fa fa-tachometer" aria-hidden="true"></i>
+                        <span class="nav-link-text"
+                            style="font-family: sans-serif;font-size:16px!important;color:#ffff">Dashboard</span></a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a class="nav-link" href='/healthanalysisdetails/'>
+                            <i class="fa fa-wpforms" aria-hidden="true"></i>
+                            <span class="nav-link-text" style="font-family: sans-serif;font-size:16px!important;"> Health Summary</span></a>
+                    </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a class="nav-link" href='/healthanalysischart/'>
+                            <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                            <span class="nav-link-text"
+                                style="font-family: sans-serif;font-size:16px!important;"> Health analysis Chart</span>
+                        </a>
+                    </li> 
+                <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a class="nav-link" href='/untreatedpatients/'>
+                            <i class="fa fa-wheelchair " aria-hidden="true"></i>
+                            <span class="nav-link-text"
+                                style="font-family: sans-serif;font-size:16px!important;">Untreated  Patients</span></a>
+                    </li>  
+                <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                    <a class="nav-link" href='/treatedpatients/'>
+                        <i class="fa fa-wheelchair-alt " aria-hidden="true"></i>
+                        <span class="nav-link-text"
+                            style="font-family: sans-serif;font-size:16px!important;">Treated  Patients</span></a>
+                </li> 
+                <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                    <a class="nav-link" href='/analysis/'>
+                        <i class="fa fa-bar-chart"></i>
+                        <span class="nav-link-text"
+                            style="font-family: sans-serif;font-size:16px!important;">Analysis</span></a>
+                </li>   
+               
+            </ul>
+
+        </div>
+        <!--Sidenav end -->
+
+    </header>
+
+    <div class="content">
+            <div class="fixed-action-btn ">
+                <a href="#" data-target="slide-out" id="sidetrigger" class="left btn-floating  red sidenav-trigger">
+                    <i class="material-icons">menu</i>
+                </a>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+                <!-- <div class="row" style="justify-content: center;">
+                                    <div class="card-content">
+                                        <div class="row" id="activitychart">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                <div class="card">
+                                                        <canvas id="hypertensionChart" width="300" height="200"></canvas>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                <div class="card">
+                                                        <canvas id="diabetesChart" width="300" height="200"></canvas>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                <div class="card">
+                                                        <canvas id="cardiacRelatedChart" width="300" height="200"></canvas>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                <div class="card">
+                                                        <canvas id="obesityChart" width="300" height="200"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                            </div>
+                </div> -->
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" >
+                        <div id="cardiacChart" style="height: 555px; width: 100%;"></div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" >
+                        <div id="diabetesChart" style="height: 555px; width: 100%;"></div>
+                    </div>
+                </div>
+                <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" >
+                                <div id="hypertensionChart" style="height: 555px; width: 100%;"></div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" >
+                                <div id="obesityChart" style="height: 555px; width: 100%;"></div>
+                            </div>
+                </div>
+            </div>
+        </div>
+    <script>
+        $('#toggleNavPosition').click(function () {
+            $('body').toggleClass('fixed-nav');
+            $('nav').toggleClass('fixed-top static-top');
+        });
+        
+        // heart_score
+        var heart_high=`{{heart_score.High}}`
+        var heart_low=`{{heart_score.Low}}`
+        var heart_mod=`{{heart_score.Moderate}}`
+        var heart_dia=`{{heart_score.Diagnosed}}`
+        //diabetes_score
+        var diabetes_high=`{{diabetes_score.High}}`
+        var diabetes_low=`{{diabetes_score.Low}}`
+        var diabetes_mod=`{{diabetes_score.Moderate}}`
+        var diabetes_dia=`{{diabetes_score.Diagnosed}}`
+        //hyper_score
+        var hyper_high=`{{hyper_score.High}}`
+        var hyper_low=`{{hyper_score.Low}}`
+        var hyper_mod=`{{hyper_score.Moderate}}`
+        var hyper_dia=`{{hyper_score.Diagnosed}}`
+        //obesity_score
+        var obesity_overweight=`{{obesity_score.Overweight}}`
+        var obesity_underweight=`{{obesity_score.Underweight}}`
+        var obesity_normal=`{{obesity_score.Normal}}`
+        var obesity_preobese=`{{obesity_score.Pre_Obese}}`
+        var obesity_obese=`{{obesity_score.Obese}}`
+        
+    </script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <!-- <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
+    <script src='{% static "kc/js/init.js" %}'></script>
+    <script src='{% static "kc/js/materialize.js" %}'></script>
+    <!-- <script src='{% static "kc/js/patients.js" %}'></script> -->
+    <script src='{% static "kc/js/adminajax.js" %}'></script>
+    <script src='{% static "kc/js/patientanalysisgraph.js" %}'></script>
+</body>
+
+</html>

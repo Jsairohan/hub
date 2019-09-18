@@ -1,0 +1,12 @@
+{% block subject %} Welcome to AimHealth Family!{% endblock %}
+{% block plain %}
+
+Dear {{user}},
+Thank you for requesting new password.
+your login email {{email}} and new password {{userpassword}} is your password.Please reset your password at the first login.
+
+Thank you
+With regards,
+AimHealth Team
+Redesigning healthcare delivery
+{% endblock %}

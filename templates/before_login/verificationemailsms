@@ -1,0 +1,9 @@
+{% block subject %} Please verify your - CyGen HealthTech Account. {% endblock %}
+{% block plain %}
+
+Dear {{username}},
+Thanks for registering to our website.
+Please click on the link below to verify your account
+http://{{ domain }}{% url 'before_l:activate' uidb64=uid token=token %}
+
+{% endblock %}

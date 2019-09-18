@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>cygen healthtech</title>
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/C5927884-34FC-7E48-9D3B-582793A89BA2/main.js" charset="UTF-8"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ <link href="{% static 'navbarcss/bootstrap.min.css'%}" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'navbarcss/css/font-awesome.min.css'%}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- Custom styles for this template-->
+    <link href="{% static 'navbarcss/sb-admin.css'%}" rel="stylesheet">
+    <link href="{% static 'navbarcss/summary.css'%}" rel="stylesheet" media="screen">
+</head>
+
+<body>
+
+
+<div class="content-wrapper">
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"> </span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href='{% url "foodandacti:userinfopost" %}'>Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if userinfo %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12  col-sm-12 col-xs-12">
+                <div class="body-content">
+                    <div id="summary">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12 health-index"><b>Summary</b></div>
+                            </div>
+
+                            <div class="col-md-12 col-sm-12 col-xs-12 name">User Information</div>
+                            <div class="row">
+                                <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6 date">Name:</div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">{{userinfo.name}}</div>
+                                </div>
+                                 <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6 date">Age:</div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">{{userinfo.age}}</div>
+                                </div>
+
+                                <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6 date">Gender:</div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">{{userinfo.Gender}}</div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="row">
+<div class="col-lg-1 col-md-1 col-sm-6 col-xs-6 date">Email:</div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">{{userinfo.email}}</div>
+                                </div>
+                                <div class="col-md-2 col-sm-12 col-xs-12 date">Phone No:</div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">{{userinfo.PhoneNo}}</div>
+                                </div>
+
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6 date">Address:</div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">{{userinfo.Address}}</div>
+                                </div>
+                                <div class="col-md-2 col-sm-12 col-xs-12 date">Nearest Healthcare facility:</div>
+                                <div class="col-md-4 col-sm-12 col-xs-12 dat">
+                                    <div class="answer">{{userinfo.hospitalAddress}}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12 name-sub">Spouse or guardian's</div>
+                            <div class="row">
+                                <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6 date">Name:</div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">{{userinfo.guardianname}}</div>
+                                </div>
+
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 date">Contact No:</div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">{{userinfo.ContactNo}}</div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6 date">Address:</div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">{{userinfo.gAddress}}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12 name-sub">Family Doctor</div>
+                            <div class="row">
+                                <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6 date">Name:</div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">{{userinfo.Doctorname}}</div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 date">Contact No:</div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">{{userinfo.Doctornumb}}</div>
+                                </div>
+                            </div>
+							                        <div class="col-md-12 col-sm-12 col-xs-12 name">Physical Findings</div>
+
+							{% if request.user.patient_code %}
+                            <div class="row">
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 date">Height:</div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">{{userperson.h_feet}}ft  {{userperson.h_inches}}inches</div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 date">Weight:</div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">{{userperson.weight}}kgs</div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 date">Systolic:</div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">{{userperson.bp_systolic}}mmHg</div>
+                                </div>
+
+                            </div>
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 date">Diastolic:</div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">{{userperson.bp_diastolic}}mmHg</div>
+                                </div>
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 date">BMI:</div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">{{userbmi|floatformat:1}}</div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 date">Pulse Rate:</div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 dat">
+								{% if useroximeter.bpm %}
+                                    <div class="answer">{{useroximeter.bpm}} beats per min</div>
+								{% elif userbpm.pulse %}
+								 <div class="answer">{{userbpm.pulse}} beats per min</div>
+								 {% endif %}
+                                </div>
+
+
+                            </div>
+                         <div class="row">
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 date">Respiratory Rate:</div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">16 breaths per min</div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 date">Oxygen Saturation:</div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">{{useroximeter.spo}}%</div>
+                                </div>
+                               <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 date">Hip-waist ratio:</div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">0.80</div>
+                                </div>
+
+                            </div>
+                        <div class="row">
+<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 date">Blood Glucose Level:</div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">{{userglucos.glucose}} mg/dl</div>
+                                </div>
+
+<div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 date">Body Temperature:</div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">{{usertemp.temperature}} C</div>
+                                </div>
+
+                            </div>
+							{% else %}
+							    <div class="row">
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 date">Height:</div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">{{userperson.h_feet}}ft  {{userperson.h_inches}}inches</div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 date">Weight:</div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">{{userperson.weight}}kgs</div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 date">Systolic:</div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">{{userperson.bp_systolic}}mmHg</div>
+                                </div>
+
+                            </div>
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 date">Diastolic:</div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">{{userperson.bp_diastolic}}mmHg</div>
+                                </div>
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 date">BMI:</div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">{{userbmi|floatformat:1}}</div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 date">Pulse Rate:</div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">80 beats per min</div>
+                                </div>
+
+
+                            </div>
+                         <div class="row">
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 date">Respiratory Rate:</div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">16 breaths per min</div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 date">Oxygen Saturation:</div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">98%</div>
+                                </div>
+                               <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 date">Hip-waist ratio:</div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">0.80</div>
+                                </div>
+
+                            </div>
+                        <div class="row">
+<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 date">Blood Glucose Level:</div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">66 mg/dl</div>
+                                </div>
+
+<div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 date">Body Temperature:</div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">98 C </div>
+                                </div>
+
+                            </div>
+							
+						{% endif %}
+                            <div class="col-md-12 col-sm-12 col-xs-12 name">Demography</div>
+                            <div class="row">
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 date">Marital Status:</div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">{{userinfo.MaritalStatus}}</div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 date">Employment status:</div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">{{userinfo.EmployedStatus}}</div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 date">Housing Status:</div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 dat">
+                                    <div class="answer">{{userinfo.HousingStatus}}</div>
+                                </div>
+                            </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12 name">Predictive Score</div>
+
+                        <div class="row">
+                            <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6 date">Hypertension:</div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 dat">
+
+                                <div class="answer" id="Hypertensionid">{{hyperlevel}}</div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12 des" id="result_text">{{hyperlevelmeasure}}</div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6 date">Cardiac:</div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 dat">
+                                <div class="answer" id="Cardiacid">{{heartlevel}}</div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12 des" id="result_text1">{{heartlevelmeasure}}</div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6 date">Diabetes:</div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 dat">
+
+                                <div class="answer" id="diabetesid">{{dialevel}}</div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12 des" id="result_text2">{{dialevelmeasure}}</div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6 date">Obesity:</div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 dat">
+
+                                <div class="answer" id="Obesityid">{{obeysitylevel}}</div>
+                            </div>
+
+                            <div class="col-md-12 col-sm-12 col-xs-12 des" id="result_text3">{{obeysitylevelmeasure}}</div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12 name">Prevailing Condition and Diagnosis</div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12 col-xs-12 date">Allergy status (Notify any rare health
+                                condition e.g.rare blood group):
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12 dat">
+                                <div class="answer">{{userinfo.allergy}}</div>
+                            </div>
+                        </div>
+
+
+                        {% else %}
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12  col-sm-12 col-xs-12">
+                                    <div class="body-content">
+                                        <div id="summary">
+                                            <form action='{% url "foodandacti:userinfopost" %}' method="post">
+                                                {% csrf_token %}
+                                                <div class="row">
+                                                    <div class="col-md-12 col-sm-12 col-xs-12 health-index"><b>Personal
+                                                        Information</b></div>
+                                                </div>
+
+                                                <div class="col-md-12 col-sm-12 col-xs-12 name">User Information</div>
+
+                                                <div class="row">
+                                                    <div class="col-lg-1 col-md-1  col-sm-12 col-xs-6 date">Address:
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 dat"><textarea
+                                                            class="id-class-text" name="Address" required autocomplete="off"></textarea></div>
+                                                    <div class="col-md-3 col-sm-6 col-xs-12 date">Nearest Healthcare
+                                                        facility:
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-6 col-xs-12 dat"><textarea
+                                                            class="id-class-text" name="hospitalAddress" required autocomplete="off"></textarea>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-12 col-sm-12 col-xs-12 name-sub">Spouse or
+                                                    guardian's
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6 date">Name:</div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 dat"><input
+                                                            type="text" name="guardianname" class="id-class" required autocomplete="off"></div>
+                                                    <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6 date">ContactNo:
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 dat">
+                                                     <input   type="number" name="ContactNo" class="id-class" autocomplete="off" pattern="[0-9]{1}[0-9]{9}" title="Phone number with 7-9 and remaing 9 digit with 0-9" minlength="10" maxlength="10" required>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6 date">Address:</div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 dat"><textarea
+                                                            class="id-class-text" name="gAddress" required autocomplete="off"></textarea></div>
+                                                </div>
+                                                <div class="col-md-12 col-sm-12 col-xs-12 name-sub">Family Doctor</div>
+                                                <div class="row">
+                                                    <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6 date">Name:</div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 dat"><input
+                                                            type="text" name="Doctorname" class="id-class" autocomplete="off" required></div>
+                                                    <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6 date">ContactNo
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 dat"><input
+                                                            type="number" name="Doctornumb" class="id-class" maxlength="12" autocomplete="off" required></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 date">Allergy status (Notify
+                                                        any rare health condition e.g.rare blood group):
+                                                    </div>
+                                                    <div class="col-md-2 col-sm-6 col-xs-12 dat"><textarea
+                                                            class="id-class-text" name="allergy" required autocomplete="off"></textarea></div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                                        <input type="submit" name="btnprint"
+                                                               class="printpdf col-md-3 col-sm-3 col-xs-6"
+                                                               value="Submit"/>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+
+                                            {% endif %}
+                                            {% if medicalinfo %}
+                                            <form action='{% url "foodandacti:medicalinfopost" %}'  method="post">
+                                            {% csrf_token %}
+                                                <div class="col-md-12 col-sm-12 col-xs-12 name med-print">Medication</div>
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 med-table">
+                                                        <div class="col-sm-12"
+                                                             style="width: 100%; overflow-x: auto ! important;">
+
+                                                            <table  id="myTable"
+                                                                   class="table table-striped table-bordered dataTable no-footer dtr-inline order-list"
+                                                                   role="grid"
+                                                                   aria-describedby="datatable-buttons_info">
+                                                                <thead class="med-head">
+                                                                <tr role="row">
+                                                                    <th style="width: 73px;">Prescription Date</th>
+                                                                    <th style="width: 73px;">Medication name</th>
+                                                                    <th style="width: 73px;">Doctor</th>
+                                                                    <th style="width: 73px;">Dosage</th>
+
+                                                                    <th style="width: 73px;">Time per day</th>
+
+                                                                    <th style="width: 73px;">With Food? Y/N</th>
+                                                                     <th style="width: 73px;">Whats It's for</th>
+                                                                    <th style="width: 73px;">No of days</th>
+                                                                </tr>
+                                                                </thead>
+
+                                                                <tbody id="TextBoxesGroup1">
+
+                                                                <tr role="row" class="odd">
+                                                                    {% for i in medicalinfo %}
+                                                                    <td class="txtPrescriptionDate pres_date">{{i.PrescriptionDate}}
+                                                                     <script>
+                              $(document).ready(function(e) {
+                                          $( ".pres_date" ).datepicker({
+                                                  shortYearCutoff: 1,
+                                              changeMonth: true,
+                                              changeYear: true,
+                                              dateFormat: 'dd-mm-yy',
+
+                                       });
+                                        });
+
+
+                                                </script></td>
+        <td>{{i.MedicationName}}</td>
+        <td>{{i.Doctor}}</td>
+        <td> {{i.Dosage}}</td>
+        <td>{{i.TimesPerDay}}</td>
+       <td>{{i.WithFood}}</td>
+        <td>{{i.Reason}}</td>
+        <td>{{i.Reactions}}</td> </tr>
+                                                                 {% endfor %}
+                                                                </tbody>
+
+
+                                                            </table>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+<div class="row">
+    <div class="col-md-12 add-btn">
+        <input type="button" class="add-button" id="addrow" value="Add Medication">
+
+    </div></div>
+</form>
+                                            <div class="col-md-12">
+                                            <div class="disclaimer" id="disclaimer">
+   <b> Disclaimer</b><br>
+<div class="paragraph">
+    <div class="number">1.</div><div class="text">  The Summary Report relates only to the samples and individual tested and data fed, into the Cygen Algorithm, based
+        upon the same and shows only the tendencies of development of identified medical conditions in future.</div>
+</div>
+   <div class="paragraph">
+       <div class="number">2. </div><div class="text">  The individual tested and the Summary Report provided is only for preventive health care education of the individual tested.</div>
+   </div>
+    <div class="paragraph">
+       <div class="number">3. </div><div class="text">  If the age of individual tested was not stated in the test requisition form, adult reference range will be printed by default
+        as the reference range of individual.</div>
+    </div>
+    <div class="paragraph">
+        <div class="number">4. </div><div class="text">The liability of Summary Report is limited to the cost of tests only.</div>
+    </div>
+    <div class="paragraph">
+        <div class="number">5. </div><div class="text">This summary report is not valid for medico legal purposes. Neither Cygen nor it's employees/representatives/affiliates
+   assume any liability, responsibility for any loss or damages that may be incurred by any person as a result presuming
+    the meaning or contents of the report.
+    </div></div>
+    <div class="paragraph">
+        <div class="number">6. </div><div class="text"> The Summary Report has its limitation to the tune of analysis of sample data generated , fed into the system and
+    analysed through the Cygen algorithm and need correlation with other related tests and medical signs/symptoms.
+    </div></div>
+    <div class="paragraph">
+        <div class="number">7.</div><div class="text">  The information (including but not limited to the advice and recommendations ) in this Summary Report are intended
+    solely as a general educational aid and are neither medical nor health care advice for any individual problem nor a substitute
+         for medical or other professional advice and services from a qualified health care provider familiar with your medical history.</div>
+        </div>
+   <div class="paragraph">
+        <div class="number">8.</div><div class="text">  Use of this Summary Report , doesn't create a doctor-patient relationship.  Nothing contained in this report is intended to
+       be used for medical diagnosis or treatment.</div></div>
+
+   <div class="paragraph">
+        <div class="number">9. </div><div class="text"> In case of doubt about Summary Report, please contact Cygen immediately, to verify your results on our toll free number.
+   </div></div>
+</div>
+
+                                   </div>     </div>
+  <div class="row">
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                <input type="button" name="btnprint"
+                                                       class="printpdf col-md-3 col-sm-3 col-xs-6" value="Print"
+                                                       onclick="PrintMe('summary')"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <div class="sum-data">
+                            <div class="summary-data">If you are under any Medication click on Add medication else click on skip Medication</div>
+                            <div class="add-medication1"><input type="button" class="link1" value="Add medication" ></div>
+                            <div class="skip-medication1"><input type="button" class="link2" value="Skip medication"  ></div>
+                        </div>
+                            </div>
+                    </div>
+                    <div class="div1" id="medi">
+
+                   <form action='{% url "foodandacti:medicalinfopost" %}'  method="post">
+                        {% csrf_token %}
+                        <div class="col-md-12 col-sm-12 col-xs-12 name">Medication</div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 med-table">
+                                <div class="col-sm-12 table-bar" style="width: 100%; overflow-x: scroll ! important;">
+                                    <table id="datatable-buttons"
+                                           class="table table-striped table-bordered dataTable no-footer dtr-inline"
+                                           role="grid" aria-describedby="datatable-buttons_info" style="width: 1034px;">
+                                        <thead class="med-head">
+                                        <tr role="row">
+                                                                    <th style="width: 73px;">Prescription Date</th>
+                                                                    <th style="width: 73px;">Medication name</th>
+                                                                    <th style="width: 73px;">Doctor</th>
+                                                                    <th style="width: 73px;">Dosage</th>
+
+                                                                    <th style="width: 73px;">Time per day</th>
+
+                                                                    <th style="width: 73px;">With Food? Y/N</th>
+                                                                     <th style="width: 73px;">Whats It's for</th>
+                                                                    <th style="width: 73px;">No of days</th>
+                                                                </tr>
+                                        </thead>
+                                        <tbody id="TextBoxesGroup">
+                                        <tr role="row" class="odd">
+                                            <td><input name="PrescriptionDate" class="txtPrescriptionDate pres_date"
+                                                       id="txtPrescriptionDate0" required>
+                                                <script>
+                              $(document).ready(function(e) {
+                                          $( ".pres_date" ).datepicker({
+                                                  shortYearCutoff: 1,
+                                              changeMonth: true,
+                                              changeYear: true,
+                                              dateFormat: 'dd-mm-yy',
+
+                                       });
+                                        });
+
+
+                                                </script>
+                                            </td>
+                                            <td><input name="MedicationName" class="txtMedicationName medicationname"
+                                                       id="txtMedicationName" required></td>
+                                            <td><input name="Doctor" class="txtDoctor doctor" id="txtDoctor" required></td>
+                                            <td><input name="Dosage" class="txtDosage dosage" id="txtDosage" required></td>
+                                            <td><input name="TimesPerDay" class="txtTimesPerDay timeperday"
+                                                       id="txttxtTimesPerDay" required></td>
+                                            <td><input name="WithFood" class="txtWithFood withfood" id="txtWithFood" required>
+                                            </td>
+                                            <td><input name="Reason" class="txtReason reason" id="txttxtReason" required></td>
+                                            <td><input name="reaction" class="txtReactions reactions" id="txtReactions" required>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="submit" class="printpdf col-md-3 col-sm-3 col-xs-6" value="Submit"/>
+                            </div>
+                        </div>
+
+                    </form> </div>
+                     <div class="col-md-12 div2">
+
+                                            <div class="disclaimer" id="disclaimer">
+   <b> Disclaimer</b><br>
+<div class="paragraph">
+    <div class="number">1.</div><div class="text">  The Summary Report relates only to the samples and individual tested and data fed, into the Cygen Algorithm, based
+        upon the same and shows only the tendencies of development of identified medical conditions in future.</div>
+</div>
+   <div class="paragraph">
+       <div class="number">2. </div><div class="text">  The individual tested and the Summary Report provided is only for preventive health care education of the individual tested.</div>
+   </div>
+    <div class="paragraph">
+       <div class="number">3. </div><div class="text">  If the age of individual tested was not stated in the test requisition form, adult reference range will be printed by default
+        as the reference range of individual.</div>
+    </div>
+    <div class="paragraph">
+        <div class="number">4. </div><div class="text">The liability of Summary Report is limited to the cost of tests only.</div>
+    </div>
+    <div class="paragraph">
+        <div class="number">5. </div><div class="text">This summary report is not valid for medico legal purposes. Neither Cygen nor it's employees/representatives/affiliates
+   assume any liability, responsibility for any loss or damages that may be incurred by any person as a result presuming
+    the meaning or contents of the report.
+    </div></div>
+    <div class="paragraph">
+        <div class="number">6. </div><div class="text"> The Summary Report has its limitation to the tune of analysis of sample data generated , fed into the system and
+    analysed through the Cygen algorithm and need correlation with other related tests and medical signs/symptoms.
+    </div></div>
+    <div class="paragraph">
+        <div class="number">7.</div><div class="text">  The information (including but not limited to the advice and recommendations ) in this Summary Report are intended
+    solely as a general educational aid and are neither medical nor health care advice for any individual problem nor a substitute
+         for medical or other professional advice and services from a qualified health care provider familiar with your medical history.</div>
+        </div>
+   <div class="paragraph">
+        <div class="number">8.</div><div class="text">  Use of this Summary Report , doesn't create a doctor-patient relationship.  Nothing contained in this report is intended to
+       be used for medical diagnosis or treatment.</div></div>
+
+   <div class="paragraph">
+        <div class="number">9. </div><div class="text"> In case of doubt about Summary Report, please contact Cygen immediately, to verify your results on our toll free number.
+   </div></div>
+</div>
+  <div class="row">
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                <input type="button" name="btnprint"
+                                                       class="printpdf col-md-3 col-sm-3 col-xs-6" value="Print"
+                                                       onclick="PrintMe('summary')"/>
+                                            </div>
+                                        </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    </div>
+</div>
+{% endif %}
+
+
+<script src='{% static "js/bootstrap.bundle.min.js" %}'></script>
+
+ <script>
+
+var counter=0;
+	$(".datepick").datepicker({ dateFormat: "dd MM yy" });
+	$("#addrow").on("click", function () {
+         counter = $('#TextBoxesGroup1').length ;
+        var newRow = $("<tr>");
+        var cols = "";
+         cols += '<td><input type="text" name="PrescriptionDate" class="datepick" id="date" required autocomplete="off"/></td>';
+        cols += '<td><input type="text" name="MedicationName" autocomplete="off" required/></td>';
+        cols += '<td><input type="text" name="Doctor" autocomplete="off" required/></td>';
+        cols += '<td><input type="text" name="Dosage" autocomplete="off" required/></td>';
+        cols += '<td><input type="text" name="TimesPerDay" autocomplete="off" required/></td>';
+        cols += '<td><input type="text" name="WithFood" autocomplete="off" required/></td>';
+        cols += '<td><input type="text" name="Reason" autocomplete="off" required/></td>';
+        cols += '<td><input type="text" name="reaction" autocomplete="off" required/></td>';
+        cols += '<td class="submit-but" style="border-color:#ffffff; background-color: #ffffff;"><input type="submit" name="Submit" value="Submit" class="submit" /></td>';
+
+
+        <!--cols += '<td><input type="button" class="ibtnDel"  value="Delete"></td>';-->
+
+        newRow.append(cols);
+        console.log (cols);
+        if (counter == 10) $('#addrow').attr('disabled', true).prop('value', "Done");
+        $("table.order-list").append(newRow);
+        counter=counter+1;
+
+        $('#date', newRow).each(function(i) {
+       	    var newID = 'date[]' + counter;
+        	$(this).attr('id', newID);
+		$(".datepick").datepicker({ dateFormat: 'dd-mm-yy' });
+
+    });
+//time function
+ var input = $('<input type="time" class="timesperday" />');
+       var input1 = $('<input type="text" class="withorwithout" />');
+    var newFields = $('');
+    var newFields1 = $('');
+
+    $('#txtTimesPerDay').bind('blur keyup change', function() {
+        var n = this.value || 0;
+        if (n+1) {
+            if (n > newFields.length && n > newFields1.length) {
+                addFields(n);
+            } else {
+                removeFields(n);
+            }
+        }
+    });
+
+    function addFields(n) {
+        for (i = newFields.length; i < n; i++) {
+            var newInput = input.clone();
+            newFields = newFields.add(newInput);
+            newInput.appendTo('#newFields');
+        }
+        for (i = newFields1.length; i < n; i++) {
+            var newInput1 = input1.clone();
+            newFields1 = newFields1.add(newInput1);
+            newInput1.appendTo('#newFields1');
+        }
+    }
+
+    function removeFields(n) {
+        var removeField = newFields.slice(n).remove();
+        newFields = newFields.not(removeField);
+        var removeField = newFields1.slice(n).remove();
+        newFields1 = newFields1.not(removeField);
+    }
+    });
+//time function
+
+    $("table.order-list").on("click", ".ibtnDel", function (event) {
+        $(this).closest("tr").remove();
+        counter -= 1;
+        $('#addrow').attr('disabled', false).prop('value', "Add Row");
+        $(".datepick").datepicker({ dateFormat: "dd MM yy" });
+
+    });
+
+
+
+    </script>
+<script language="javascript">
+        function PrintMe(summary) {
+            var disp_setting = "toolbar=yes,location=yes,";
+            disp_setting += "directories=yes,menubar=yes,";
+            disp_setting += "scrollbars=yes,width=100%,  left=0, top=25";
+            var content_vlue = document.getElementById(summary).innerHTML;
+            var docprint = window.open("", "", disp_setting);
+            docprint.document.open();
+            docprint.document.write('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"');
+            docprint.document.write('"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">');
+            docprint.document.write('<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">');
+            docprint.document.write('<head><title>Cygen HealthTech</title>');
+            docprint.document.write('<style type="text/css">body{ margin:10px;');
+            docprint.document.write('font-family:verdana,Arial;color:#000;');
+            docprint.document.write('font-family:Verdana, Geneva, sans-serif; font-size:12px;}');
+            docprint.document.write('.date{float:left;color:#464a4a;margin-bottom:5px;padding:2px;}');
+            docprint.document.write('.dat{color:#797979;margin-bottom:5px;padding:2px;margin-left:10px;}');
+            docprint.document.write('.health-index{font-size: 17px;font-weight: bold;color: #017b8b;}');
+            docprint.document.write('.name{font-size: 14px;font-weight: bold;background-color: #efefef;padding:4px;margin-top:5px;margin-bottom:5px;}');
+            docprint.document.write('.name-sub{font-size: 15px;font-weight: bold;}');
+            docprint.document.write('.dtr-inline{border:1px solid #efefef;}');
+            docprint.document.write('.med-head,th{border:1px solid #efefef;text-align:center;}');
+            docprint.document.write('.des{text-align:justify;}');
+            docprint.document.write('#TextBoxesGroup,td{border:1px solid #efefef;text-align:center; word-break: break-all;width:100px}');
+            docprint.document.write('.disclaimer{font-size:8px; text-align:justify; border:1px solid #454545; margin-top:10px; padding:10px;}');
+            docprint.document.write('.number{float:left;}');
+            docprint.document.write('.text{padding-left:10px;}');
+            docprint.document.write('.add-btn{visibility:hidden;}');
+            docprint.document.write('.skip-button{visibility:hidden;}');
+            docprint.document.write('.printpdf{visibility:hidden;}');
+            docprint.document.write('.medi{display:none;}');
+            docprint.document.write('.sum-data{display:none;}');
+            docprint.document.write('a{color:#000;text-decoration:none;} </style>');
+            docprint.document.write('</head><body onLoad="self.print()">');
+            docprint.document.write(content_vlue);
+            docprint.document.write('</body></html>');
+            docprint.document.close();
+            docprint.focus();
+        }
+
+
+</script>
+<script>
+  $(function () {
+
+    $(".div1, .div2").hide();
+
+    $(".link1, .link2").bind("click", function () {
+
+      $(".div1, .div2").hide();
+
+      if ($(this).attr("class") == "link1")
+      {
+        $(".div1").show();
+      }
+      else
+      {
+        $(".div2").show();
+      }
+    });
+
+});
+
+
+
+</script>
+<script>
+    $(function() {
+
+    var input = $('<input type="time" class="timesperday" />');
+       var input1 = $('<input type="text" class="withorwithout" />');
+    var newFields = $('');
+    var newFields1 = $('');
+
+    $('#txtTimesPerDay').bind('blur keyup change', function() {
+        var n = this.value || 0;
+        if (n+1) {
+            if (n > newFields.length && n > newFields1.length) {
+                addFields(n);
+            } else {
+                removeFields(n);
+            }
+        }
+    });
+
+
+    function addFields(n) {
+        for (i = newFields.length; i < n; i++) {
+            var newInput = input.clone();
+            newFields = newFields.add(newInput);
+          newInput.appendTo('#newFields');
+          }
+
+
+for (i = newFields1.length; i < n; i++) {
+            var newInput1 = input1.clone();
+              newFields1 = newFields1.add(newInput1);
+            newInput1.appendTo('#newFields1');
+        }
+}
+    function removeFields(n) {
+        var removeField = newFields.slice(n).remove();
+        newFields = newFields.not(removeField);
+        var removeField = newFields1.slice(n).remove();
+        newFields1 = newFields1.not(removeField);
+    }
+});
+</script>
+
+</body>
+
+</html>

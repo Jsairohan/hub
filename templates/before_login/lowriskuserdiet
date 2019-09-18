@@ -1,0 +1,13 @@
+{% block subject %} Foods Suggested For {{todate}} {% endblock %}
+{% block plain %}
+
+Dear {{username}},
+
+Here are the food that could help you in getting your diet complete.
+
+
+Breakfast-{{breakfast}}
+Lunch-{{lunch}}
+Dinner-{{dinner}}
+
+{% endblock %}

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title></title>
+     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <link href="{% static 'navbarcss/bootstrap.min.css'%}"  rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="{% static 'navbarcss/css/font-awesome.min.css'%}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <!-- Custom styles for this template-->
+  <link href="{% static 'navbarcss/sb-admin.css'%}" rel="stylesheet">
+    <link href="{% static 'navbarcss/activityjuly.css'%}"  rel="stylesheet" media="screen">
+
+</head>
+<style>
+    .link.active{
+    background-color: #efefef !important;
+    }
+</style>
+<body>
+
+  <div class="content-wrapper">
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href='#'>Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+         <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-md-10 offset-md-1 col-sm-12 col-xs-12">
+                <div id="menu_about">
+                    {% for i in daylist %}
+                        <a class="link" href="{% url 'foodandacti:createactivity' slug=i  %}" data-link="first">{{i}}</a>
+
+                    {% endfor %}
+                    </div>
+                    </div>
+            <div class="col-md-12 col-xs-12 textWord_about" id="showcontent1" data-link="first" name="first">
+                <div class="col-md-10 offset-md-1 text">
+ <table id="datatable-buttons" class="table table-striped table-bordered dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info" >
+                                <thead>
+                                  <tr role="row">
+    <th>Day</th>
+    <th>Exercise</th>
+    <th>Duration</th>
+    <th>Calaries Burnt</th>
+  </tr>
+                                  {% for acitvity in asecdule %}
+  <tr>
+    <td>{{acitvity.dayofweek}}</td>
+    <td>{{acitvity.exercise}}</td>
+    <td>{{acitvity.howtime}}</td>
+    <td>{{acitvity.calburnt}}</td>
+  </tr>
+                                {% endfor %}
+  </thead>
+</table>
+                  <div class="col-md-12 col-sm-12 col-xs-12 but"><input type="button"  class="sub-but" value="Add Exercise"></div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 welcomeDiv">
+                      <form action="{% url 'foodandacti:createactivity' slug=slug  %}" method="post">
+                          {% csrf_token %}
+                    <div class="row">
+                    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12"><select class="form-control-gain2" id="slider_select_dep" name="Activity">
+            <option value="0">Exercise</option>
+            <option value="Aerobic dancing (low impact)">Aerobic dancing (low impact)</option>
+            <option value="Aerobics step training (4 step)">Aerobics step training (4"" step)"</option>
+            <option value="Aerobics slide training (basic)">Aerobics slide training (basic)</option>
+            <option value="Backpacking with 10 lb. load">Backpacking with 10 lb. load</option>
+            <option value="Backpacking with 20 lb. load">Backpacking with 20 lb. load</option>
+            <option value="Backpacking with 30 lb. load">Backpacking with 30 lb. load</option>
+            <option value="Badminton">Badminton</option>
+            <option value="Basketball (game)">Basketball (game)</option>
+            <option value="Basketball (leisurely nongame)">Basketball (leisurely nongame)</option>
+            <option value="Bicycling 10 mph (6 minutes/mile)">Bicycling 10 mph (6 minutes/mile)</option>
+            <option value="Bicycling 13 mph (4.6 minutes/mile)">Bicycling 13 mph (4.6 minutes/mile)</option>
+            <option value="Billiards">Billiards</option>
+            <option value="Bowling">Bowling</option>
+            <option value="Canoeing 2.5 mph">Canoeing 2.5 mph</option>
+            <option value="Canoeing 4.0 mph">Canoeing 4.0 mph</option>
+            <option value="Croquet">Croquet</option>
+            <option value="Cross country snow skiing intense">Cross country snow skiing intense</option>
+            <option value="Cross country snow skiing leisurely">Cross country snow skiing leisurely</option>
+            <option value="Cross country snow skiing moderate">Cross country snow skiing moderate</option>
+            <option value="Dancing (noncontact)">Dancing (noncontact)</option>
+            <option value="Dancing (slow)">Dancing (slow)</option>
+            <option value="Gardening moderate">Gardening moderate</option>
+            <option value="Golfing (walking w/o cart)">Golfing (walking w/o cart)</option>
+            <option value="Golfing (with a cart)">Golfing (with a cart)</option>
+            <option value="Handball">Handball</option>
+            <option value="Hiking with a 10 lb. load">Hiking with a 10 lb. load</option>
+            <option value="Hiking with a 20 lb. load">Hiking with a 20 lb. load</option>
+            <option value="Hiking with a 30 lb. load">Hiking with a 30 lb. load</option>
+            <option value="Hiking no load">Hiking no load</option>
+            <option value="Housework">Housework</option>
+            <option value="Ironing">Ironing</option>
+            <option value="Jogging 5 mph (12 minutes/mile)">Jogging 5 mph (12 minutes/mile)</option>
+            <option value="Jogging 6 mph (10 minutes/mile)">Jogging 6 mph (10 minutes/mile)</option>
+            <option value="Mopping">Mopping</option>
+            <option value="Mowing">Mowing</option>
+            <option value="Ping Pong">Ping Pong</option>
+            <option value="Raking">Raking</option>
+            <option value="Racquetball">Racquetball</option>
+            <option value="Rowing (leisurely)">Rowing (leisurely)</option>
+            <option value="Rowing machine">Rowing machine</option>
+            <option value="Running 08 mph (7.5 minutes/mile)">Running 08 mph (7.5 minutes/mile)</option>
+            <option value="Running 09 mph (6.7 minutes/mile)">Running 09 mph (6.7 minutes/mile)</option>
+            <option value="Running 10 mph (6 minutes/mile)">Running 10 mph (6 minutes/mile)</option>
+            <option value="Scrubbing the floor">Scrubbing the floor</option>
+            <option value="Scuba diving">Scuba diving</option>
+            <option value="Shopping for groceries">Shopping for groceries</option>
+            <option value="Skipping rope">Skipping rope</option>
+            <option value="Snow shoveling">Snow shoveling</option>
+            <option value="Snow skiing downhill">Snow skiing downhill</option>
+            <option value="Soccer">Soccer</option>
+            <option value="Squash">Squash</option>
+            <option value="Stair climber machine">Stair climber machine</option>
+            <option value="Stair climbing">Stair climbing</option>
+            <option value="Swimming (25 yards/minute)">Swimming (25 yards/minute)</option>
+            <option value="Swimming (50 yards/minute)">Swimming (50 yards/minute)</option>
+            <option value="Table Tennis">Table Tennis</option>
+            <option value="Tennis">Tennis</option>
+            <option value="Tennis (doubles)">Tennis (doubles)</option>
+            <option value="Trimming hedges">Trimming hedges</option>
+            <option value="Vacuuming">Vacuuming</option>
+            <option value="Volleyball (game)">Volleyball (game)</option>
+            <option value="Volleyball (leisurely)">Volleyball (leisurely)</option>
+            <option value="Walking 2 mph (30 minutes/mile)">Walking 2 mph (30 minutes/mile)</option>
+            <option value="Walking 3 mph (20 minutes/mile)">Walking 3 mph (20 minutes/mile)</option>
+            <option value="Walking 4 mph (15 minutes/mile)">Walking 4 mph (15 minutes/mile)</option>
+            <option value="Washing the car">Washing the car</option>
+            <option value="Water skiing">Water skiing</option>
+            <option value="Waxing the car">Waxing the car</option>
+            <option value="Weeding">Weeding</option>
+            <option value="Weight training (40 sec. between sets)">Weight training (40 sec. between sets)</option>
+            <option value="Weight training (60 sec. between sets">Weight training (60 sec. between sets)</option>
+            <option value="Weight training (90 sec. between sets)">Weight training (90 sec. between sets)</option>
+            <option value="Window cleaning">Window cleaning</option>
+            </select> </div>
+
+                      <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                        Duration:<input type="number" name="Duration" autocomplete="off" placeholder="Minutes" class="minutes">
+
+                    </div>
+                        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"><input type="submit" value="submit" class="sub-btn"></div>
+                    </div>
+                           </form>
+                          </div>
+                  </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+    <script>
+            $(document).ready(function(){
+                $(".sub-but").click(function(){
+                    $(".welcomeDiv").toggle();
+                });
+            });
+</script>
+
+            <script type="text/javascript">
+ window.ghi='';
+var abc="first";
+                        $('.link').click(function() {
+                    $('.textWord_about').hide();
+   $('.textWord_about[data-link=' +$(this).data('link') + ']').fadeIn({
+                        width: '200px'
+                    }, 300);
+                });
+                if( window.ghi===''){
+                    $('.textWord_about').hide();
+                    $('.textWord_about[data-link=' + String(abc) + ']').fadeIn({
+                        width: '200px'
+                    }, 300);
+
+                }else{
+                    alert('isvalue yes');
+                }
+                </script>
+
+<script>
+    function showDiv() {
+   document.getElementById('welcomeDiv').style.display = "block";
+}
+</script>
+
+<script>
+
+
+$( '.link' ).each(function( index ) {
+        if ($(this).attr('href')===window.location.pathname) {
+
+            $(this).addClass("active");
+                    return false; }
+
+
+});
+</script>
+
+  <script src='{% static "js/bootstrap.bundle.min.js" %}'></script>
+
+</body>
+
+</html>

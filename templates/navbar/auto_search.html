@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+  <link rel="stylesheet" href='{% static "navbarcss/auto_search.css"%}'>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+             <div class="food-click">Click on the food items below to get the serving table</div>
+{% if object_list %}
+    {% for obj in object_list %}
+
+            <div class="set" id="{{ obj.pk }}">
+
+<div class="food">
+       <div class="food_name">{{ obj.fodd_name }}</div>
+
+    </div>
+        <div class="serve">Serve: {{ obj.Serving_Size }} calories: {{ obj.Calories }} Fat: {{ obj.Fat }} carbs: {{ obj.Carbs }} protein: {{ obj.Protein }}</div>
+                </div>
+<div class="serving"></div>
+{% endfor %}
+{% else %}
+<div>
+<div class="no-food">No food items to show</div>
+{% endif %}
+</div>
+            </div>
+    </div>
+    </div>
+<script>
+
+	    $(".set").click(function(evt){
+$('.serving').show();
+      $.ajax({
+        url: '/foodnew/'+$(this).attr("id"),
+        dataType: 'json',
+        success: function (data) {
+          if (data.foodname) {
+
+            $('#newid').val(1);
+            $('#Fatid').val(parseFloat(data.fat).toFixed(1));
+
+            $('#Carbsid').val(parseFloat(data.carbs).toFixed(1));
+            $('#Protiensid').val(parseFloat(data.protein).toFixed(1));
+            $('#Caloriesid').val(parseFloat(data.size).toFixed(1));
+            $('#foodnameid').val(data.foodname);
+
+          }
+
+        }
+      });
+
+    });
+  </script>
+<script> $(document).on("change",'input[id="newid"]', function () {
+    var serveval =$('#newid').val();
+          if (serveval) {
+            $('#newid').val(1);
+            $('#Fatid').val(parseFloat($('#Fatid').val()*serveval).toFixed(1));
+            $('#Carbsid').val($('#Carbsid').val()*serveval);
+            $('#Protiensid').val( $('#Protiensid').val()*serveval);
+            $('#Caloriesid').val($('#Caloriesid').val()*serveval);
+          $('<option value='+String(data.foodname)+'>'+data.foodname+'</option>').appendTo('#clothing_options');
+                  var select = $("<select name='foodnames'/>")
+        select.append($("<option/>").attr("value", data.foodname).text(data.foodname));
+    $("#" + "dynamicInput").append(select);
+
+ }
+ });
+</script>
+</body>
+</html>

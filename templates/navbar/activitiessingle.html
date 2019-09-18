@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Activities</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static 'kc/css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link href="{% static 'kc/css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="{% static 'kc/css/cygen.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
+    <style>
+        #logo-container {
+            height: 100%;
+            width: 17%;
+            padding: 4px;
+        }
+        .select-wrapper input.select-dropdown {
+            display:none !important;
+        }
+        .caret{
+        display:none
+        }
+        #watermark
+        {
+        padding-right: 10px;
+        position: fixed;
+        bottom:5px;
+        right:5px;
+        opacity:0.6;
+        z-index:99;
+        color:#293d3d;
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+        }
+        .tabs{
+            overflow-x: hidden
+        }
+        .fixed-action-btn{
+            top: 53px !important;
+                right: auto; 
+                margin-left: 2px; 
+       }
+       .week{
+        vertical-align: 50%;
+        line-height: 50px;
+        font-size:15px
+       }
+       .circle{
+       width:120px;
+       height:120px;
+       }
+       @media only screen and (max-width: 992px){
+
+        nav .brand-logo {
+    padding:2px;
+      left: 0px;
+    -webkit-transform: none;
+    transform: none;
+}
+.circle{
+       width:100px;
+       height:100px;
+       }
+}
+</style>
+</head>
+
+<body>
+        <span id="watermark" style="font-size:1.64rem;" unselectable="on">Powered by <span style="font-size:1.64rem; color: #64c1b1">CYGEN</span></span>
+
+<header>
+        <div class="navbar-fixed">
+            <nav class="white top-nav nav-extended" role="navigation">
+                <div class="nav-wrapper container-fluid">
+                    <span>
+                        <img src='{% static "sreesend/img/aimh.1.png" %}' alt="logo" id="logo-container" class="brand-logo">
+                    </span>
+                    <ul class="right hide-on-med-and-down">
+                        <!-- <li><a href="{% url 'healthandrecords:first_form' %}">Evaluation Form</a></li> -->
+                       <!--  <li><a href="#health_index_modal" class="modal-trigger">Health Index</a></li> -->
+
+                        <li>
+                            <a href="#!" class="dropdown-trigger" data-target="dropdown1">Account Settings
+                                <i class="material-icons right">arrow_drop_down</i></a>
+                        </li>
+                    </ul>
+
+
+
+                </div>
+
+            </nav>
+        </div>
+
+        <!--Sidenav-->
+        <div class="container">
+             <ul id="slide-out" class="sidenav">
+                <!-- sidenav-fixed-->
+                <li>
+                    <div class="user-view">
+                        <div class="background"><img src="{% static 'kc/img/sideimg.jpg' %}"></div>
+                        <a href="#user"><img class="circle" src="{% static 'kc/img/doctor.jpg' %}"></a>
+                        <a href="#name"><span class="white-text name">{{request.user.first_name}}</span></a>
+                        <a href="#email"><span class="white-text email">{{request.user.email}}</span></a>
+                    </div>
+                </li>
+                <li><a href='{% url "healthandrecords:health_ana" %}'><i class="material-icons small">dashboard</i>Dashboard</a></li>
+                <li>
+                    <a href='{% url "foodandacti:personal_info_update" %}'><i class="fas fa-utensils fa-2x"></i>Diet</a>
+                </li>
+                <li><a href='{% url "foodandacti:activityredirct" %}'><i class="material-icons small">directions_run</i>Activities and Fitness</a>
+                </li>
+                <li>               <li>
+                <li><a href='{% url "foodandacti:summary" %}'><i class="fas fa-book-open fa-2x"></i>Summary</a></li>
+
+                <!-- <li><a href='{% url "healthandrecords:cygenpacks" %}'><i class="fas fa-heartbeat fa-2x"></i>Health Package</a></li>
+                <li><a href="#!"><i class="fas fa-piggy-bank fa-2x"></i>Insurance Packs</a></li>
+                <li><a href="#!"><i class="far fa-hospital fa-2x"></i>Hospital Packs</a></li> -->
+                 <!-- <li><a href="{% url 'healthandrecords:first_form' %}">Evaluation Form</a></li> -->
+                    <!--     <li><a href="#health_index_modal" class="modal-trigger">Health Index</a></li>-->
+
+                        <li>
+                            <a href="#!" class="dropdown-trigger" data-target="dropdown2">Account Settings
+                                <i class="material-icons right">arrow_drop_down</i></a>
+                        </li>
+            </ul>
+
+        </div>
+        <!--Sidenav end-->
+    </header>
+    <!-- Main-->
+    <main>
+      <ul id="dropdown1" class="dropdown-content">
+            <li><a href='{% url "foodandacti:summary" %}'><i class="material-icons">account_circle</i>Profile</a></li>
+            <li><a href="#!"><i class="material-icons">settings</i>Settings</a></li>
+            <li class="divider"></li>
+            <li><a href='{% url "before_l:logout_view" %}' ><i class="material-icons">power_settings_new</i>Logout</a></li>
+        </ul>
+        <ul id="dropdown2" class="dropdown-content">
+            <li><a href='{% url "foodandacti:summary" %}'><i class="material-icons">account_circle</i>Profile</a></li>
+            <li><a href="#!"><i class="material-icons">settings</i>Settings</a></li>
+            <li class="divider"></li>
+            <li><a href='{% url "before_l:logout_view" %}' ><i class="material-icons">power_settings_new</i>Logout</a></li>
+        </ul>
+        <div class="fixed-action-btn ">
+            <a href="#" data-target="slide-out" class="left btn-floating red sidenav-trigger">
+                <i class="material-icons">menu</i>
+            </a>
+        </div>
+        <div class="row">
+            <div id="activity" class="col s12">
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col m1  ">
+                    </div>
+                    <div class="col m10 s12 center-align">
+                        <div class="row card teal week">
+                            {% for i in daylist %}
+                            {% if forloop.counter|divisibleby:2 %}
+                            <div class="col m1 s6"><a class="white-text" href="{% url 'foodandacti:createactivity' slug=i  %}">{{i}}</a></div>
+                            {% else %}
+                            <div class="col m2 s6"><a class="white-text" href="{% url 'foodandacti:createactivity' slug=i  %}">{{i}}</a></div>
+
+                            {% endif %}
+                    {% endfor %}
+
+                        </div>
+                        <div class="card">
+
+                            <a class="btn-floating halfway-fab waves-effect waves-light red modal-trigger" href="#pactivity">
+                                <i class="material-icons">add</i>
+                            </a>
+                            <!-- <div class="card-image" style="max-height:250px !important; overflow:hidden">
+                                <img src="sports.png">
+
+                            </div> -->
+                            <div class="card-stacked">
+                                <div class="card-content">
+                                    <!--images-->
+                                     <div class="row">
+                                        <div class="col m2 s6">
+                                            <img src='{% static "kc/img/skeletal.jpg" %}' class="circle"  alt="Running">
+                                        </div>
+                                        <div class="col m2 s6">
+                                            <img src='{% static "kc/img/earphone.jpg" %}' class="circle" alt="Running">
+                                        </div>
+                                        <div class="col m2 s6">
+                                            <img src='{% static "kc/img/running.jpg" %}' class="circle" alt="Running">
+                                        </div>
+                                        <div class="col m2 s6">
+                                            <img src='{% static "kc/img/cycling.jpg" %}' class="circle"  alt="Running">
+                                        </div>
+                                        <div class="col m2 s6">
+                                            <img src='{% static "kc/img/swimming.jpg" %}' class="circle"  alt="Running">
+                                        </div>
+                                        <div class="col m2 s6">
+                                            <img src='{% static "kc/img/aerobics.jpg" %}' class="circle"  alt="Running">
+                                        </div>
+
+                                    </div>
+                                    <br>
+                                    <span class="card-title black-text">Activity Summary</span>
+                                    <br>
+                                    <table class="center">
+                                        <thead>
+                                            <tr>
+                                                <th>Activities</th>
+                                                <th>Duration</th>
+                                                <th>Calories to be burnt(kcal)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for acitvity in asecdule %}
+                                      <tr>
+                                        <td>{{acitvity.exercise}}</td>
+                                        <td>{{acitvity.howtime}}</td>
+                                        <td>{{acitvity.calburnt|floatformat:2}}</td>
+                                      </tr>
+                                {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+    <footer class="">
+
+    </footer>
+
+    <!--Modals -->
+    <!--Modals -->
+  
+
+    <!--Activity modal -->
+    <div id="pactivity" class="modal">
+      <div class="modal-content">
+            <h4>Activities</h4>
+            <form action="{% url 'foodandacti:createactivity' slug=slug  %}" method="post">
+                          {% csrf_token %}
+            <div class="row">
+                <div class="input-field col s12 m4">
+                    <select class='browser-default'>
+                        <!--<option disabled selected>Choose a day</option>-->
+                        <option value="{{slug}}">{{slug}}</option>
+
+                    </select>
+                </div>
+                <div class="input-field col s12 m4">
+                    <select required name="Activity" required class="validate" id="activityValue" >
+                        <option disabled selected value = ''>Select an Activity</option>
+                        <option value="Aerobic dancing (low impact)">Aerobic dancing (low impact)</option>
+                        <option value="Aerobics step training (4 step)">Aerobics step training (4"" step)"</option>
+                        <option value="Aerobics slide training (basic)">Aerobics slide training (basic)</option>
+                        <option value="Backpacking with 10 lb. load">Backpacking with 10 lb. load</option>
+                        <option value="Backpacking with 20 lb. load">Backpacking with 20 lb. load</option>
+                        <option value="Backpacking with 30 lb. load">Backpacking with 30 lb. load</option>
+                        <option value="Badminton">Badminton</option>
+                        <option value="Basketball (game)">Basketball (game)</option>
+                        <option value="Basketball (leisurely nongame)">Basketball (leisurely nongame)</option>
+                        <option value="Bicycling 10 mph (6 minutes/mile)">Bicycling 10 mph (6 minutes/mile)</option>
+                        <option value="Bicycling 13 mph (4.6 minutes/mile)">Bicycling 13 mph (4.6 minutes/mile)</option>
+                        <option value="Billiards">Billiards</option>
+                        <option value="Bowling">Bowling</option>
+                        <option value="Canoeing 2.5 mph">Canoeing 2.5 mph</option>
+                        <option value="Canoeing 4.0 mph">Canoeing 4.0 mph</option>
+                        <option value="Croquet">Croquet</option>
+                        <option value="Cross country snow skiing intense">Cross country snow skiing intense</option>
+                        <option value="Cross country snow skiing leisurely">Cross country snow skiing leisurely</option>
+                        <option value="Cross country snow skiing moderate">Cross country snow skiing moderate</option>
+                        <option value="Dancing (noncontact)">Dancing (noncontact)</option>
+                        <option value="Dancing (slow)">Dancing (slow)</option>
+                        <option value="Gardening moderate">Gardening moderate</option>
+                        <option value="Golfing (walking w/o cart)">Golfing (walking w/o cart)</option>
+                        <option value="Golfing (with a cart)">Golfing (with a cart)</option>
+                        <option value="Handball">Handball</option>
+                        <option value="Hiking with a 10 lb. load">Hiking with a 10 lb. load</option>
+                        <option value="Hiking with a 20 lb. load">Hiking with a 20 lb. load</option>
+                        <option value="Hiking with a 30 lb. load">Hiking with a 30 lb. load</option>
+                        <option value="Hiking no load">Hiking no load</option>
+                        <option value="Housework">Housework</option>
+                        <option value="Ironing">Ironing</option>
+                        <option value="Jogging 5 mph (12 minutes/mile)">Jogging 5 mph (12 minutes/mile)</option>
+                        <option value="Jogging 6 mph (10 minutes/mile)">Jogging 6 mph (10 minutes/mile)</option>
+                        <option value="Mopping">Mopping</option>
+                        <option value="Mowing">Mowing</option>
+                        <option value="Ping Pong">Ping Pong</option>
+                        <option value="Raking">Raking</option>
+                        <option value="Racquetball">Racquetball</option>
+                        <option value="Rowing (leisurely)">Rowing (leisurely)</option>
+                        <option value="Rowing machine">Rowing machine</option>
+                        <option value="Running 08 mph (7.5 minutes/mile)">Running 08 mph (7.5 minutes/mile)</option>
+                        <option value="Running 09 mph (6.7 minutes/mile)">Running 09 mph (6.7 minutes/mile)</option>
+                        <option value="Running 10 mph (6 minutes/mile)">Running 10 mph (6 minutes/mile)</option>
+                        <option value="Scrubbing the floor">Scrubbing the floor</option>
+                        <option value="Scuba diving">Scuba diving</option>
+                        <option value="Shopping for groceries">Shopping for groceries</option>
+                        <option value="Skipping rope">Skipping rope</option>
+                        <option value="Snow shoveling">Snow shoveling</option>
+                        <option value="Snow skiing downhill">Snow skiing downhill</option>
+                        <option value="Soccer">Soccer</option>
+                        <option value="Squash">Squash</option>
+                        <option value="Stair climber machine">Stair climber machine</option>
+                        <option value="Stair climbing">Stair climbing</option>
+                        <option value="Swimming (25 yards/minute)">Swimming (25 yards/minute)</option>
+                        <option value="Swimming (50 yards/minute)">Swimming (50 yards/minute)</option>
+                        <option value="Table Tennis">Table Tennis</option>
+                        <option value="Tennis">Tennis</option>
+                        <option value="Tennis (doubles)">Tennis (doubles)</option>
+                        <option value="Trimming hedges">Trimming hedges</option>
+                        <option value="Vacuuming">Vacuuming</option>
+                        <option value="Volleyball (game)">Volleyball (game)</option>
+                        <option value="Volleyball (leisurely)">Volleyball (leisurely)</option>
+                        <option value="Walking 2 mph (30 minutes/mile)">Walking 2 mph (30 minutes/mile)</option>
+                        <option value="Walking 3 mph (20 minutes/mile)">Walking 3 mph (20 minutes/mile)</option>
+                        <option value="Walking 4 mph (15 minutes/mile)">Walking 4 mph (15 minutes/mile)</option>
+                        <option value="Washing the car">Washing the car</option>
+                        <option value="Water skiing">Water skiing</option>
+                        <option value="Waxing the car">Waxing the car</option>
+                        <option value="Weeding">Weeding</option>
+                        <option value="Weight training (40 sec. between sets)">Weight training (40 sec. between sets)</option>
+                        <option value="Weight training (60 sec. between sets">Weight training (60 sec. between sets)</option>
+                        <option value="Weight training (90 sec. between sets)">Weight training (90 sec. between sets)</option>
+                        <option value="Window cleaning">Window cleaning</option>
+                    </select>
+                </div>
+
+                <div class="input-field col s12 m4">
+                    <input name="Duration" required placeholder="minutes" id="duration" type="text" class="validate">
+                    <label for="calories">Duration</label>
+                </div>
+                <div class="input-field col s12 m3">
+                    <button class="waves-effect waves-light btn">Add Activitiy</button>
+                </div>
+            </div>
+                </form>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="activityClose">close </a>
+        </div>
+    </div>
+    <!--Health Index Modal-->
+    <div id="health_index_modal" class="modal">
+        <div class="modal-content">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat right">Close</a>
+            <h5>Health Index Assessment</h5>
+            <br>
+            <form action='{% url "healthandrecords:today_hel" %}'   method="POST" enctype=multipart/form-data>
+
+  {% csrf_token %}
+                <div class="row" style="background-color: #F5F7FA">
+                    <div class="col m2"></div>
+                    <div class="col m4">
+                        <div class="input-field">
+                            <input name="date" type="text" class="datepicker" required id="assess_for_date">
+                            <label for="assess_for_date">Select Date</label>
+                        </div>
+                        <div class="input-field">
+                            <input name="systolic" type="number" required id="systolic_assess">
+                            <label for="systolic_assess">Systolic Pressure(mm Hg)</label>
+                        </div>
+                        <div class="input-field">
+                            <input name="diastolic" type="number" required id="diastolic_assess">
+                            <label for="diastolic_assess">Diastolic Pressure(mm Hg)</label>
+                        </div>
+                    </div>
+                    <div class="col m4">
+                        <div class="input-field">
+                            <input name="glucose" type="number" required id="glucose">
+                            <label for="glucose">Glucose Level(mg/dL)</label>
+                        </div>
+                        <div class="input-field">
+                            <input name="HDL" type="number" required id="hdl_cholestrol">
+                            <label for="hdl_cholestrol">HDL Cholesterol(mg/dL)</label>
+                        </div>
+                        <div class="input-field">
+                            <input name="tc" type="number" required id="total_cholestrol">
+                            <label for="total_cholestrol">Total Cholesterol(mg/dL)</label>
+                        </div>
+                    </div>
+                    <div class="col m2"></div>
+
+                </div>
+                <div class="right">
+                    <button type="submit" class="btn">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+
+        </div>
+    </div>
+
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src='{% static "kc/js/init.js" %}'></script>
+    <script src='{% static "kc/js/materialize.js" %}'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <!-- <script src="js/dashboard.js"></script> -->
+    <script>
+        $(document).ready(function () {
+            $('.tabs').tabs();
+            $('.datepicker').datepicker({
+                format: "yyyy-mm-dd",
+                autoClose: true
+            });
+            $('.modal').modal();
+            $('select').formSelect();
+            $('.sidenav').sidenav();
+            $(".dropdown-trigger").dropdown({ hover: true });
+        });
+        $("select[required]").css({display:"block"});
+         $(document).on('click', '.modal-close', function(){
+         $("#activityValue").val('');
+         $("#duration").val("");
+        });
+    </script>
+</body>
+
+</html>

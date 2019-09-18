@@ -1,0 +1,253 @@
+.navbar-nav {
+    margin: 0;
+    text-align: left;
+}
+.content-name
+{
+    margin-top: 20px;
+    background:#26A69A;
+    color: #fff;
+    padding: 20px;
+    border:1px solid #26A69A;
+    border-radius: 3px;
+    box-shadow: 0px 0px 4px 0px #efefef;
+}
+.content-name1
+{
+    margin-top: 20px;
+    background:#EC407A;
+    color: #fff;
+    padding: 20px;
+    border:1px solid #EC407A;
+    border-radius: 3px;
+    box-shadow: 0px 0px 4px 0px #efefef;
+}
+.content-name2
+{
+    margin-top: 20px;
+background: #a6a226;
+color: #fff;
+padding: 20px;
+border: 1px solid #a6a226;
+border-radius: 3px;
+box-shadow: 0px 0px 4px 0px #efefef;
+}
+.content-name3
+{
+    margin-top: 20px;
+    background:#FF7043;
+    color: #fff;
+    padding: 20px;
+    border:1px solid #FF7043;
+    border-radius: 3px;
+    box-shadow: 0px 0px 4px 0px #efefef;
+}
+.content-name4 {
+    margin-top: 20px;
+    background: #ffc107;
+    color: #fff;
+    padding: 20px;
+    border: 1px solid #ffc107;
+    border-radius: 3px;
+    box-shadow: 0px 0px 4px 0px #efefef;
+}
+.content-name5 {
+
+margin-top: 20px;
+    background:#29B6F6;
+    color: #fff;
+    padding: 20px;
+    border:1px solid #29B6F6;
+    border-radius: 3px;
+    box-shadow: 0px 0px 4px 0px #efefef;
+}
+/*scroll css*/
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+/*scroll css*/
+.panel-body{
+    float:left;
+    width: 100px;
+}
+.images{
+   
+        text-align: center;
+    
+}
+.calender{
+    width: 100%;
+    display: inline-block;
+    margin-top: 20px;
+    border: 2px solid #efefef;
+}
+.calender-name
+{
+    background: #efefef;
+    text-align: justify;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 14px;
+    color: #a5a5a5;
+}
+.img-ic{
+    width:40px;
+    height:40px;
+}
+.breadcrumb{
+    margin-top: 20px;
+    padding: 0px !important;
+}
+.item{
+    display: inline-flex;
+    /* margin-bottom: -22px; */
+}
+.hosp{
+    border: 2px solid #efefef;
+    text-align: center;
+}
+.hosp-img{
+    margin-top: 10px;
+}
+.hospimgsize{
+    height:150px;
+    width:150px;
+}
+.hosp-name,.hosp-email,.hosp-social{
+    padding: 5px;
+}
+.hosp-form{
+    border: 2px solid #efefef;
+    padding:10px;
+}
+.Financial{
+    border: 2px solid #efefef;
+    padding:10px;
+}
+
+.form-group {
+    margin-top: 1rem;
+    
+        font-size: 15px;
+        color: #8a8686;
+        /* padding: 10px; */
+    
+}
+.submit{
+    border: none;
+    background: #888888;
+    color: white;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.xl-btn{
+    width: 165px;
+    text-align: center;
+    padding: 3px;
+    border: 1px solid #348834;
+    background: #348834;
+    border-radius: 3px;
+    margin: 15px;
+    font-size: 14px;
+}
+.info{
+  margin-top: 20px;
+        border: 2px solid #efefef;
+        padding: 10px;
+    
+}
+.nav-item {
+    font-size: 14px;
+}
+.specname {
+    padding-top: 15px;
+    font-size: 13px;
+    padding-left: 10px;
+}
+.spec{
+    display: block;
+    width: 100%;
+    height: 36px;
+    padding: 7px 12px;
+    font-size: 13px;
+    line-height: 1.5384616;
+    color: #333333;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    border-radius: 5px;
+}
+.specinput{
+    padding: 10px;
+}
+.headspec { overflow: hidden }
+.sub{
+    float: right;
+    border: none;
+    font-weight: bold;
+    color: white;
+    background: #888888;
+    border-radius: 4px;
+    padding: 5px;
+}
+.specsub{
+    padding: 10px;
+}
+.Label-name{
+    padding: 20px;
+}
+
+.label-content{
+    padding:20px;
+    border:2px solid #efefef;
+}
+.add-btn{
+    float: right;
+}
+.adding{
+       border: none;
+
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    color: #64c1b1;
+}
+.Search{
+    padding: 5px;
+    float:right;
+}
+.search-input{
+    border-radius: 4px;
+    border: 2px solid #d4d1d1;
+    padding: 4px;
+}
+.table{
+    text-align: center;
+}
+.admin-name{
+    padding: 25px !important;
+    color: white;
+    cursor: auto;
+}
+.field{
+    margin-bottom: 30px;
+}

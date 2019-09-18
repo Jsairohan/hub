@@ -1,0 +1,46 @@
+{% block subject %}  Today's Review on Your Diet And Activites {% endblock %}
+{% block plain %}
+Dear {{username}},
+
+{% if activities and food %}
+Seems like your diet and activites proportion are not optimal for bringing your weight {{goal}}kgs..
+
+Reason:
+Your goal can be achived only with proper plan and implementing the plan. To achieve your goal all you need to do is balance the engergy consumed from food to energy spent by doing activities
+energy needed is {{what}} than energy consumed.
+
+{% elif activities and not food %}
+Seems like your diet and activities plan proportion are not optimal for you to bring your weight to {{goal}}kgs..
+
+Reason:
+Your goal can be achived only with proper plan and implementing the plan. To achieve your goal all you need to do is balance the energy consumed from food with activities.
+However,it looks like you have not planned on what's your meal plan today. Let us help with your meal plan and while you are it you get to check each nutrients that's available in selected food option at {{domain}}.
+
+{% elif not activities and  food %}
+Seems like your diet and activites plan proportion are not optimal for bringing your weight {{goal}}kgs..
+
+Reason:
+Your goal can be achived only with proper plan and implementing the plan. To achieve your goal all you need to do is balance the engergy consumed from food to energy spent by doing activities
+However,it looks like your fittness and activites schedule is empty.While you make plan you can check for energy spent from performing an activity choosen at {{domain}}.
+
+{% elif not activities and not food %}
+Seems like your diet and activites plan proportion are not optimal for bringing your weight {{goal}}kgs..
+
+Reason:
+Your goal can be achived only with proper plan and implementing the plan. To achieve your goal all you need to do is balance the engergy consumed from food to energy spent by doing activities
+However,it looks like you have not planned on what to eat and your fittness and activites schedule is empty. While you make plan you can check for nutrients available in foods choosen and
+you can check for energy spent from performing an activity choosen at {{domain}}
+{% endif %}
+if You want to Improve Your Diet And Activity schedule:
+We’ll assist you to handpick your choice of food among the plethora
+Login to your account at  and visit activites and food dairy sections
+
+Have a good day
+
+Thank you
+With regards,
+CyGen Team
+Redesigning healthcare delivery
+
+{% endblock %}
+

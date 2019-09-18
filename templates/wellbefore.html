@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>CyGen HealthTech</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="keywords" content="HTML5 Template" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<title>Welcome</title>
+	<link rel="shortcut icon" href="{% static 'img/logo1.png' %}" />
+	<link href="{% static 'navbarcss/wel1.css' %}" rel="stylesheet" />
+</head>
+<body>
+
+<div class="body111">
+	<div class="b123">
+		<div class="b120">
+		<img src="{% static 'img/logo1.jpg' %}">
+		</div>
+	</div>
+	<div class="b122">
+		<b>Welcome to CyGen HealthTech</b>
+	</div>
+	<div class="b124">
+		 Click on the link sent to your email to confirm registration
+	</div>
+	<div class="b125">
+		<button  type="button" class="but1"  onclick="window.location.href='{% url "before_l:loged" %}'">Continue</button>
+	</div>
+</div>
+</body>
+</html>

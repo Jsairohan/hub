@@ -1,0 +1,15 @@
+{% block subject %}Please verify your - CyGen HealthTech Account. {% endblock %}
+{% block plain %}
+
+Dear {{username}},
+
+We have sent you this email to verify your CyGen HealthTech account.
+Please click on the link below to verify your account bearing id {{useremail}}
+{{otp}} is your OTP for completing your registration on cygen healthtech.Please do not share OTP with anyone.
+Please note the verification link is valid only for 12 hours.
+
+Thank you
+With regards,
+CyGen Team
+Redesigning healthcare delivery
+{% endblock %}

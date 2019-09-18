@@ -1,0 +1,127 @@
+<!--<!DOCTYPE html>-->
+{% load static %}
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="{% static 'sreesend/css/bootstrap.min.css'%}">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="{% static 'sreesend/css/login-signup.css'%}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+</head>
+<style>
+ #head-nav {
+    box-shadow: 0px 0px 2px 2px #efefef;
+    margin: 15px;
+}
+.head-logo{
+    color: #017b8b;
+    font-weight: 500;
+    font-size: 30px;
+}
+.nav-link{
+    color: rgba(117, 115, 115, 0.85);
+    font-size: 17px;
+}
+#watermark
+{
+ position:fixed;
+ bottom:5px;
+ right:5px;
+ opacity:0.5;
+ z-index:99;
+ color:white;
+}
+
+
+</style>
+<body>
+
+<div class="container">
+<br><br><br>
+    <div class="login-form">
+        <div class="main-div"><img src="{% static 'sreesend/img/aimh.png' %}"  style="width:370px;height:80px;">
+
+            <div class="panel">
+                <h6 style="color:red">Your login Password is expired <br> Please click submit button to get a new password</h6>
+                <h2 style="color:#357ebd;font-weight:bold;font-size:25px;">Resend password</h2>
+            </div>
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" class="form-control", id="inputEmail" placeholder="Enter email here" value={{ email }}>
+            </div>
+            <button type="submit" id="loginsubmit" class="btn btn-primary" style="background-color: #428bca;border-color: #357ebd;color: #fff">Submit</button>
+        </div>
+
+    </div>
+</div>
+</div>
+<div id="watermark"><img src="{% static 'sreesend/img/cygenfi.jpg' %}"  style="width:280px;height:50px;"></div>
+
+<script>
+        window.drf = {
+          csrfHeaderName: "X-CSRFTOKEN",
+          csrfCookieName: "csrftoken"
+        };
+
+</script>
+
+
+<script src="{% static 'js/csrf.js' %}"></script>
+<script src="{% static 'js/apicals.js' %}"></script>
+<script src="{% static 'js/adminajax.js' %}"></script>
+<script>
+
+    $("#loginsubmit").on("click",function() {
+        <!--document.getElementById('firstName').value = e.state.firstName;-->
+        var email = String($("#inputEmail").val());
+
+            var newlogin_data ={
+
+                "email": String($("#inputEmail").val()),
+
+
+                        } ;
+
+
+        <!--var a={"email":"manoharsompalli@gmail.com","password":"manoharchow"};-->
+            $.ajax({
+            <!--console.log("sssss");-->
+            type: "POST",
+            url: "/resend/",
+            data: JSON.stringify(newlogin_data),
+            contentType: "application/json",
+            dataType: "json",
+            success: function (data, status) {
+            window.location.pathname='/login/';
+
+             },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    //Process error actions
+                    alert( XMLHttpRequest.responseText);
+                    console.log(XMLHttpRequest.status + ' ' +
+                        XMLHttpRequest.statusText);
+                    return false;
+            }
+                })
+
+
+
+
+    });
+
+
+
+</script>
+
+<script>
+
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{% block subject %} Password successfully changed {% endblock %}
+{% block plain %}
+Dear {{username}},
+
+Your Cygen Account password for the account{{useremail}} has been set.
+Your password protects your account. We recommend that you keep your password secure and not share it with anyone.
+
+Thank you
+With regards,
+CyGen Team
+Redesigning healthcare delivery
+
+{% endblock %}

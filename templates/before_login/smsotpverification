@@ -1,0 +1,11 @@
+{% block subject %} One time password (OTP) Validation for your cygen healthtech account {% endblock %}
+{% block plain %}
+
+The OTP for your cygenhealthtech account bearing login id{{useremail}}   is *****
+Please validate your account by entering the above 4/5 digits in your CyGen account.Please note the OTP is valid only for 2 minutes.
+If still you encounter any problem, please feel free to call us at **********. Our customer care executive will give you a call back shortly.
+Thank you
+
+{% endblock %}
+
+VALIDATION FOR YOUR CYGEN HEALTHTECH ACCOUNT

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Result</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static 'kc/css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link href="{% static 'kc/css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="{% static 'kc/css/cygen.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
+    <style>
+        #logo-container {
+            height: 100%;
+            width: 17%;
+            padding: 4px;
+        }
+        #watermark
+        {
+        padding-right: 10px;
+        position: fixed;
+        bottom:5px;
+        right:5px;
+        opacity:0.4;
+        z-index:99;
+        color:#293d3d;
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+        }
+        main {
+            padding: 1%;
+            background-color: #F5F7FA
+        }
+
+        .fixed-action-btn {
+            top: 53px !important;
+                right: auto; 
+                margin-left: 2px; 
+        }
+
+        .heading {
+            font-size: 24px;
+            font-weight: 300;
+        }
+
+        .risk_scores {
+            display: flex
+        }
+
+        .cards {
+            min-height: 100%;
+
+            /* max-height:430px */
+        }
+
+
+        .disclaimer {
+            padding: 15px;
+            font-size: 11px;
+            text-align: justify;
+            border: 2px solid #585353;
+        }
+
+        .paragraph {
+            font-size: 15px
+        }
+        td{
+float:right;
+padding: 15px 5px;
+}
+@media only screen and (max-width: 992px) {
+  nav .brand-logo {
+    padding:2px;
+      left: 0px;
+    -webkit-transform: none;
+    transform: none;
+}
+.dises{
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+}
+    </style>
+</head>
+
+<body>
+        <span id="watermark" style="font-size:1.64rem;" unselectable="on">Powered by <span style="font-size:1.64rem; color: #64c1b1">CYGEN GROUP</span></span>
+
+        <header>
+        <div class="navbar-fixed">
+            <nav class="white top-nav nav-extended" role="navigation">
+                <div class="nav-wrapper container-fluid">
+                    <span>
+                        <img src='{% static "sreesend/img/aimh.1.png" %}' alt="logo" id="logo-container" class="brand-logo">
+                    </span>
+                    <ul class="right hide-on-med-and-down">
+                        <!-- <li><a href="{% url 'healthandrecords:first_form' %}">Evaluation Form</a></li> -->
+                        <li><a href="#health_index_modal" class="modal-trigger">Health Index</a></li>
+                        <li>
+                            <a href="#!" class="dropdown-trigger" data-target="dropdown1">Account Settings
+                                <i class="material-icons right">arrow_drop_down</i></a>
+                        </li>
+                    </ul>
+
+
+
+                </div>
+
+            </nav>
+
+        </div>
+
+        <!--Sidenav-->
+        <div class="container">
+            <ul id="slide-out" class="sidenav">
+                <!-- sidenav-fixed-->
+                <li>
+                    <div class="user-view">
+                        <div class="background"><img src="{% static 'kc/img/sideimg.jpg' %}"></div>
+                        <a href="#user"><img class="circle" src="{% static 'kc/img/doctor.jpg' %}"></a>
+                        <a href="#name"><span class="white-text name">{{request.user.first_name}}</span></a>
+                        <a href="#email"><span class="white-text email">{{request.user.email}}</span></a>
+                    </div>
+                </li>
+               <li><a href='{% url "healthandrecords:health_ana" %}'><i class="material-icons small">dashboard</i>Dashboard</a></li>
+                <li>
+                    <a href='{% url "foodandacti:personal_info_update" %}'><i class="fas fa-utensils fa-2x"></i>Diet</a>
+                </li>
+                <li><a href='{% url "foodandacti:activityredirct" %}'><i class="material-icons small">directions_run</i>Activities and Fitness</a>
+                </li>
+                <li><a href='{% url "foodandacti:summary" %}'><i class="fas fa-book-open fa-2x"></i>Summary</a></li>
+                <!-- <li><a href='{% url "healthandrecords:cygenpacks" %}'><i class="fas fa-heartbeat fa-2x"></i>Health Package</a></li>
+                <li><a href="#!"><i class="fas fa-piggy-bank fa-2x"></i>Insurance Packs</a></li>
+                <li><a href="#!"><i class="far fa-hospital fa-2x"></i>Hospital Packs</a></li>
+                 <li><a href="{% url 'healthandrecords:first_form' %}">Evaluation Form</a></li> -->
+                        <li><a href="#health_index_modal" class="modal-trigger">Health Index</a></li>
+                        <li>
+                            <a href="#!" class="dropdown-trigger" data-target="dropdown2">Account Settings
+                                <i class="material-icons right">arrow_drop_down</i></a>
+                        </li>
+            </ul>
+
+        </div>
+        <!--Sidenav end-->
+    </header>
+    <br>
+    <!-- Main-->
+    <main>
+        <!--Account Settings-->
+        <ul id="dropdown1" class="dropdown-content">
+            <li><a href='{% url "foodandacti:summary" %}'><i class="material-icons">account_circle</i>Profile</a></li>
+            <li><a href="#!"><i class="material-icons">settings</i>Settings</a></li>
+            <li class="divider"></li>
+            <li><a href='{% url "before_l:logout_view" %}'><i class="material-icons">power_settings_new</i>Logout</a></li>
+        </ul>
+        <ul id="dropdown2" class="dropdown-content">
+            <li><a href='{% url "foodandacti:summary" %}'><i class="material-icons">account_circle</i>Profile</a></li>
+            <li><a href="#!"><i class="material-icons">settings</i>Settings</a></li>
+            <li class="divider"></li>
+            <li><a href='{% url "before_l:logout_view" %}'><i class="material-icons">power_settings_new</i>Logout</a></li>
+        </ul>
+
+        <div class="container-fluid">
+            <!--menu button-->
+            <div class="fixed-action-btn ">
+                <a href="#" data-target="slide-out" id="sidetrigger" class="left btn-floating  red sidenav-trigger">
+                    <i class="material-icons">menu</i>
+                </a>
+            </div>
+
+            <!--User Details-->
+            <div class="row card">
+                <div class="card-content">
+                    <span class="card-title teal-text text-darken-4"><i class="material-icons blue-text">person</i>
+                        General Details</span>
+                    <!--First Column-->
+                    <div class="col m4 s12">
+                        <div class="">
+                            <table>
+                                <tr>
+                                    <th>Age</th>
+                                    <td>{{eval_data.age}}
+</td>
+                                </tr>
+                                <tr>
+                                    <th>Height (inch)</th>
+                                    <td>{{eval_data.h_inches}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Systolic BP (mmHg)</th>
+                                    <td>{{eval_data.bp_systolic}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Housing Status</th>
+                                    <td>{{eval_data.housing_status}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Ethnicity</th>
+                                    <td>{{eval_data.ethnicity}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <!--Second Column-->
+                    <div class="col m4 s12">
+                        <div class="">
+                            <table>
+                                <tr>
+                                    <th>Weight (kg)</th>
+                                    <td> {{eval_data.weight}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Gender</th>
+                                    <td>{{eval_data.gender}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Diastolic BP (mmHg)</th>
+                                    <td> {{eval_data.bp_diastolic}}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Annual Income (INR)</th>
+                                    <td>{{eval_data.anualincome}}</td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                    <!--Third Column-->
+                    <div class="col m4 s12">
+                        <div class="">
+                            <table>
+                                <tr>
+                                    <th>Height (ft)</th>
+                                    <td>{{eval_data.h_feet}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Smoker</th>
+                                    <td>{{eval_data.smoker}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Employment Status</th>
+                                    <td>{{eval_data.employment}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Marital Status</th>
+                                    <td>{{eval_data.maritial_status}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <a href='{% url "healthandrecords:first_formediter" %}' class="btn btn-floating halfway-fab indigo"><i class="material-icons">edit</i></a>
+                <div class="card-content">
+                    <span class="card-title"><i class="material-icons blue-text">event_note</i> &nbsp;</span>
+                    <br>
+                    <!--hypertension-->
+                      {% if eval_data.waist_circumference %}
+                    <div class="row hypertension">
+                        <div class="col m5 s12">
+                            <div class="dises">
+                            <span ><b>Waist circumference measured below the ribs (cm) : </b></span>
+                            <span id="hypertension_result">{{eval_data.waist_circumference}}</span>
+                        </div></div>
+                    </div>
+                    <br>
+                    {% endif %}
+                    <!--Diabetes-->
+                    <div class="row diabetes">
+                        {% if eval_data.hypertension %}
+                            <div class="col m4  s12">
+                                <div class="dises">
+                                <span><b>Hypertension : </b></span>
+                                <span> {{eval_data.hypertension}}</span>
+                                </div></div>
+                         {% endif %}
+                        {% if eval_data.exercise %}
+                            <div class="col m4 s12">
+                                <div class="dises">
+                                <span><b>Daily exercise : </b> </span>
+                                <span>{{eval_data.exercise}}</span>
+                                </div></div>
+                         {% endif %}
+                        {% if eval_data.family_diabetes %}
+                            <div class="col m4 s12">
+                                <div class="dises">
+                                <span><b>Do any one in the family Mother, Father, Sister or Brother with Diabetes : </b> </span>
+                                <span> {{eval_data.family_diabetes}}</span>
+                                </div></div>
+                         {% endif %}
+                        {% if eval_data.geostational_diabetes %}
+                            <div class="col m4 s12">
+                                <div class="dises">
+                                    <span><b>Have you ever been found to have
+                                    gestational
+                                    diabetes
+                                    or
+                                    given
+                                    birth to a baby weighing 9 pounds or more: : </b> </span>
+                                    <span>{{eval_data.geostational_diabetes}}</span>
+                                </div></div>
+                         {% endif %}
+                    <!--Cardiac-->
+                    <div class="row cardiac">
+                         {% if eval_data.treated_for_systolic_bp %}
+                            <div class="col m4  s12">
+                                <div class="dises">
+                                <span><b>Have you treated for Systolic B.P : </b></span>
+                                <span> {{eval_data.treated_for_systolic_bp}}</span>
+                                </div></div>
+                         {% endif %}
+                        {% if eval_data.hdl_level %}
+                            <div class="col m4 s12">
+                                <div class="dises">
+                                    <span><b>HDL Cholesterol Level (mg/dL) : </b> </span>
+                                    <span>{{eval_data.hdl_level}}</span>
+                            </div></div>
+                         {% endif %}
+                        {% if eval_data.total_cholestoral %}
+                            <div class="col m4 s12">
+                                <div class="dises">
+                                    <span><b>Total Cholesterol Level (mg/dL) : </b> </span>
+                                    <span> {{eval_data.total_cholestoral}}</span>
+                                </div></div>
+                         {% endif %}
+
+
+
+
+                        </div>
+                </div>
+            </div>
+
+        </div>
+        </div>
+    </main>
+    <footer class="">
+
+    </footer>
+    <!--Health Index Modal-->
+   <div id="health_index_modal" class="modal">
+        <div class="modal-content">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat right">Close</a>
+            <h5 class="health-text">Health Index Assessment</h5>
+            <br>
+            <form action='{% url "healthandrecords:today_hel" %}'   method="POST" enctype=multipart/form-data>
+
+  {% csrf_token %}
+                <div class="row" style="background-color: #F5F7FA">
+                    <div class="col m2"></div>
+                    <div class="col m4">
+                        <div class="input-field">
+                            <input name="date" type="text" class="datepicker" required id="assess_for_date">
+                            <label for="assess_for_date">Select Date</label>
+                        </div>
+                        <div class="input-field">
+                            <input name="systolic" type="number" required id="systolic_assess">
+                            <label for="systolic_assess">Systolic Pressure</label>
+                        </div>
+                        <div class="input-field">
+                            <input name="diastolic" type="number" required id="diastolic_assess">
+                            <label for="diastolic_assess">Diastolic Pressure</label>
+                        </div>
+                    </div>
+                    <div class="col m4">
+                        <div class="input-field">
+                            <input name="glucose" type="number" required id="glucose">
+                            <label for="glucose">Glucose Level</label>
+                        </div>
+                        <div class="input-field">
+                            <input name="HDL" type="number" required id="hdl_cholestrol">
+                            <label for="hdl_cholestrol">HDL Cholestrol(mg/dl)</label>
+                        </div>
+                        <div class="input-field">
+                            <input name="tc" type="number" required id="total_cholestrol">
+                            <label for="total_cholestrol">Totral Cholestrol(mg/dl)</label>
+                        </div>
+                    </div>
+                    <div class="col m2"></div>
+
+                </div>
+                <div class="right">
+                    <button type="submit" class="btn">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+
+        </div>
+    </div>
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+   <script src='{% static "kc/js/init.js" %}'></script>
+    <script src='{% static "kc/js/materialize.js" %}'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <!-- <script src="js/dashboard.js"></script> -->
+    <script>
+
+        $(document).ready(function () {
+        $('.datepicker').datepicker({
+                format: "yyyy-mm-dd",
+                autoClose: true
+               });
+            $(".modal").modal();
+            $('.dropdown-trigger').dropdown({ hover: true });
+
+            $('select').formSelect();
+        });
+    </script>
+<script>
+      document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems, options);
+  });
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
+
+</script>
+
+</body>
+
+</html>

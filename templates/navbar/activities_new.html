@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Activities</title>
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static 'kc/css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+     <link href="{% static 'kc/css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="{% static 'kc/css/cygen.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="{% static 'navbarcss/foodsearch.css'%}" rel="stylesheet">
+    <style>
+        #logo-container {
+            height: 100%;
+            width: 17%;
+            padding: 4px;
+        }
+        #watermark
+        {
+        padding-right: 10px;
+        position: fixed;
+        bottom:5px;
+        right:5px;
+        opacity:0.4;
+        z-index:99;
+        color:#293d3d;
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+        }
+        .tabs{
+            overflow-x: hidden
+        }
+        .fixed-action-btn{
+            top: 53px !important;
+            right: auto; 
+            margin-left: 2px; 
+        }
+        .week{
+            height:50px;
+            vertical-align: 50%;
+            line-height: 50px;
+            font-size:18px
+        }
+    </style>
+</head>
+
+<body>
+    <span id="watermark" style="font-size:1.64rem;" unselectable="on">Powered by <span style="font-size:1.64rem; color: #64c1b1">CYGEN GROUP</span></span>
+    <header>
+        <div class="navbar-fixed">
+            <nav class="white top-nav" role="navigation">
+                <div class="nav-wrapper container-fluid">
+                    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                    <span>
+                        <img src='{% static "sreesend/img/aimh.1.png" %}' alt="logo" id="logo-container" class="brand-logo">
+                    </span>
+                    <ul class="right hide-on-med-and-down">
+                        <!-- <li><a href="{% url 'healthandrecords:first_form' %}">Evaluation Form</a></li> -->
+                        <li><a href="#health_index_modal" class="modal-trigger">Health Index</a></li>
+                        <li>
+                            <a href="#!" class="dropdown-trigger" data-target="accountdrop">Account Settings
+                                <i class="material-icons right">arrow_drop_down</i></a>
+                        </li>
+                    </ul>
+                    <ul id="nav-mobile" class="sidenav">
+                        <li>
+                            <!-- <a href="{% url 'healthandrecords:first_form' %}">Evaluation Form</a> -->
+                        </li>
+                        <li>
+                            <a href="#">Logout</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </nav>
+        </div>
+        <!--Sidenav-->
+ <div class="container">
+            <ul id="slide-out" class="sidenav">
+                <!-- sidenav-fixed-->
+                <li>
+                    <div class="user-view">
+                        <div class="background"><img src="{% static 'kc/img/sideimg.jpg' %}"></div>
+                        <a href="#user"><img class="circle" src="{% static 'kc/img/doctor.jpg' %}"></a>
+                        <a href="#name"><span class="white-text name">{{request.user.first_name}}</span></a>
+                        <a href="#email"><span class="white-text email">{{request.user.email}}</span></a>
+                    </div>
+                </li>
+                <li><a href='{% url "healthandrecords:health_ana" %}'><i class="material-icons small">dashboard</i>Dashboard</a></li>
+                <li>
+                    <a href='{% url "foodandacti:activityredirct" %}'><i class="fas fa-utensils fa-2x"></i>Goals,Diet & Exercise</a>
+                </li>
+                <li><a href='{% url "foodandacti:summary" %}'><i class="fas fa-book-open fa-2x"></i>Summary</a></li>
+                <!-- <li><a href='{% url "healthandrecords:cygenpacks" %}'><i class="fas fa-heartbeat fa-2x"></i>Health Package</a></li>
+                <li><a href="#!"><i class="fas fa-piggy-bank fa-2x"></i>Insurance Packs</a></li>
+                <li><a href="#!"><i class="far fa-hospital fa-2x"></i>Hospital Packs</a></li> -->
+            </ul>
+
+        </div>
+        <!--Sidenav end-->
+    </header>
+    <!-- Main-->
+    <main>
+        <ul id="accountdrop" class="dropdown-content">
+            <li><a href='{% url "foodandacti:summary" %}'><i class="material-icons">account_circle</i>Profile</a></li>
+            <li><a href="#!"><i class="material-icons">settings</i>Settings</a></li>
+            <li class="divider"></li>
+            <li><a href='{% url "before_l:logout_view" %}'><i class="material-icons">power_settings_new</i>Logout</a></li>
+        </ul>
+        <div class="fixed-action-btn ">
+            <a href="#" data-target="slide-out" class="left btn-floating red sidenav-trigger">
+                <i class="material-icons">menu</i>
+            </a>
+        </div>
+        <!--Tabs -->
+        <div class="row">
+            <div class="col s12 ">
+                <ul class="tabs tabs-fixed-width">
+                    <!-- <li class="tab col s12 m4">
+                        <a href="#goal">Your Goal</a>
+                    </li> -->
+                    <li id="activitydiet" class="tab col s12 m6">
+                        <a class="active" href="#activity">Activities</a>
+                    </li>
+                    <li id="lidiet" class="tab col s12 m6">
+                        <a href="#diet">Diet</a>
+                    </li>
+
+                </ul>
+            </div>
+            <!--  <div id="goal" class="col s12">Goal</div> -->
+            <div id="activity" class="col s12">
+                <br>
+                <br>
+                <div class="row">
+
+                    <div class="col m10 center-align">
+                        <div class="row card teal week">
+                            {% for i in daylist %}
+                            {% if forloop.counter|divisibleby:2 %}
+                            <div class="col m2 "><a class="white-text" href="{% url 'foodandacti:createactivity' slug=i  %}">{{i}}</a></div>
+                            {% else %}
+                            <div class="col m1 "><a class="white-text" href="{% url 'foodandacti:createactivity' slug=i  %}">{{i}}</a></div>
+
+                            {% endif %}
+                    {% endfor %}
+
+                        </div>
+                        <div class="card">
+
+                            <a class="btn-floating halfway-fab waves-effect waves-light red modal-trigger" href="#pactivity">
+                                <i class="material-icons">add</i>
+                            </a>
+                            <!-- <div class="card-image" style="max-height:250px !important; overflow:hidden">
+                                <img src="sports.png">
+
+                            </div> -->
+                            <div class="card-stacked">
+                                <div class="card-content">
+                                    <!--images-->
+                                    <div class="row">
+                                        <div class="col m2">
+                                            <img src='{% static "kc/img/skeletal.jpg" %}' class="circle" height="150px" width="150px" alt="Running">
+                                        </div>
+                                        <div class="col m2">
+                                            <img src='{% static "kc/img/earphone.jpg" %}' class="circle" height="150px" width="150px" alt="Running">
+                                        </div>
+                                        <div class="col m2">
+                                            <img src='{% static "kc/img/running.jpg" %}' class="circle" height="150px" width="150px" alt="Running">
+                                        </div>
+                                        <div class="col m2">
+                                            <img src='{% static "kc/img/cycling.jpg" %}' class="circle" height="150px" width="150px" alt="Running">
+                                        </div>
+                                        <div class="col m2">
+                                            <img src='{% static "kc/img/swimming.jpg" %}' class="circle" height="150px" width="150px" alt="Running">
+                                        </div>
+                                        <div class="col m2">
+                                            <img src='{% static "kc/img/aerobics.jpg" %}' class="circle" height="150px" width="150px" alt="Running">
+                                        </div>
+
+                                    </div>
+                                    <br>
+                                    <span class="card-title black-text">Activity Summary</span>
+                                    <br>
+                                    <table class="center">
+                                        <thead>
+                                            <tr>
+                                                <th>Activities</th>
+                                                <th>Duration</th>
+                                                <th>Calories burnt(kcal)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for acitvity in asecdule %}
+                                      <tr>
+                                        <td>{{acitvity.exercise}}</td>
+                                        <td>{{acitvity.howtime}}</td>
+                                        <td>{{acitvity.calburnt|floatformat:2}}</td>
+                                      </tr>
+                                {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="diet" class="col s12">
+                <br>
+                <br>
+                <div class="row">
+                    <div class="input-field col s12 m3">
+                        <i class="material-icons prefix">date_range</i>
+                        <input class="datepicker" id="date" type="text" >
+                        <label for="date">Select Date</label>
+                    </div>
+
+                    <div class="col m12 s6 center-align">
+                        <div class="card">
+
+                            <div class="card-stacked">
+                                <div class="card-content">
+                                    <a class="btn-floating halfway-fab  waves-effect waves-light indigo modal-trigger"
+                                        href="#pdiet_summary">
+                                        <i class="material-icons">insert_chart</i>
+                                        <div class="tooltip">Content</div>
+                                    </a>
+                                    <a class="btn-floating halfway-fab left waves-effect waves-light teal modal-trigger" href="#pdiet">
+                                <i class="material-icons">add</i></a>
+                                    <table class="table responsive-table">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Food</th>
+                                                <th>Quantity</th>
+                                                <th>Calorie (kcal)</th>
+                                                <th>Carbs(g)</th>
+                                                <th>Protien (g)</th>
+                                                <th>Sodium (mg)</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                 <tr class="success">
+                                        {% for notice in Breakfast %}
+                            <th>Breakfast</th>
+
+
+                                       <td>{{notice.fodd_name}}</td>
+                                        <td>225 ml (1 cup)</td>
+                                        <td>{{notice.Calories|floatformat:1}}</td>
+                                        <td>{{notice.Carbs|floatformat:1}}</td>
+                                        <td>{{notice.Protein|floatformat:1}}</td>
+                                        <td>{{notice.Fat|floatformat:1}}</td>
+
+
+                                    </tr>
+                                    {% endfor %}
+                                    <tr class="info">
+
+                                        {% for notice in Lunch %}
+                                        <th>Lunch</th>
+
+                                        <td>{{notice.fodd_name}}</td>
+                                        <td>225 ml (1 cup)</td>
+                                        <td>{{notice.Calories|floatformat:1}}</td>
+                                        <td>{{notice.Carbs|floatformat:1}}</td>
+                                        <td>{{notice.Protein|floatformat:1}}</td>
+                                        <td>{{notice.Fat|floatformat:1}}</td>
+
+
+                                    </tr>
+                                    {% endfor %}
+                                    <tr class="success">
+                                         {% for notice in Snacks %}
+                                        <th>Snacks</th>
+
+                                        <td>{{notice.fodd_name}}</td>
+                                        <td>225 ml (1 cup)</td>
+                                        <td>{{notice.Calories|floatformat:1}}</td>
+                                        <td>{{notice.Carbs|floatformat:1}}</td>
+                                        <td>{{notice.Protein|floatformat:1}}</td>
+                                        <td>{{notice.Fat|floatformat:1}}</td>
+
+
+                                    </tr>
+                                     {% endfor %}
+                                    <tr class="info">
+                                        {% for notice in Dinner %}
+                                        <th>Dinner</th>
+
+                                        <td>{{notice.fodd_name}}</td>
+                                        <td>225 ml (1 cup)</td>
+                                        <td>{{notice.Calories|floatformat:1}}</td>
+                                        <td>{{notice.Carbs|floatformat:1}}</td>
+                                        <td>{{notice.Protein|floatformat:1}}</td>
+                                        <td>{{notice.Fat|floatformat:1}}</td>
+
+
+                                    </tr>
+
+                                    {% endfor %}
+                                </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+    <footer class="">
+
+    </footer>
+
+    <!--Modals -->
+    <!--Modals -->
+    <div id="pdiet" class="modal">
+             <div class="modal-content">
+            <h5 style="color:#5c6bc0">Diet</h5>
+            <div class="row">
+                <div class="input-field col s12 m12" style="margin-top:0px;">
+ <i class="material-icons prefix" style="color:#f12222">search</i>
+                    <div class="auto-search" >
+
+<div class="search-item"> </div>
+                        <input type="text" value="" id="search1" name="breakf" class="search"  autocomplete="off" style="height: 30px !important;padding-left:25px"/>
+
+                         <div id="foodname1" class="count"></div>
+
+
+        <div class="test">
+
+            <div class="testxx" id="search-results"></div>
+        </div>
+                        <div class="serving">
+
+<form action="{% url 'foodandacti:editss' %}?{{ request.GET.urlencode }}" method='POST'>
+    {% csrf_token %}<div class="serv">
+    <div class="serving-name">Serving Table</div>
+
+   <input type="text" id ="newid" name="fname"><br>
+
+<select name="sectionmel" class="blds"> <option value="Breakfast">Breakfast</option>
+    <option value="Lunch">Lunch</option>
+    <option value="Dinner">Dinner</option>
+    <option value="Snacks">Snacks</option></select>
+
+
+    <div id="dynamicInput"><input type="text" id="foodnameid" value="" name='foodnames' class="nut-cal" readonly></div>
+</div>
+
+ <div class="nutrients">
+              <div class="nut-name">Nutrition Values</div>
+           <div class="cal-items">Calories- </div>  <input type="text" id="Caloriesid" value="" name="Calories" class="nut-cal" style="width:50% !important" readonly>
+     <div class="cal-items">Carbs-</div> <input type="text" id="Carbsid" value="" name="Carbs" class="nut-cal" style="width:50% !important" readonly>
+     <div class="cal-items">Protiens- </div> <input type="text" id="Protiensid" value="" name="Protiens" class="nut-cal" style="width:50% !important" readonly>
+     <div class="cal-items"> Fat-</div><input type="text" id="Fatid" value="" name="Fat" class="nut-cal" style="width:50% !important" readonly>
+<div class="submit-serv">
+    <input type="submit" value="submit" class="serving-submit"/>
+</div>
+    </div>
+
+                        </form>
+                            </div>
+        </div>
+
+</div>
+
+
+                </div>
+
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">close</a>
+        </div>
+    </div>
+
+    <!--Diet Summary Modal -->
+    <div id="pdiet_summary" class="modal">
+        <div class="modal-content">
+            <h4>Diet Summary</h4>
+            <div class="row">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Calories (kcal)</th>
+                            <th>Carbs.(g)</th>
+                            <th>Protiens (g)</th>
+                            <th>Sodium(mg)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Total</th>
+                            <td>600</td>
+                            <td>538</td>
+                            <td>693</td>
+                            <td>208</td>
+                        </tr>
+                        <tr>
+                            <th>Daily Goal</th>
+                            <td>700</td>
+                            <td>638</td>
+                            <td>793</td>
+                            <td>308</td>
+                        </tr>
+                        <tr>
+                            <th>Remaining</th>
+                            <td>100</td>
+                            <td>100</td>
+                            <td>100</td>
+                            <td>100</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">close</a>
+        </div>
+    </div>
+    <!--Add Diet Modal-->
+    <!--Add Diet Modal-->
+ <div id="diet" class="modal">
+
+        <!--<div class="modal-footer">-->
+            <!--<a href="#!" class="modal-close waves-effect waves-green btn-flat">close</a>-->
+        <!--</div>-->
+    </div>
+    <!--Activity modal -->
+    <div id="pactivity" class="modal">
+        <div class="modal-content">
+            <h4>Activities</h4>
+            <form action="{% url 'foodandacti:createactivity' slug=slug  %}" method="post">
+                          {% csrf_token %}
+            <div class="row">
+                <div class="input-field col s12 m4">
+                    <select class='browser-default'>
+                        <option disabled selected>Choose a day</option>
+                        <option value="{{slug}}">{{slug}}</option>
+
+                    </select>
+                </div>
+                <div class="input-field col s12 m4">
+                    <select name="Activity" required class='browser-default'>
+                        <option disabled selected>Select an Activity</option>
+                        <option value="Aerobic dancing (low impact)">Aerobic dancing (low impact)</option>
+                        <option value="Aerobics step training (4 step)">Aerobics step training (4"" step)"</option>
+                        <option value="Aerobics slide training (basic)">Aerobics slide training (basic)</option>
+                        <option value="Backpacking with 10 lb. load">Backpacking with 10 lb. load</option>
+                        <option value="Backpacking with 20 lb. load">Backpacking with 20 lb. load</option>
+                        <option value="Backpacking with 30 lb. load">Backpacking with 30 lb. load</option>
+                        <option value="Badminton">Badminton</option>
+                        <option value="Basketball (game)">Basketball (game)</option>
+                        <option value="Basketball (leisurely nongame)">Basketball (leisurely nongame)</option>
+                        <option value="Bicycling 10 mph (6 minutes/mile)">Bicycling 10 mph (6 minutes/mile)</option>
+                        <option value="Bicycling 13 mph (4.6 minutes/mile)">Bicycling 13 mph (4.6 minutes/mile)</option>
+                        <option value="Billiards">Billiards</option>
+                        <option value="Bowling">Bowling</option>
+                        <option value="Canoeing 2.5 mph">Canoeing 2.5 mph</option>
+                        <option value="Canoeing 4.0 mph">Canoeing 4.0 mph</option>
+                        <option value="Croquet">Croquet</option>
+                        <option value="Cross country snow skiing intense">Cross country snow skiing intense</option>
+                        <option value="Cross country snow skiing leisurely">Cross country snow skiing leisurely</option>
+                        <option value="Cross country snow skiing moderate">Cross country snow skiing moderate</option>
+                        <option value="Dancing (noncontact)">Dancing (noncontact)</option>
+                        <option value="Dancing (slow)">Dancing (slow)</option>
+                        <option value="Gardening moderate">Gardening moderate</option>
+                        <option value="Golfing (walking w/o cart)">Golfing (walking w/o cart)</option>
+                        <option value="Golfing (with a cart)">Golfing (with a cart)</option>
+                        <option value="Handball">Handball</option>
+                        <option value="Hiking with a 10 lb. load">Hiking with a 10 lb. load</option>
+                        <option value="Hiking with a 20 lb. load">Hiking with a 20 lb. load</option>
+                        <option value="Hiking with a 30 lb. load">Hiking with a 30 lb. load</option>
+                        <option value="Hiking no load">Hiking no load</option>
+                        <option value="Housework">Housework</option>
+                        <option value="Ironing">Ironing</option>
+                        <option value="Jogging 5 mph (12 minutes/mile)">Jogging 5 mph (12 minutes/mile)</option>
+                        <option value="Jogging 6 mph (10 minutes/mile)">Jogging 6 mph (10 minutes/mile)</option>
+                        <option value="Mopping">Mopping</option>
+                        <option value="Mowing">Mowing</option>
+                        <option value="Ping Pong">Ping Pong</option>
+                        <option value="Raking">Raking</option>
+                        <option value="Racquetball">Racquetball</option>
+                        <option value="Rowing (leisurely)">Rowing (leisurely)</option>
+                        <option value="Rowing machine">Rowing machine</option>
+                        <option value="Running 08 mph (7.5 minutes/mile)">Running 08 mph (7.5 minutes/mile)</option>
+                        <option value="Running 09 mph (6.7 minutes/mile)">Running 09 mph (6.7 minutes/mile)</option>
+                        <option value="Running 10 mph (6 minutes/mile)">Running 10 mph (6 minutes/mile)</option>
+                        <option value="Scrubbing the floor">Scrubbing the floor</option>
+                        <option value="Scuba diving">Scuba diving</option>
+                        <option value="Shopping for groceries">Shopping for groceries</option>
+                        <option value="Skipping rope">Skipping rope</option>
+                        <option value="Snow shoveling">Snow shoveling</option>
+                        <option value="Snow skiing downhill">Snow skiing downhill</option>
+                        <option value="Soccer">Soccer</option>
+                        <option value="Squash">Squash</option>
+                        <option value="Stair climber machine">Stair climber machine</option>
+                        <option value="Stair climbing">Stair climbing</option>
+                        <option value="Swimming (25 yards/minute)">Swimming (25 yards/minute)</option>
+                        <option value="Swimming (50 yards/minute)">Swimming (50 yards/minute)</option>
+                        <option value="Table Tennis">Table Tennis</option>
+                        <option value="Tennis">Tennis</option>
+                        <option value="Tennis (doubles)">Tennis (doubles)</option>
+                        <option value="Trimming hedges">Trimming hedges</option>
+                        <option value="Vacuuming">Vacuuming</option>
+                        <option value="Volleyball (game)">Volleyball (game)</option>
+                        <option value="Volleyball (leisurely)">Volleyball (leisurely)</option>
+                        <option value="Walking 2 mph (30 minutes/mile)">Walking 2 mph (30 minutes/mile)</option>
+                        <option value="Walking 3 mph (20 minutes/mile)">Walking 3 mph (20 minutes/mile)</option>
+                        <option value="Walking 4 mph (15 minutes/mile)">Walking 4 mph (15 minutes/mile)</option>
+                        <option value="Washing the car">Washing the car</option>
+                        <option value="Water skiing">Water skiing</option>
+                        <option value="Waxing the car">Waxing the car</option>
+                        <option value="Weeding">Weeding</option>
+                        <option value="Weight training (40 sec. between sets)">Weight training (40 sec. between sets)</option>
+                        <option value="Weight training (60 sec. between sets">Weight training (60 sec. between sets)</option>
+                        <option value="Weight training (90 sec. between sets)">Weight training (90 sec. between sets)</option>
+                        <option value="Window cleaning">Window cleaning</option>
+                    </select>
+                </div>
+
+                <div class="input-field col s12 m4">
+                    <input name="Duration" required placeholder="minutes" id="duration" type="text" class="validate">
+                    <label for="calories">Duration</label>
+                </div>
+                <div class="input-field col s12 m3">
+                    <button class="waves-effect waves-light btn">Add Activitiy</button>
+                </div>
+            </div>
+                </form>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">close</a>
+        </div>
+    </div>
+    <!--Health Index Modal-->
+    <div id="health_index_modal" class="modal">
+        <div class="modal-content">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat right">Close</a>
+            <h5>Health Index Assessment</h5>
+            <br>
+            <form action='{% url "healthandrecords:today_hel" %}'   method="POST" enctype=multipart/form-data>
+
+  {% csrf_token %}
+                <div class="row" style="background-color: #F5F7FA">
+                    <div class="col m2"></div>
+                    <div class="col m4">
+                        <div class="input-field">
+                            <input name="date" type="text" class="datepicker" required id="assess_for_date">
+                            <label for="assess_for_date">Select Date</label>
+                        </div>
+                        <div class="input-field">
+                            <input name="systolic" type="number" required id="systolic_assess">
+                            <label for="systolic_assess">Systolic Pressure</label>
+                        </div>
+                        <div class="input-field">
+                            <input name="diastolic" type="number" required id="diastolic_assess">
+                            <label for="diastolic_assess">Diastolic Pressure</label>
+                        </div>
+                    </div>
+                    <div class="col m4">
+                        <div class="input-field">
+                            <input name="glucose" type="number" required id="glucose">
+                            <label for="glucose">Glucose Level</label>
+                        </div>
+                        <div class="input-field">
+                            <input name="HDL" type="number" required id="hdl_cholestrol">
+                            <label for="hdl_cholestrol">HDL Cholestrol(mg/dl)</label>
+                        </div>
+                        <div class="input-field">
+                            <input name="tc" type="number" required id="total_cholestrol">
+                            <label for="total_cholestrol">Totral Cholestrol(mg/dl)</label>
+                        </div>
+                    </div>
+                    <div class="col m2"></div>
+
+                </div>
+                <div class="right">
+                    <button type="submit" class="btn">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+
+        </div>
+    </div>
+
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src='{% static "kc/js/init.js" %}'></script>
+    <script src='{% static "kc/js/materialize.js" %}'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <!-- <script src="js/dashboard.js"></script> -->
+    <script>
+
+   $(function(){
+
+            $(document).on("keyup",".auto-search .search",function() {
+	    var v = this.id;
+
+		$.ajax({
+			type:'POST',
+			url:"/fooddetails/search/",
+			dataType: "html",
+			data:   {"search_text" : $("#"+v).val(), "csrfmiddlewaretoken" : $("input[name=csrfmiddlewaretoken]").val() },
+			success: searchSuccess,
+
+		});
+	});
+
+});
+function searchSuccess(data,textStatus,jqXHR)
+{
+		$('#search-results').html(data);
+}
+
+        $(document).ready(function () {
+$(".modal").modal();
+        })
+
+        function changeSwitchValue(val){
+ var id = $(this).attr('id');
+ alert(val);
+ var url="fooddairy/recordupdate/"+String(val);
+ alert( window.location.pathname);
+ window.location.pathname = url;
+
+
+
+    }
+
+$("#lidiet").click(function () {
+
+if (window.location.pathname.indexOf("fooddairy/update") ==-1){
+window.location.pathname="/fooddairy/update/";
+
+ }
+else{
+$("#lidiet").click;
+
+}
+});
+
+
+$("#activitydiet").click(function () {
+if (window.location.pathname.indexOf("/createactivity") ==-1){
+window.location.pathname="/createactivity/Monday/";
+ }
+
+});
+
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.tabs').tabs();
+            $('.datepicker').datepicker({
+                format: "yyyy-mm-dd",
+                autoClose: true
+            });
+            $('.modal').modal();
+            $('select').formSelect();
+            $('.sidenav').sidenav();
+            $(".dropdown-trigger").dropdown({ hover: true });
+            $('.serving').hide();
+
+            $("#date").change(function(){
+             var currentUrl=window.location.pathname;
+             var changedURL=currentUrl+"?date="+$(this).val();
+             console.log(changedURL);
+             window.location.href=changedURL;
+         });
+        });
+    </script>
+</body>
+
+</html>

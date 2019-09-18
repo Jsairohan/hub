@@ -1,0 +1,18 @@
+
+{% block subject %}Welcome to CyGen Health tech  Family !{% endblock %}
+{% block plain %}
+Dear {{username}},
+
+Thank you for subscribing to our services.
+From here onwards, we take care of your health and help in leading a healthier and happier life.
+You will receive our daily/weekly health tips.
+To make sure our emails are delivered to your inbox folder, please add us to your Contacts or safe senders list.
+
+With regards,
+CyGen Team
+Redesigning healthcare delivery
+
+{% endblock %}
+
+
+

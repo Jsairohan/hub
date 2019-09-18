@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+   <meta charset="utf-8" />
+        <title>HealthTech</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="keywords" content="HTML5 Template" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="shortcut icon" href="{% static 'sreesend/img/logo1.png' %}"  />
+
+     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ <link href="{% static 'navbarcss/bootstrap.min.css'%}"  rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="{% static 'navbarcss/css/font-awesome.min.css'%}" rel="stylesheet" type="text/css">
+  <!-- Custom styles for this template-->
+  <link href="{% static 'navbarcss/sb-admin.css'%}" rel="stylesheet">
+
+     <link rel="stylesheet" type="text/css" href="{% static 'navbarcss/variant_hp.css' %}">
+<link href="https://fonts.googleapis.com/css?family=Lato:400,400i&amp;subset=latin-ext" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="content-wrapper">
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href='{% url "before_l:index" %}'>Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!--hospital content-->
+      <div class="container">
+          <div class="row">
+
+
+<div class="col-md-6 col-sm-6 col-xs-12 hos">
+
+<div class="hp">
+
+	    {% for pack in hospitals1 %}
+            <div class="hp3">
+        <div class="hp31"><b>{{ pack.hosp }}</b></div>
+
+	<div class="hp-background">
+
+	   <div class="hp32"> {{ pack.product }}</div>
+
+
+
+	  <div class="hp33">   {{ pack.covers }}</div>
+
+	<br>
+
+	  <div class="hp34"> {{ pack.price }}</div>
+
+</div>
+
+
+
+ </div>
+
+{% endfor %}
+
+</div>
+</div>
+<div class="col-md-6 col-sm-6 col-xs-12 hos1">
+<div class="hp">
+
+
+     {% for pack in hospitals2 %}
+         <div class="hp41">
+         <div class="hp31"><b>{{ pack.hosp }}</b></div>
+
+
+<div class="hp-background">
+	   <div class="hp32"> {{ pack.product }}</div>
+
+
+
+	  <div class="hp33">   {{ pack.covers }}</div>
+
+	<br>
+
+	  <div class="hp34"> {{ pack.price }}</div>
+
+
+</div>
+
+
+
+</div>
+        {% endfor %}
+</div>
+     </div>
+
+</div>
+</div>
+
+  </div>
+    <!-- Bootstrap core JavaScript-->
+
+      <script src='{% static "js/bootstrap.bundle.min.js" %}'></script>
+
+
+</body>
+
+</html>

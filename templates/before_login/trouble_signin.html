@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>HealthTech</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="keywords" content="HTML5 Template" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="{% static 'sreesend/img/logo1.png' %}"  />
+        <!-- Font -->
+        <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Arimo:300,400,700,400italic,700italic' />
+        <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css' />
+        <!-- Font Awesome Icons -->
+        <link href="{% static 'sreesend/css/font-awesome.min.css' %}"  rel='stylesheet' type='text/css' />
+        <!-- Bootstrap core CSS -->
+        <link href="{% static 'sreesend/css/bootstrap.min1.css' %}"  rel="stylesheet" />
+        <link href="{% static 'sreesend/css/hover-dropdown-menu21.css' %}"  rel="stylesheet" />
+        <!-- Icomoon Icons -->
+        <!-- Revolution Slider -->
+
+
+        <!-- Custom Style -->
+        <link href="{% static 'sreesend/css/style.css' %}"  rel="stylesheet" />
+        <!-- Color Scheme -->
+		 <link rel="stylesheet" type="text/css" href="{% static 'sreesend/css/s.css' %}" >
+    </head>
+    <style>
+    .user-login{
+        width: 350px;
+    /* height: 331px; */
+    margin: 0 auto;
+    }
+    </style>
+    <body>
+    <div id="page">
+        <header id="sticker" class="sticky-navigation">
+            <!-- Sticky Menu -->
+            <div class="sticky-menu relative">
+                <!-- navbar -->
+                <div id="navigation" class="navbar navbar-default navbar-bg-light" role="navigation">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                                <div class="navbar-header">
+                                <!-- Button For Responsive toggle -->
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span></button>
+                                <!-- Logo -->
+
+                                <a class="navbar-brand" href="#">
+                                    <img class="site_logo" alt="Site Logo" src="{% static 'sreesend/img/logo.gif' %}"  />
+                                </a></div>
+
+                                <!-- Navbar Collapse -->
+                                <div id="topnav" class="navbar-collapse collapse">
+                                    <!-- nav -->
+                                    <ul class="nav navbar-nav">
+                                        <li><a href='{% url "before_l:index" %}'  class="scroll">HOME</a>
+											</li>
+                                        <li>
+                                            <a href="#about-us" class="scroll">ABOUT</a>
+                                        </li>
+                                        <li>
+                                            <a href="#services" class="scroll  ">SERVICES</a>
+                                        </li>
+										<li>
+                                            <a href="#team" class="scroll  ">TEAM</a>
+                                        </li>
+
+                                         <li>
+                                            <a href="#contact-us" class="scroll">CONTACT US</a>
+                                        </li>
+                                        <li>
+                                            <a href='{% url "before_l:loged" %}'  class="scroll">LOGIN/SIGNUP</a>
+                                        </li>
+
+                                        <!-- Header Contact -->
+
+                                        <div class="location">
+   <img class="image-location" src="{% static 'sreesend/img/location.png' %}"  width="30px" height="30px" />
+      <b><span id ="city"></span>, <span id= "country"></span></b>
+</div>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+                <script>
+                     $.getJSON('https://geoip-db.com/json/geoip.php?jsonp=?')
+                           .done (function(location)
+                           {
+                               $('#country').html(location.country_name);
+                            $('#city').html(location.city);
+                           });
+             </script>
+                                    </ul>
+                                    <!-- Right nav -->
+									<!-- Header Contact Content -->
+
+
+									<!-- Header Search Content -->
+									<!-- Header Share Content -->
+
+									<!-- Header Share Content -->
+                                </div>
+                                <!-- /.navbar-collapse -->
+                            </div>
+                            <!-- /.col-md-12 -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container -->
+                </div>
+                <!-- navbar -->
+            </div>
+            <!-- Sticky Menu -->
+        </header>
+        <section class="page-section">
+
+
+
+                    <!-- .content -->
+<div class="user-login">
+                        <form action='{% url "before_l:trouble" %}' method="POST" id="contact-form" class="light-bg contact-form pad-40" >
+
+                            <div class="regii3">
+                            <h3 class="regii" style="color : #017b8b">Trouble SignIn</h3>
+                            </div>
+                            {% csrf_token %}
+                            <div class="container">
+                                <div class="row">
+                                    <div class="user">
+                                        <input class="in" type="text" name="email" required style="width:283px" placeholder="Enter your Email"  />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sub">
+                                <button id="submit" name="submit" value="submit" class="btnbtn-default1" style="color:#fff">Submit</button>
+                            </div>
+
+                        	<!-- . buttons-box -->
+
+                        </form>
+
+                    </div>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+
+
+
+
+
+            <!-- .content -->
+
+</section>
+        <!-- page-section -->
+        <footer id="footer">
+
+            <!-- footer-top -->
+            <div class="copyright">
+                <div class="container">
+                    <div class="row1">
+                        <!-- Copyrights -->
+                        <div class="col-xs-10 col-sm-6 col-md-6"> &copy; 2018 <a href="https://cygengroup.com">cygengroup.com</a>. HealthTech.
+
+                        <!-- Terms Link -->
+
+                        <a href="#">Terms of Use</a> /
+                        <a href="#">Privacy Policy</a></div>
+                        <div class="col-xs-2  col-sm-6 col-md-6 text-right page-scroll gray-bg icons-circle i-3x">
+                            <!-- Goto Top -->
+                            <a href="#page">
+                                <i class="glyphicon glyphicon-arrow-up"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- footer-bottom -->
+        </footer>
+        <!-- request -->
+
+        <!-- footer -->
+    </div>
+    <!-- page -->
+    <!-- Scripts -->
+
+    <!-- Scripts -->
+	</body>
+</html>

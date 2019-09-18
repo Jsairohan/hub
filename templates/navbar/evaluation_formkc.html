@@ -1,0 +1,667 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Evaluation Form</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+        <link href="{% static 'kc/css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link rel="stylesheet" href="{% static 'kc/css/materialize-stepper.min.css' %}">
+
+    <link href="{% static 'kc/css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="{% static 'kc/css/cygen.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="{% static 'kc/css/media-query.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
+    <style>
+        #logo-container {
+            height: 100%;
+            width: 17%;
+            padding: 4px;
+        }
+        #watermark
+        {
+        padding-right: 10px;
+        position: fixed;
+        bottom:5px;
+        right:5px;
+        opacity:0.4;
+        z-index:99;
+        color:#293d3d;
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+        }
+        .fixed-action-btn{
+
+            top: 53px !important;
+                right: auto; 
+                margin-left: 2px; 
+       }
+       ul.stepper .step-title {
+    margin: 0px;
+    }
+    @media only screen and (max-width: 992px) {
+  nav .brand-logo {
+    padding:2px;
+      left: 0px;
+    -webkit-transform: none;
+    transform: none;
+}
+.diabetesques{
+    padding: 10px;
+    }
+}
+    </style>
+</head>
+
+
+<body>
+        <span id="watermark" style="font-size:1.64rem;" unselectable="on">Powered by <span style="font-size:1.64rem; color: #64c1b1">CYGEN GROUP</span></span>
+
+   <header>
+        <nav class="white top-nav" role="navigation">
+            <div class="nav-wrapper container-fluid">
+                <span>
+                    <img src='{% static "sreesend/img/aimh.1.png" %}' alt="logo" id="logo-container" class="brand-logo">
+                </span>
+                <ul class="right hide-on-med-and-down">
+                        <!-- <li><a href="{% url 'healthandrecords:first_form' %}">Evaluation Form</a></li> -->
+                        <li><a href="#health_index_modal" class="modal-trigger">Health Index</a></li>
+                        <li>
+                            <a href="#!" class="dropdown-trigger" data-target="accountdrop">Account Settings
+                                <i class="material-icons right">arrow_drop_down</i></a>
+                        </li>
+                    </ul>
+                    <!-- <ul id="nav-mobile" class="sidenav">
+                        <li><a href="evaluation_form.html">Evaluation Form</a></li>
+                        <li><a class="dropdown-trigger" href="#!" data-activates="dropdown1">Account</a></li>
+                    </ul> -->
+
+            </div>
+        </nav>
+        <!--Sidenav-->
+        <div class="container">
+            <ul id="slide-out" class="sidenav">
+                <li>
+                    <div class="user-view">
+                        <div class="background">
+                            <img src="{% static 'kc/img/sideimg.jpg' %}">
+                        </div>
+                        <a href="#user">
+                            <img class="circle" src="{% static 'kc/img/doctor.jpg' %}">
+                        </a>
+                        <a href="#name"><span class="white-text name">{{request.user.first_name}}</span></a>
+                        <a href="#email"><span class="white-text email">{{request.user.email}}</span></a>
+                    </div>
+                </li>
+
+                <li><a href='{% url "healthandrecords:health_ana" %}'><i class="material-icons small">dashboard</i>Dashboard</a></li>
+                <li>
+                    <a href='{% url "foodandacti:personal_info_update" %}'><i class="fas fa-utensils fa-2x"></i>Diet</a>
+                </li>
+                <li><a href='{% url "foodandacti:activityredirct" %}'><i class="material-icons small">directions_run</i>Activities and Fitness</a>
+                </li>
+                <li><a href='{% url "foodandacti:summary" %}'><i class="fas fa-book-open fa-2x"></i>Summary</a></li>
+                <!-- <li><a href='{% url "healthandrecords:cygenpacks" %}'><i class="fas fa-heartbeat fa-2x"></i>Health Package</a></li>
+                <li><a href="#!"><i class="fas fa-piggy-bank fa-2x"></i>Insurance Packs</a></li>
+                <li><a href="#!"><i class="far fa-hospital fa-2x"></i>Hospital Packs</a></li>
+                 <li><a href="{% url 'healthandrecords:first_form' %}">Evaluation Form</a></li> -->
+                        <li><a href="#health_index_modal" class="modal-trigger">Health Index</a></li>
+                        <li>
+                            <a href="#!" class="dropdown-trigger" data-target="accountdrop2">Account Settings
+                                <i class="material-icons right">arrow_drop_down</i></a>
+                        </li>
+
+            </ul>
+
+        </div>
+        <!--Sidenav end-->
+    </header>
+    <!-- Main-->
+       <main>
+            <ul id="accountdrop" class="dropdown-content">
+                    <li><a href='{% url "foodandacti:summary" %}'><i class="material-icons">account_circle</i>Profile</a></li>
+                    <li><a href="#!"><i class="material-icons">settings</i>Settings</a></li>
+                    <li class="divider"></li>
+                    <li><a href='{% url "before_l:logout_view" %}'><i class="material-icons">power_settings_new</i>Logout</a></li>
+                </ul>
+                <ul id="accountdrop2" class="dropdown-content">
+                    <li><a href='{% url "foodandacti:summary" %}'><i class="material-icons">account_circle</i>Profile</a></li>
+                    <li><a href="#!"><i class="material-icons">settings</i>Settings</a></li>
+                    <li class="divider"></li>
+                    <li><a href='{% url "before_l:logout_view" %}'><i class="material-icons">power_settings_new</i>Logout</a></li>
+                </ul>
+        <div class="container-fluid card">
+
+                <div class="fixed-action-btn ">
+                        <a href="#" data-target="slide-out" class="left btn-floating btn-large red sidenav-trigger">
+                                <i class="material-icons">menu</i>
+                            </a>
+                </div>
+
+
+            <!--Evaluation Criteria-->
+            <div class="row">
+                <ul class="stepper linear ">
+                    <li class="step active">
+                        <div class="step-title waves-effect">Do you have any of the following diseases</div>
+                        <div class="step-content">
+                            <div class="row">
+                                <div class="col m3 s12">
+                                    <span>Diabetes </span>
+                                    <div class="switch">
+                                        <label>
+                                            No
+                                            <input type="checkbox" id="diabetes">
+                                            <span class="lever"></span>
+                                            Yes
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col m3 s12">
+                                    <span>Hypertension </span>
+                                    <div class="switch">
+                                        <label>
+                                            No
+                                            <input type="checkbox" id="hypertension">
+                                            <span class="lever"></span>
+                                            Yes
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col m3 s12">
+                                    <span>Cardiac Related </span>
+                                    <div class="switch">
+                                        <label>
+                                            No
+                                            <input type="checkbox" id="cardiac">
+                                            <span class="lever"></span>
+                                            Yes
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="step-actions">
+                                <button class="waves-effect waves-dark btn next-step" id="continue">CONTINUE</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="step" id="step2" >
+                        <div class="step-title waves-effect">Which of the following ailments do you want to be diagnosed</div>
+                        <div class="step-content">
+                            <div class="row">
+                                <div class="col m3 s12"  id="hyper_check">
+                                    <label>
+                                        <input type="checkbox" id="hcheck">
+                                        <span>Hypertension</span>
+                                    </label>
+                                </div>
+                                <div class="col m3 s12" hidden id="diabetes_check">
+                                    <label>
+                                        <input type="checkbox" id="dcheck">
+                                        <span>Diabetes</span>
+                                    </label>
+                                </div>
+                                <div class="col m3 s12" hidden id="cardiac_check">
+                                    <label>
+                                        <input type="checkbox" id="ccheck">
+                                        <span>Cardiac Related</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="step-actions">
+                                <button class="waves-effect waves-dark btn next-step" id="continue2">CONTINUE</button>
+                                <button class="waves-effect waves-dark btn-flat previous-step">BACK</button>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+
+             <!--General Questions-->
+             <div class="z-depth-1" id="general" hidden style="margin-left: 1%;margin-right: 1%;margin-top:2%">
+                    <h5 class="center-align" style="padding:10px;">General Details</h5>
+                  <form action="{% url 'healthandrecords:first_form' %}" method="POST" enctype=multipart/form-data>
+                {% csrf_token %}
+                    <div class="row">
+                        <!--First Column -->
+                        <div class="col m4 s12">
+                            <div class="input-field">
+                                <input  id="dob" type="text" required name="age" value="" class="validate">
+                                <label for="dob">Age</label>
+                            </div>
+                            <div class="input-field">
+                                <select required name="h_inch">
+                                    <option value="" disabled selected>Inches</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                                <label>Height(inches)</label>
+                            </div>
+                            <div class="input-field">
+                                <select required name="systolic">
+                                    <option value="" disabled selected>Systolic</option>
+                                    <option value="110">Less than 120</option>
+                                    <option value="125">120-129</option>
+                                    <option value="135">130-139</option>
+                                    <option value="145">140-149</option>
+                                    <option value="155">150-159</option>
+                                    <option value="165">160-169</option>
+                                    <option value="175">170-179</option>
+                                    <option value=" 180">More than 180</option>
+                                </select>
+                                <label>Systolic BP(mm/Hg)</label>
+                            </div>
+                            <div class="input-field">
+                                <select required name="annualincome">
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="500000">Below 5,00,000</option>
+                                    <option value="1000000">5,00,000-10,00,000</option>
+                                    <option value="1500000">10,00,000-15,00,000</option>
+                                    <option value="7000000"> 15,00,000-20,00,000</option>
+                                    <option value="10000000">Above 20,00,000</option>
+                                </select>
+                                <label>Annual Income(INR)</label>
+                            </div>
+                            <div class="input-field">
+                                <select required name="Ethnicity">
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="Asian">Asian</option>
+                                    <option value="Non-Asian">Non-Asian</option>
+
+                                </select>
+                                <label>Ethnicity</label>
+                            </div>
+                        </div>
+                        <!-- Second Column-->
+                        <div class="col m4 s12">
+                            <div class="input-field">
+                                <input id="weight" required type="number" name="weight" class="validate">
+                                <label for="weight">Weight(kg)</label>
+                            </div>
+                            <div class="input-field">
+                                <select required name="gender">
+                                    <option value="" disabled selected>Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                                <label>Gender</label>
+                            </div>
+                            <div class="input-field">
+                                <select required name="diastolic">
+                                    <option value="" disabled selected>Diastolic</option>
+                                    <option value="79">Less than 80</option>
+                                    <option value="85">80-89</option>
+                                    <option value="95">90-99</option>
+                                    <option value="105">100-109</option>
+                                    <option value="115">110-119</option>
+                                    <option value="126">More than 120</option>
+                                </select>
+                                <label>Diastolic BP(mm/Hg)</label>
+                            </div>
+                            <div class="input-field">
+                                <select required name="housingstatus" >
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="Own">Own</option>
+                                    <option value="Loan">Loan</option>
+                                    <option value="Rent">Rent</option>
+                                </select>
+                                <label>Housing Status</label>
+                            </div>
+                        </div>
+                        <!--Third Column-->
+                        <div class="col m4 s12">
+                            <div class="input-field">
+                                <select required name="h_feet">
+                                    <option value="" disabled selected>Feet</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                                <label>Height(feet)</label>
+                            </div>
+                            <div class="input-field">
+                                <select required name="smoker">
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="No"> Non-Smoker</option>
+                                    <option value="Yes"> Smoked in last 12 months</option>
+                                    <option value="Yes"> More than 10/day</option>
+                                    <option value="Yes"> 10-19/day</option>
+                                </select>
+                                <label>Smoker</label>
+                            </div>
+                            <div class="input-field">
+                                <select required name="employment">
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="Self Employed">Self Employed</option>
+                                    <option value="Employed">Employed</option>
+                                </select>
+                                <label>Employment</label>
+                            </div>
+                            <div class="input-field">
+                                <select required name="maritialstatus">
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="Single">Single</option>
+                                    <option value="Married">Married</option>
+                                    <option value="Married">Widowed</option>
+                                    <option value="Married">Separated</option>
+                                </select>
+                                <label>Marital Status</label>
+                            </div>
+                        </div>
+                    </div>
+
+            <!--Questionnaire -->
+            <div class="row">
+                <div class="input-field hyperques col m3 s12">
+                    <select name="waistcircumference">
+                        <option value="" disabled selected>Select</option>
+                        <option value="80">For men Less than 85 cm</option>
+                        <option value="86">For men &gt;85 cm&lt;94cm</option>
+                        <option value="90">For men Less than 94 cm</option>
+                        <option value="96">For men 94-102 cm</option>
+                        <option value="75">For women Less than 80 cm</option>
+                        <option value="83">For women 80-88 cm</option>
+                        <option value="90">For women More than 88 cm</option>
+                    </select>
+                    <label>Waist circumference below the ribs (cms)</label>
+                </div>
+                <div class="input-field cardiacques col m3 s12">
+                    <select name="hdllevel">
+                        <option value="" disabled selected>Select</option>
+                        <option value="38">Less than 40</option>
+                        <option value="45">40-49</option>
+                        <option value="55">50-59</option>
+                        <option value="65">More than 60</option>
+                    </select>
+                    <label>HDL Cholestrol level(mg/dL)</label>
+                </div>
+                <div class="input-field cardiacques col m3 s12">
+                    <select name="totalcholestoral">
+                        <option value="" disabled selected>Select</option>
+                        <option value="150"> &lt;160</option>
+                        <option value="170"> 160-199</option>
+                        <option value="215"> 200-239</option>
+                        <option value="250"> 240-279</option>
+                        <option value="290"> More than 280</option>
+                    </select>
+                    <label>Total Cholestrol level(mg/dL)</label>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col m5 s12 cardiacques">
+                    <span><b>Have you ever been treated for systolic BP :</b> &nbsp;</span>
+                    <label>
+                        <input name="treatedforsystolicbp"  type="radio" value="Yes"  />
+                        <span>Yes</span>
+                    </label>
+                    <label>
+                        <input  type="radio" value="No" />
+                        <span>No</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col m2 s12 diabetesques" style="padding:10px">
+                   <span>Hypertension</span>
+                   <div class="switch">
+                        <label>
+                          No
+                          <input type="checkbox" name="hypertension">
+                          <span class="lever"></span>
+                          Yes
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col m2 s12 diabetesques" style="padding:10px">
+                        <span>Exercise</span>
+                        <div class="switch">
+                             <label>
+                               No
+                               <input type="checkbox" name="exercise">
+                               <span class="lever"></span>
+                               Yes
+                             </label>
+                        </div>
+                </div>
+
+                <div class="col m4 s12 diabetesques" style="padding:10px">
+                        <span>Any Immediate family member diagonised with Diabetes</span>
+                        <div class="switch">
+                             <label>
+                               No
+                               <input type="checkbox" name="familydiabetes">
+                               <span class="lever"></span>
+                               Yes
+                             </label>
+                        </div>
+                </div>
+
+                <div class="col m4 s12 diabetesques" style="padding:10px">
+                        <span>Have you ever been found to have gestational diabetes or given birth to a baby weighing 9 pounds or more</span>
+                        <div class="switch">
+                             <label>
+                               No
+                               <input type="checkbox" name="geostationaldia">
+                               <span class="lever"></span>
+                               Yes
+                             </label>
+                        </div>
+                </div>
+            </div>
+            <!--Submit button-->
+            <button  class="btn waves-effect waves-light right submit"  type="submit" name="action">Submit
+                    <i class="material-icons right">send</i>
+            </button>
+        </form>
+
+        </div>
+        </div>
+    </main>
+    <footer class="">
+
+    </footer>
+
+    <!--Modals -->
+    <!--Modals -->
+<div id="health_index_modal" class="modal">
+        <div class="modal-content">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat right">Close</a>
+            <h5>Health Index Assessment</h5>
+            <br>
+            <form action='{% url "healthandrecords:today_hel" %}'   method="POST" enctype=multipart/form-data>
+
+  {% csrf_token %}
+                <div class="row" style="background-color: #F5F7FA">
+                    <div class="col m2"></div>
+                    <div class="col m4">
+                        <div class="input-field">
+                            <input name="date" type="text" class="datepicker" required id="assess_for_date">
+                            <label for="assess_for_date">Select Date</label>
+                        </div>
+                        <div class="input-field">
+                            <input name="systolic" type="number" required id="systolic_assess">
+                            <label for="systolic_assess">Systolic Pressure(mm Hg)</label>
+                        </div>
+                        <div class="input-field">
+                            <input name="diastolic" type="number" required id="diastolic_assess">
+                            <label for="diastolic_assess">Diastolic Pressure(mm Hg)</label>
+                        </div>
+                    </div>
+                    <div class="col m4">
+                        <div class="input-field">
+                            <input name="glucose" type="number" required id="glucose">
+                            <label for="glucose">Glucose Level(mmol/L)</label>
+                        </div>
+                        <div class="input-field">
+                            <input name="HDL" type="number" required id="hdl_cholestrol">
+                            <label for="hdl_cholestrol">HDL Cholestrol(mmol/L)</label>
+                        </div>
+                        <div class="input-field">
+                            <input name="tc" type="number" required id="total_cholestrol">
+                            <label for="total_cholestrol">Totral Cholestrol(mmol/L)</label>
+                        </div>
+                    </div>
+                    <div class="col m2"></div>
+
+                </div>
+                <div class="right">
+                    <button type="submit" class="btn">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+
+        </div>
+    </div>
+
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
+    <script src='{% static "kc/js/init.js" %}'></script>
+    <script src='{% static "kc/js/materialize.js" %}'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src='{% static "kc/js/materialize-stepper.min.js" %}'></script>
+            <script type="text/javascript">
+            $("#diabetes_check").hide();
+                $("#cardiac_check").hide();
+                $("#hyper_check").hide();
+            $("#continue").click(function(){
+            $("#diabetes_check").show();
+                $("#cardiac_check").show();
+                $("#hyper_check").show();
+})
+$(document).ready(function(){
+function changeSwitchValue(){
+  var cb=  $('.switch input[type="checkbox"]');
+       var status= cb.prop("checked");
+       if(status)
+          cb.val("Yes")
+      else
+          cb.val("No")
+
+          console.log(cb.val());
+
+          return cb.val();
+    }
+
+    $('button').click(function(){
+        changeSwitchValue();
+    })
+});
+</script>
+    <script>
+        $(document).ready(function () {
+            $('.tabs').tabs();
+            $('.datepicker').datepicker({
+                format: "yyyy-mm-dd",
+                autoClose: true
+               });
+            $('.modal').modal();
+            $('select').formSelect();
+            $('.stepper').activateStepper();
+            $(".dropdown-trigger").dropdown({hover:true});
+
+            $(".hyperques").hide();
+            $(".cardiacques").hide();
+            $(".diabetesques").hide();
+            $(".submit").hide();
+
+            $("#continue").click(function () {
+                //hiding the elements after every trail
+                $("#diabetes_check").hide();
+                $("#cardiac_check").hide();
+                $("#hyper_check").hide();
+                $("#diabetes").hide();
+                $("#cardiac").hide();
+                $("#hypertension").hide();
+                
+                var dbts = $("#diabetes").is(":checked");
+                var cardiac = $("#cardiac").is(":checked");
+                var hyper = $("#hypertension").is(":checked");
+                //console.log(hyper);
+                if (dbts && cardiac && hyper) {
+                    $("#step2").hide();
+                }
+                else{
+                    $("#step2").show();         
+                    if(!dbts){
+                        console.log("Diabetes: "+dbts);
+                       $("#diabetes_check").show();
+                    }
+                    if(!cardiac){
+                        console.log("Cardiac : "+cardiac);
+                       $("#cardiac_check").show();
+                    }
+                    if(!hyper){
+                        console.log("HyperTension :"+hyper);
+                       $("#hyper_check").show();
+                    }
+                   
+                }
+            });
+
+            $("#continue2").click(function(){
+               $(".hyperques").hide();
+                $(".cardiacques").hide();
+                $(".diabetesques").hide();
+                $("#general").hide();
+                $(".submit").hide();
+                var dcheck= $("#dcheck").is(":checked");
+                var hcheck= $("#hcheck").is(":checked");
+                var ccheck= $("#ccheck").is(":checked");
+                console.log("d"+dcheck);
+                console.log("h"+hcheck);
+                console.log("c"+ccheck);
+                if(dcheck){
+                  console.log("d"+dcheck);
+                  $(".diabetesques").show();}
+                if(hcheck){
+                  console.log("h"+hcheck);
+                  $(".hyperques").show();}
+                if(ccheck){
+                  console.log("c"+ccheck);
+                  $(".cardiacques").show();}  
+                if(dcheck||ccheck||hcheck){
+                    $("#general").show();
+                    $(".submit").show();
+                }  
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>HealthTech</title>
+  <!-- Custom fonts for this template-->
+
+  <link href="{% static 'navbarcss/bootstrap.min.css'%}"  rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="{% static 'navbarcss/css/font-awesome.min.css'%}" rel="stylesheet" type="text/css">
+  <!-- Custom styles for this template-->
+  <link href="{% static 'navbarcss/sb-admin.css'%}" rel="stylesheet">
+     <link href="{% static 'navbarcss/foodsearch.css'%}" rel="stylesheet">
+    <link href="{% static 'navbarcss/auto_search.css'%}" rel="stylesheet">
+ <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+         rel = "stylesheet">
+     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<body>
+
+  <div class="content-wrapper">
+    <!-- Scroll to Top Button-->
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href='{% url "before_l:index" %}'>Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+       <div class="col-md-4 col-sm-4 col-xs-12">
+           <div class="date">
+
+<input type="text" id="datepicker" />
+
+               </div>
+     </div>
+    <div class="col-md-8 col-sm-8 col-xs-12">
+<div class="select_food">
+   <div class="food-calu">
+  <div class="food-pro">
+
+    <div class="Calories">Calories<br>kcal</div>
+    <div class="Calories">Carbs<br>g</div>
+    <div class="Calories">Protiens<br>g</div>
+    <div class="Calories">Fats<br>g</div>
+<div class="Calories1"></div>
+  </div>
+    </div>
+    <div class="break-fast">
+    <div class="meal-name">BreakFast</div>
+    <div class="meal-button"><input type="button" class="open" value="+" name="ADD FOOD"></div>
+  </div>
+  {% for notice in Breakfast %}
+  <div class="food-cal">
+
+    <div class="food-name">{{notice.fodd_name}}</div>
+  <div class="food-pro">
+
+    <div class="food_displayCalories" >{{notice.Calories|floatformat:1}}</div>
+    <div class="food_displayCarbs">{{notice.Carbs|floatformat:1}}</div>
+    <div class="food_displayProtein">{{notice.Protein|floatformat:1}}</div>
+    <div class="food_displayFat">{{notice.Fat|floatformat:1}}</div>
+<div class="food_displaydelete"><input type="button" class="close-btn" value="-" name="DELETE FOOD" ></div>
+  </div>
+
+    </div>
+{% endfor %}
+   <div class="break-fast">
+    <div class="meal-name">Lunch</div>
+    <div class="meal-button"><input type="button" class="open" value="+" name="ADD FOOD"></div>
+</div>
+{% for notice in Lunch %}
+  <div class="food-cal">
+
+     <div class="food-name">{{notice.fodd_name}}</div>
+  <div class="food-pro">
+
+    <div class="food_displayCalories" >{{notice.Calories|floatformat:1}}</div>
+    <div class="food_displayCarbs">{{notice.Carbs|floatformat:1}}</div>
+    <div class="food_displayProtein">{{notice.Protein|floatformat:1}}</div>
+    <div class="food_displayFat">{{notice.Fat|floatformat:1}}</div>
+<div class="food_displaydelete"><input type="button" class="close-btn" value="-" name="DELETE FOOD" ></div>
+
+  </div>
+
+    </div>
+ {% endfor %}
+   <div class="break-fast">
+    <div class="meal-name">Dinner</div>
+    <div class="meal-button"><input type="button" class="open" value="+" name="ADD FOOD"></div>
+  </div>
+ {% for notice in Dinner %}
+  <div class="food-cal">
+
+    <div class="food-name">{{notice.fodd_name}}</div>
+ <div class="food-pro">
+
+    <div class="food_displayCalories">{{notice.Calories|floatformat:1}}</div>
+    <div class="food_displayCarbs">{{notice.Carbs|floatformat:1}}</div>
+    <div class="food_displayProtein">{{notice.Protein|floatformat:1}}</div>
+    <div class="food_displayFat">{{notice.Fat|floatformat:1}}</div>
+<div class="food_displaydelete"><input type="button" class="close-btn" value="-" name="DELETE FOOD" ></div>
+
+  </div>
+
+    </div>
+{% endfor %}
+   <div class="break-fast">
+    <div class="meal-name">Snacks</div>
+    <div class="meal-button"><input type="button" class="open" value="+" name="ADD FOOD"></div>
+  </div>
+  {% for notice in Snacks %}
+  <div class="food-cal">
+
+    <div class="food-name">{{notice.fodd_name}}</div>
+ <div class="food-pro">
+
+    <div class="food_displayCalories">{{notice.Calories|floatformat:1}}</div>
+    <div class="food_displayCarbs">{{notice.Carbs|floatformat:1}}</div>
+    <div class="food_displayProtein">{{notice.Protein|floatformat:1}}</div>
+    <div class="food_displayFat">{{notice.Fat|floatformat:1}}</div>
+<div class="food_displaydelete"><input type="button" class="close-btn" value="-" name="DELETE FOOD" ></div>
+
+  </div>
+
+    </div>
+{% endfor %}
+
+
+  <div class="food-cal">
+    <div class="totals">Total</div>
+  <div class="food-pro">
+
+    <div class="food_display" id="calorieschosen"></div>
+    <div class="food_display" id="Carbschosen"></div>
+    <div class="food_display" id="Protienschosen"></div>
+    <div class="food_display" id="Fatchosen"></div>
+<div class="food_display1" id="empty"></div>
+
+  </div>
+    </div>
+
+  <div class="food-cal">
+    <div class="totals">Daily Goal</div>
+  <div class="food-pro">
+
+    <div class="food_display" id="caloriesdaily">{{newdaily|floatformat:1}}</div>
+    <div class="food_display" id="Carbsdaily">{% widthratio newdaily 1000 125 %}</div>
+    <div class="food_display" id="Protiendaily">{% widthratio newdaily 1000 052 %}</div>
+    <div class="food_display" id="Fatdaily">{% widthratio newdaily 1000 1200 %}</div>
+<div class="food_display1" id="empty"></div>
+  </div>
+    </div>
+
+  <div class="food-cal">
+    <div class="totals">Remaining</div>
+  <div class="food-pro">
+
+   <div class="food_display" id="caloriesremain"></div>
+    <div class="food_display" id="Carbsremain"></div>
+    <div class="food_display" id="Protienremain"></div>
+    <div class="food_display" id="Fatremain"></div>
+<div class="food_display1" id="empty"></div>
+  </div>
+    </div>
+</div>
+    </div>
+        <!--Creates the popup content-->
+
+      <div class="popup-overlay">
+   <div class="popup-content">
+     <button class="close">x</button>
+      <div class="auto-search" >
+
+<div class="search-item"> </div>
+                        <input type="text" value="" id="search1" name="breakf" class="search" placeholder="Search for Foods..." autocomplete="off"/>
+
+                         <div id="foodname1" class="count"></div>
+
+
+        <div class="test">
+
+            <div class="testxx" id="search-results"></div>
+        </div>
+
+<div class="serving">
+    <div class="serv">
+    <div class="serving-name">Serving Table</div>
+<form action="{% url 'foodandacti:editss' %}?{{ request.GET.urlencode }}" method='POST'>
+    {% csrf_token %}
+   <input type="text" id ="newid" name="fname"><br>
+
+<select name="sectionmel" class="blds"> <option value="Breakfast">Breakfast</option>
+    <option value="Lunch">Lunch</option>
+    <option value="Dinner">Dinner</option>
+    <option value="Snacks">Snacks</option></select>
+
+
+    <div id="dynamicInput"></div>
+</div>
+
+ <div class="nutrients">
+              <div class="nut-name">Nutrition Values</div>
+            Calories-  <input type="text" id="Caloriesid" value="" name="Calories" class="nut-cal" readonly>
+            Carbs- <input type="text" id="Carbsid" value="" name="Carbs" class="nut-cal" readonly>
+            Protiens-  <input type="text" id="Protiensid" value="" name="Protiens" class="nut-cal" readonly>
+            Fat-<input type="text" id="Fatid" value="" name="Fat" class="nut-cal" readonly>
+
+    </div>
+    <input type="submit" value="submit" class="serving-submit"/></form>
+</div>
+             </div>
+
+
+      </div>
+
+ </div>
+    </div>
+
+  </div>
+ <script>
+        var date = new Date();
+      var new_url = '/profile/update/';
+
+
+
+ $( function() {
+
+    $('#datepicker').datepicker({
+    dateFormat: "yy-mm-dd",
+      onSelect: function(dateText) {
+        $(this).change();
+              window.location.href = "?date=" + this.value;
+
+      }
+    })
+
+  } );
+$(function () {
+if (location.search){
+    $('#datepicker').val(location.search.split("&")[0].replace("?","").split("=")[1]);
+
+}
+else{
+    $('#datepicker').val(date.toLocaleDateString());
+
+}
+  $('#prev').click(function () {
+
+        date.setDate(date.getDate() - 1);
+
+        $('#datepicker').val(date.toLocaleDateString())
+
+location.search= "?date=" + date.toLocaleDateString();
+});
+    $('#next').click(function () {
+        date.setDate(date.getDate() + 1);
+
+        $('#datepicker').val(date.toLocaleDateString())
+
+    });
+});
+
+</script>
+
+    <script>
+      //appends an "active" class to .popup and .popup-content when the "Open" button is clicked
+$(".open").on("click", function(){
+  $(".popup-overlay, .popup-content").addClass("active");
+});
+
+//removes the "active" class to .popup and .popup-content when the "Close" button is clicked
+$(".close").on("click", function(){
+  $(".popup-overlay, .popup-content").removeClass("active");
+});
+    </script>
+ <script>
+
+   $(function(){
+
+            $(document).on("keyup",".auto-search .search",function() {
+	    var v = this.id;
+
+		$.ajax({
+			type:'POST',
+			url:"/fooddetails/search/",
+			dataType: "html",
+			data:   {"search_text" : $("#"+v).val(), "csrfmiddlewaretoken" : $("input[name=csrfmiddlewaretoken]").val() },
+			success: searchSuccess,
+
+		});
+	});
+
+});
+function searchSuccess(data,textStatus,jqXHR)
+{
+		$('#search-results').html(data);
+}
+</script>
+ <script>
+          var calsum = 0;
+          var carbsum=0;
+          var protiensum=0;
+          var fatsum=0;
+$('.food_displayCalories').each(function()
+{
+    calsum += parseFloat($(this).text());
+    document.getElementById("calorieschosen").innerHTML = parseFloat(calsum).toFixed(2);
+
+
+});
+$('.food_displayCarbs').each(function()
+{
+    carbsum += parseFloat($(this).text());
+    document.getElementById("Carbschosen").innerHTML = parseFloat(carbsum).toFixed(2);
+
+
+});
+$('.food_displayProtein').each(function()
+{
+    protiensum += parseFloat($(this).text());
+    document.getElementById("Protienschosen").innerHTML =parseFloat(protiensum).toFixed(2) ;
+
+
+});
+$('.food_displayFat').each(function()
+{
+    fatsum += parseFloat($(this).text());
+    document.getElementById("Fatchosen").innerHTML = parseFloat(fatsum).toFixed(2);
+
+
+});
+ document.getElementById("caloriesremain").innerHTML =parseFloat(document.getElementById("caloriesdaily").innerHTML-calsum).toFixed(2);
+ document.getElementById("Carbsremain").innerHTML =parseFloat(document.getElementById("Carbsdaily").innerHTML-carbsum).toFixed(2);
+ document.getElementById("Protienremain").innerHTML =parseFloat(document.getElementById("Protiendaily").innerHTML-protiensum).toFixed(2);
+ document.getElementById("Fatremain").innerHTML =parseFloat(document.getElementById("Fatdaily").innerHTML-fatsum).toFixed(2);
+
+
+      </script>
+  <script>
+      $('.close-btn').on('click', function(){
+    $(this).closest(".food-cal").remove();
+});
+  </script>
+<script src='{% static "js/bootstrap.bundle.min.js" %}'></script>
+
+</body>
+
+</html>

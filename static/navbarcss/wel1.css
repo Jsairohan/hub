@@ -1,0 +1,166 @@
+.body111
+{
+
+    height: 300px;
+    width: 500px;
+    margin: auto;
+    border: 1px;
+    font-family: Tahoma, Geneva, sans-serif;
+    border-color: #f7f7f7;
+    margin-top: 160px;
+    background-color: #f7f7f7;
+}
+@media only screen and (max-width: 768px){
+.body111
+{
+
+    height: 315px;
+    width: 320px;
+    margin: auto;
+    border: 1px;
+    font-family: Tahoma, Geneva, sans-serif;
+    border-color: #f7f7f7;
+    margin-top: 160px;
+    background-color: #f7f7f7;
+}
+}
+.b123
+{
+	height: 100px;
+	width: 495px;
+	padding-top: 5px;
+	margin-top:5px;
+	margin-left: 2px;
+	background:#fff;
+	border-bottom: 1px solid #017b8b;
+}
+@media only screen and (max-width: 768px){
+	.b123
+{
+	height: 100px;
+	width: 315px;
+	padding-top: 5px;
+	margin-top:5px;
+	margin-left: 2px;
+	background:#fff;
+	border-bottom: 1px solid #017b8b;
+}
+}
+.b122
+{
+	width: 400px;
+	height: 50px;
+
+	text-align: center;
+	margin: auto;
+	font-size: 23px;
+	color:#017b8b;
+	font-family:Tahoma, Geneva, sans-serif;
+	margin-top: 30px;
+}
+@media only screen and (max-width: 768px){
+	.b122
+{
+	width: 306px;
+	height: 50px;
+
+	text-align: center;
+	margin: auto;
+	font-size: 23px;
+	color:#017b8b;
+	font-family:Tahoma, Geneva, sans-serif;
+	margin-top: 30px;
+}
+}
+.b120
+{
+	width: 181px;
+	height: 91px;
+	margin-top: 15px;
+	margin: auto;
+
+}
+@media only screen and (max-width: 768px){
+	.b120
+{
+	width: 181px;
+	height: 91px;
+	margin-top: 15px;
+	margin: auto;
+
+}
+}
+.b124
+{
+	width: 306px;
+	height: 30px;
+	font-size:19px;
+	font-family:Tahoma, Geneva, sans-serif;
+	
+	text-align: center;
+	margin: auto;
+	margin-top: 6px;
+
+
+}
+@media only screen and (max-width: 768px){
+	.b124
+{
+
+	height: 30px;
+	font-size:19px;
+	font-family: Tahoma, Geneva, sans-serif;
+
+	text-align: center;
+	margin: auto;
+	margin-top: 22px;
+
+
+}
+}
+.but1
+{
+	color: #fff;
+	background: #017b8b;
+	height: 30px;
+	width: 100px;
+	font-size:16px;
+	border-radius: 4px;
+	text-align: center;
+
+}
+@media only screen and (max-width: 768px){
+.but1
+{
+	color: #fff;
+	background: #017b8b;
+	height: 30px;
+	width: 100px;
+	font-size:16px;
+	border-radius: 4px;
+	text-align: center;
+
+}
+}
+.b125
+{
+	width: 100px;
+	height: 30px;
+	margin: auto;
+	margin-top: 22px;
+	
+}
+@media only screen and (max-width: 768px){
+.b125
+{
+	width: 100px;
+	height: 30px;
+	margin: auto;
+	margin-top: 22px;
+
+}
+}
+
+li{
+	list-style: none;
+}

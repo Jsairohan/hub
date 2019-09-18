@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Nurse Creation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'kc/css/dashboard.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'kc/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'kc/css/sb-admin.css'%}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'kc/css/ehr.css'%}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'kc/css/bootstrap-multiselect.css'%}">
+    
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+    
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static 'kc/css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.js"></script>
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js"></script>
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js.map"></script>
+
+    <style>
+        .navbar {
+            padding: 0px;
+        }
+
+        .bg-dark {
+            background: #ffff !important;
+        }
+
+        .fixed-action-btn {
+            top: 53px !important;
+            right: auto;
+            margin-left: 2px;
+        }
+
+        #logo-container {
+            height: 100%;
+            width: 19%;
+            padding: 0px;
+        }
+        .form-control:disabled, .form-control[readonly] {
+            background-color: #ffff;
+            opacity: 1;
+        }
+        .mandatory{
+            color:tomato
+        }
+        .ui-dialog {
+            width: 800px !important;
+        }
+        .table td, .table th {
+            text-align: center !important;
+        }
+        label {
+            font-size: 1.2rem;
+            color: #000;
+        }
+        .field {
+            margin-bottom: 10px;
+            padding-top: 8px;
+            font-size: small;
+        }
+         .caret{
+            display: none;
+        }
+         input.select-dropdown{
+            display: none !important;
+        }
+        /* multi select */
+        .btn {
+            white-space: initial !important;
+            background-color: white !important;
+            border-color: #cccccc;
+            color: black;
+            overflow: hidden;
+            height: 35px !important;
+            width: 212px !important;
+        }
+
+        .dropdown-menu {
+            max-height: 200px;
+            overflow: scroll;
+        }
+        ::-webkit-scrollbar {
+            width: 0.4em !important;
+            height:  0 !important;
+        }
+
+        .multiselect-clear-filter {
+            display: none;
+        }
+        .multiselect-search{
+            margin-right: 8px;
+        }
+        .ui-dialog .ui-dialog-title {
+            float: left;
+            margin: .1em 0;
+            white-space: nowrap;
+            font-size: 20px;
+            width: 90%;
+            overflow: hidden;
+            font-weight: 100;
+            text-overflow: ellipsis;
+            font-family: apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif !important;
+
+        }
+        .ui-widget{
+        font-family:apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif !important
+        }
+        .nav-link-text{
+            font-family: apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif !important;
+            font-size:16px!important
+        }
+        @media (min-width: 992px) {
+            .col-lg-3 {
+                -webkit-box-flex: 0;
+                -ms-flex: 0 0 19%;
+                flex: 0 0 19%;
+                max-width: 25%;
+                padding-top: 34px;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .col-lg-12 {
+                -webkit-box-flex: 0;
+                -ms-flex: 0 0 100%;
+                flex: 0 0 100%;
+                max-width: 100%;
+                /* padding-top: 60px; */
+            }
+        }
+
+        body {
+            background-color: #ffff;
+        }
+	#watermark
+        {
+        padding-right: 10px;
+        position: fixed;
+        bottom:5px;
+        right:5px;
+        opacity:0.6;
+        z-index:99;
+        color:#293d3d;
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+        }
+    </style>
+    <script>
+        $(function () {
+            $('#nursequalification').multiselect({
+                includeSelectAllOption: false,
+                enableFiltering: true,
+                numberDisplayed: 1,
+                enableCaseInsensitiveFiltering: true,
+                filterPlaceholder: 'Search for Qualification'
+            });
+            $('#nursespeciality').multiselect({
+                includeSelectAllOption: false,
+                enableFiltering: true,
+                numberDisplayed: 1,
+                enableCaseInsensitiveFiltering: true,
+                filterPlaceholder: 'Search for Speciality'
+            });
+        });
+
+    </script>
+</head>
+
+<body>
+<span id="watermark" style="font-size:1.64rem;" unselectable="on">Powered by 
+<span style="font-size:1.64rem; color: #64c1b1">CYGEN</span>
+</span>
+    <header>
+        <div class="navbar-fixed">
+            <nav class="white top-nav nav-extended" role="navigation">
+                <div class="nav-wrapper container-fluid">
+                    <span>
+                        <img src='{% static "sreesend/img/aimh.1.png" %}' alt="logo" id="logo-container"
+                            class="brand-logo">
+                    </span>
+                    <ul class="right hide-on-med-and-down">
+                        <li>
+                            <a onclick="window.location.pathname='/logout/'" data-toggle="modal"
+                                data-target="#exampleModal" style="color:black; font-size: 16px;">
+                                Logout</a>
+
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!--Sidenav-->
+        <div class="container">
+                <ul id="slide-out" class="sidenav">
+                    <!-- sidenav-fixed-->
+                    <li>
+                        <div class="user-view">
+                            <div class="background"><img src="{% static 'kc/img/sideimg.jpg' %}"></div>
+                            <a href="#user"><img class="circle" src="{% static 'kc/img/doctor.jpg' %}"></a>
+                            <a href="#name"><span class="white-text name">{{request.user.first_name}}</span></a>
+                            <a href="#email"><span class="white-text email">{{request.user.email}}</span></a>
+                        </div>
+                    </li>
+    
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a  class="nav-link" href='/admindashboard/'>
+                            <i class="fa fa-tachometer" aria-hidden="true"></i>
+                            <span class="nav-link-text"
+                                style="font-family: sans-serif;font-size:16px!important;">Dashboard</span></a>
+                    </li>
+                    {% if user %}
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a class="nav-link" href='/adminlist/'>
+                            <i class="fa fa-user-o" aria-hidden="true"></i>
+                            <span class="nav-link-text"
+                                style="font-family: sans-serif;font-size:16px!important">Admin</span></a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a class="nav-link" href='/doctorlist/'>
+                            <i class="fa fa-user-md" aria-hidden="true"></i>
+                            <span class="nav-link-text"
+                                style="font-family: sans-serif;font-size:16px!important">Doctor</span></a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a style="background-color:#69b7dd;"  class="nav-link" href='/nurselist/'>
+                            <i class="fa fa-plus-square" aria-hidden="true"></i>
+                            <span class="nav-link-text"
+                                style="font-family: sans-serif;font-size:16px!important;color:#fff">Nurse</span></a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a class="nav-link" href='/medtechlist/'>
+                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                            <span class="nav-link-text"
+                                style="font-family: sans-serif;font-size:16px!important">MedTech</span></a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a class="nav-link" href='/corporatehrlist/'>
+                             <i class="fa fa-users" aria-hidden="true"></i>
+                            <span class="nav-link-text"
+                                style="font-family: sans-serif;font-size:16px!important">Corporate HR</span></a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a class="nav-link" href='/distributerlist/'>
+                            <i class="fa fa-hospital-o" aria-hidden="true"></i>
+                            <span class="nav-link-text"
+                                style="font-family: sans-serif;font-size:16px!important">Distributor</span></a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a class="nav-link" href='/branchlist/'>
+                            <i class="fa fa-building-o" aria-hidden="true"></i>
+                            <span class="nav-link-text"
+                                style="font-family: sans-serif;font-size:16px!important">Branch</span></a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                        <a class="nav-link" href='/corporatebranchlist/'>
+                            <i class="fa fa-industry" aria-hidden="true"></i>
+                            <span class="nav-link-text"
+                                style="font-family: sans-serif;font-size:16px!important">Corporate Branch</span></a>
+                    </li>
+                    
+                </ul>
+    
+            </div>
+        <!--Sidenav end-->
+
+    </header>
+
+    <div class="content">
+        <div class="fixed-action-btn ">
+            <a href="#" data-target="slide-out" id="sidetrigger" class="left btn-floating  red sidenav-trigger">
+                <i class="material-icons">menu</i>
+            </a>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="content-details">
+                    <h3 style="text-align: center;font-family: apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif">Nurse</h3>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {% if user %}
+                                <div style="margin-top: 10px;display:none" class="add-btn right "><i class="fa fa-plus fa-lg adding nurse-adduser" title="Create Nurse"></i>
+                                </div>
+                            {% else %}
+                                <div style="margin-top: 10px;" class="add-btn right "><i class="fa fa-plus fa-lg adding nurse-adduser" title="Create Nurse"></i>
+                                </div>
+                            {% endif %}
+                            <div class="Search">
+                                <input id="myInput" type="search" class="nurseinput form-control"
+                                    data-table="order-table" placeholder="Search">
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--create nurse-->
+                    {% csrf_token %}
+                    <div class="manage-table">
+                        <div id="nurse-form" title="Nurse profile">
+                            <div class="fields">
+                                <div class="user-info">
+                                    <div class="row ">
+                                        <div class="col-md-2 required">
+                                            <label for="fname" class="field">First Name<span class="mandatory">*</span></label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="text"
+                                                title="Please enter your first name. Special charecter and numeric values are not allowed "
+                                                onkeydown="return /[a-zA-Z\s]/i.test(event.key)" name="fname"
+                                                id="nursefname" value="" class="form-control" minlength="1"
+                                                maxlength="35" />
+                                            
+
+                                        </div>
+
+                                        <div class="col-md-2 ">
+                                            <label for="fname" style="font-size:13px" class="field">Middle Name</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="text"
+                                                title="Please enter your middle name. Special charecter and numeric values are not allowed "
+                                                onkeydown="return /[a-zA-Z\s]/i.test(event.key)" name="fname"
+                                                id="nursemname" value="" class="form-control" minlength="1"
+                                                maxlength="35" />
+
+
+                                        </div>
+
+                                        <div class="col-md-2 required">
+                                            <label for="lname" class="field"> Last Name<span class="mandatory">*</span></label></div>
+                                        <div class="col-md-4">
+                                            <input type="text"
+                                                title="Please enter your last name. Special charecter and numeric values are not allowed "
+                                                onkeydown="return /[a-zA-Z\s]/i.test(event.key)" name="lname"
+                                                id="nurselname" value="" class="form-control" minlength="1"
+                                                maxlength="35" />
+                                            
+                                        </div>
+
+                                        <div class="col-md-2 required">
+                                            <label for="contact" class="field">Contact No<span class="mandatory">*</span></label></div>
+                                        <div class="col-md-4">
+                                            <div class="input-group-prepend ">
+                                                    <input id="countryCode" style=" height:35px !important;width: 46px;" class="form-control " readonly value="+63">
+                                                
+                                                <input style=" height:35px !important; " name="contact" id="nursecontact" class="form-control "
+                                                    title="Contact number must be 10 digits"
+                                                    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                    onkeypress='return event.charCode >= 48 && event.charCode <= 57 || event.key === "Backspace"'
+                                                    type="number" maxlength="10" />
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="col-md-2" id="nursegendername">
+                                            <label for="Gender" class="field">Gender<span class="mandatory">*</span></label>
+                                        </div>
+                                        <div class="col-md-4" id="nursegendername">
+                                            <select style=" height:40px !important; " id="nursegender" class="form-control">
+                                                <option value="" disabled selected>Select
+                                                </option>
+                                                <option value="Male">Male
+                                                </option>
+                                                <option value="Female">Female
+                                                </option>
+                                                
+                                            </select>
+
+                                        </div>
+                                        <div class="col-md-2 required" id="nurseemailname">
+                                            <label for="email" class="field">Email<span class="mandatory">*</span></label></div>
+                                        <div class="col-md-4" id="nurseemailnamei">
+                                            <input type="text" name="email" id="nurseemail" value=""
+                                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                                                class="form-control" />
+                                            
+                                        </div>
+                                        <div class="col-md-2 required" id="docbranchcodela">
+                                            <label for="email" class="field">Branch Code<span class="mandatory">*</span></label></div>
+                                        <div class="col-md-4" id="docbranchcodein">
+                                                <select style=" height:40px !important;" type="text" name="nurbcode" id="branchcode" value=""
+                                                class="form-control" autocomplete="off" >
+                                            
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2 required" id="nursespecialityname">
+                                            <label for="Speciality" class="field">Speciality<span class="mandatory">*</span></label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="specialityContent">
+                                                <select multiple style="height:40px !important; " id="nursespeciality" class="form-control">
+                                                        <option value="" disabled >Select speciality</option>
+                                                        <option value="Ambulatory care nursing">Ambulatory care nursing</option>
+                                                                <option value="Advanced practice nursing">Advanced practice nursing</option>
+                                                                <option value="Burn nursing">Burn nursing</option>
+                                                                <option value="Camp nursing">Camp nursing</option>
+                                                                <option value="Cardiac nursing">Cardiac nursing</option>
+                                                                    <option value="Cardiac Intervention nursing">Cardiac Intervention nursing</option>
+                                                                <option value="Diabetes Nursing">Diabetes Nursing</option>
+                                                                <option value="Dental nursing">Dental nursing</option>
+                                                                <option value="Medical case management">Medical case management</option>
+                                                                <option value="Community health nursing">Community health nursing</option>
+                                                                <option value="Correctional nursing">Correctional nursing</option>
+                                                                <option value="Critical care nursing">Critical care nursing</option>
+                                                                <option value="Emergency nursing">Emergency nursing</option>
+                                                                <option value="Environmental health nursing">Environmental health nursing</option>
+                                                                <option value="Faith community nursing">Faith community nursing</option>
+                                                                <option value="Flight nursing">Flight nursing</option>
+                                                                <option value="Forensic nursing">Forensic nursing</option>
+                                                                <option value="Gastroenterology nursing">Gastroenterology nursing</option>
+                                                                <option value="Genetics nursing">Genetics nursing</option>
+                                                                <option value="Geriatric nursing">Geriatric nursing</option>
+                                                                <option value="Health visiting">Health visiting</option>
+                                                                <option value="Holistic nursing">Holistic nursing</option>
+                                                                <option value="Home health nursing">Home health nursing</option>
+                                                                <option value="Hospice and palliative care nursing">Hospice and palliative care nursing</option>
+                                                                <option value="Hyperbaric nursing">Hyperbaric nursing</option>
+                                                                <option value="Immunology and allergy nursing">Immunology and allergy nursing</option>
+                                                                <option value="Intravenous therapy nursing">Intravenous therapy nursing</option>
+                                                                <option value="Infection control nursing">Infection control nursing</option>
+                                                                <option value="Infectious disease nursing">Infectious disease nursing</option>
+                                                                <option value="Legal nurse consultant">Legal nurse consultant</option>
+                                                                <option value="Maternal-child nursing">Maternal-child nursing</option>
+                                                                <option value="Medical-surgical nursing">Medical-surgical nursing</option>
+                                                                <option value="Military and uniformed services nursing">Military and uniformed services nursing</option>
+                                                                <option value="Neonatal nursing">Neonatal nursing</option>
+                                                                <option value="Neurosurgical nursing">Neurosurgical nursing</option>
+                                                                <option value="Nephrology nursing">Nephrology nursing</option>
+                                                                <option value="Nurse attorney">Nurse attorney</option>
+                                                                    <option value="Nursing informatics">Nursing informatics</option>
+                                                                    <option value="Nursing management">Nursing management</option>
+                                                                    <option value="Nursing research">Nursing research</option>
+                                                                    <option value="Nurse midwifery">Nurse midwifery</option>
+                                                                    <option value= "Obstetrical nursing">Obstetrical nursing</option>
+                                                                    <option value="Occupational health nursing">Occupational health nursing</option>
+                                                                    <option value="Oncology nursing">Oncology nursing</option>
+                                                                    <option value="Orthopaedic nursing">Orthopaedic nursing</option>
+                                                                    <option value="Ostomy nursing">Ostomy nursing</option>
+                                                                <option value="Pediatric nursing">Pediatric nursing</option>
+                                                                <option value="Perianesthesia nursing">Perianesthesia nursing</option>
+                                                                <option value="Perioperative nursing">Perioperative nursing</option>
+                                                                <option value="Psychiatric nursing">Psychiatric nursing</option>
+                                                                <option value="Private duty nursing">Private duty nursing</option>
+                                                                <option value="Public health nursing">Public health nursing</option>
+                                                                <option value="Pulmonary nursing">Pulmonary nursing</option>
+                                                                <option value="Quality improvement">Quality improvement</option>
+                                                                <option value="Radiology nursing">Radiology nursing</option>
+                                                                <option value="Rehabilitation nursing">Rehabilitation nursing</option>
+                                                                <option value="Research nursing">Research nursing</option>
+                                                                <option value="Renal nursing">Renal nursing</option>
+                                                                <option value="School nursing">School nursing</option>
+                                                                <option value="Space nursing">Space nursing</option>
+                                                                <option value="Sub-acute nursing">Sub-acute nursing</option>
+                                                                <option value="Substance abuse nursing">Substance abuse nursing</option>
+                                                                <option value="Surgical nursing">Surgical nursing</option>
+                                                                <option value="Telenursing">Telenursing</option>
+                                                                <option value="Telephone triage nursing">Telephone triage nursing</option>
+                                                                <option value="Transplantation nursing">Transplantation nursing</option>
+                                                                <option value="Travel nursing">Travel nursing</option>
+                                                                <option value="Urology nursing">Urology nursing</option>
+                                                                <option value="Utilization management">Utilization management</option>
+                                                                <option value="Vascular Access">Vascular Access</option>
+                                                                <option value="Wound care">Wound care</option>
+                                                    </select>
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2 required" id="nurselicensename">
+                                            <label for="License" class="field">License Number<span class="mandatory">*</span></label></div>
+                                        <div class="col-md-4">
+                                            <input type="text" name="License" id="nurselicense" value=""
+                                                class="form-control" required />
+                                            
+                                        </div>
+
+                                        <div class="col-md-2 required" id="nursequalificationname">
+                                            <label for="Qualification" class="field"style="padding-top: 12px">Qualification<span class="mandatory">*</span></label></div>
+                                        <div class="col-md-4" id="nursequalificationname" style="padding-top: 12px">
+                                            
+                                                <select style=" height:40px !important; " id="nursequalification" multiple="multiple" class="form-control">
+                                                        <option value="BSc (Basic)">BSc (Basic)</option>
+                                                        <option value="BSc (Post Basic)">BSc (Post Basic)</option>
+                                                        <option value="GNM ">GNM </option>
+                                                        <option value="ANM">ANM</option> 
+                                                        <option value="MSc">MSc</option>
+                                                        <option value="MPhil">MPhil</option>
+                                                        <option value="PhD">PhD</option>
+                                                    </select>
+                                                        
+                                        </div>
+                                        <div class="col-md-2 required" id="nurseexperiencename">
+                                            <label for="Experience" class="field"> Experience<span class="mandatory">*</span></label></div>
+                                        <div class="col-md-4" id="nurseexperiencenamen">
+                                            <div class="input-group-prepend">
+                                                <div>
+                                                    <label class="field">Year<select style=" width:84px; height:40px !important; " class="form-control" id='selectYear' downward></select></label>
+                                                </div>
+                                                &emsp;
+                                                <div>
+                                                    <label class="field">Month<select style="width:84px; height:40px !important; " class="form-control"  id='nurseexperience'></select></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                            <div class="status" id="dialogboxNurse" style="display: none;">
+                                                <span id= "errorMsgFname" style="font-size:12px; color:red" class="alert "   role="alert">
+                                                </span>
+                                            </div>
+                                            <div class="status" id="dialogboxNurse8" style="display: none;">
+                                                <span id= "errorMsglname" style="font-size:12px; color:red" class="alert "   role="alert">
+                                                </span>
+                                            </div>
+                                            <div class="status" id="dialogboxNurse1" style="display: none;">
+                                                <span id= "errorMsgContact" style="font-size:12px; color:red" class="alert "   role="alert">
+                                                </span>
+                                            </div> 
+                                            <div class="status" id="dialogboxNurse7" style="display: none;">
+                                                <span id= "errorMsgemail" style="font-size:12px; color:red" class="alert "   role="alert">
+                                                </span>
+                                            </div> 
+                                            <div class="status" id="dialogboxNurse2" style="display: none;">
+                                                <span id= "errorMsgUsername" style="font-size:12px; color:red" class="alert "   role="alert">
+                                                </span>
+                                            </div>
+                                            <div class="status" id="dialogboxUsername" style="display: none;">
+                                                <span id= "errorMsgUserName1" style="font-size:12px; color:red" class="alert "   role="alert">
+                                                </span>
+                                            </div>
+                                            <div class="status" id="dialogboxNurse3" style="display: none;">
+                                                <span id= "errorMsgSpeciality" style="font-size:12px; color:red" class="alert "   role="alert">
+                                                </span>
+                                            </div>
+                                            <div class="status" id="dialogboxNurse4" style="display: none;">
+                                                <span id= "errorMsgExperience" style="font-size:12px; color:red" class="alert "   role="alert">
+                                                </span>
+                                            </div>
+                                            <div class="status" id="dialogboxNurse5" style="display: none;">
+                                                <span id= "errorMsgLicense" style="font-size:12px; color:red" class="alert "   role="alert">
+                                                </span>
+                                            </div>
+                                            <div class="status" id="dialogboxNurse6" style="display: none;">
+                                                <span id= "errorMsgQualification" style="font-size:12px; color:red" class="alert "   role="alert">
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="manage-table">
+                        <table class="table table-bordered table-striped order-table table responsive-table"
+                            style="    font-size: 13px;">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Branch Code</th>
+                                    <th>License</th>
+                                    <th>Qualification</th>
+
+                                    <th>Speciality</th>
+                                    <th>Experience</th>
+                                    <th>Profile</th>
+                                    {% if user %}
+                                            <th style="display:none">Edit</th>
+                                            <th style="display:none">Delete</th>
+                                    {% else %}
+                                            <th >Edit</th>
+                                            <th >Delete</th>
+                                    {% endif %}
+                                    <!--<th style="width: 382px !important;">Action</th>-->
+                                </tr>
+                            </thead>
+
+
+                            <tbody id="NursesTable">
+                                <tr id="selectnurses">
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                    <!--create user-->
+
+            </div>
+        </div>
+    </div>
+    <script>
+        $('#toggleNavPosition').click(function () {
+            $('body').toggleClass('fixed-nav');
+            $('nav').toggleClass('fixed-top static-top');
+        });
+
+        var $crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+        window.drf = {
+            csrfHeaderName: "X-CSRFTOKEN",
+            csrfCookieName: "csrftoken"
+        };
+
+        var month = '';
+        for (i = 0; i <= 12; i++) {
+            month += '<option val=' + i + '>' + i + '</option>';
+        }
+        
+
+        $('#nurseexperience').html(month);
+        // selected
+        var year = '';
+        for (i = 0; i <= 70; i++) {
+            year += '<option val=' + i + '>' + i + '</option>';
+        }
+        $('#selectYear').html(year);
+    </script>
+    <script>
+   (function(document) {
+	'use strict';
+
+	var LightTableFilter = (function(Arr) {
+
+		var _input;
+
+		function _onInputEvent(e) {
+			_input = e.target;
+			var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+			Arr.forEach.call(tables, function(table) {
+				Arr.forEach.call(table.tBodies, function(tbody) {
+					Arr.forEach.call(tbody.rows, _filter);
+				});
+			});
+		}
+
+		function _filter(row) {
+			var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+			row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+		}
+
+		return {
+			init: function() {
+				var inputs = document.getElementsByClassName('nurseinput');
+				Arr.forEach.call(inputs, function(input) {
+					input.oninput = _onInputEvent;
+				});
+			}
+		};
+	})(Array.prototype);
+
+	document.addEventListener('readystatechange', function() {
+		if (document.readyState === 'complete') {
+			LightTableFilter.init();
+		}
+	});
+
+})(document);
+</script>
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  <!-- <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
+  <script src='{% static "kc/js/init.js" %}'></script>
+  <script src='{% static "kc/js/materialize.js" %}'></script>
+  <script src='{% static "kc/js/adminscript.js" %}'></script>
+  <script src='{% static "kc/js/adminajax.js" %}'></script>
+  <script>
+        var suser='{{user}}'
+    </script>
+</body>
+
+</html>
